@@ -6,3 +6,14 @@ export default {
 	},
 	plugins: [],
 };
+
+// module.exports = {
+// 	theme: {
+// 	  extend: {
+// 		backgroundImage: {
+// 		  'hero-pattern': "url('/src/assets/Home Page Image.jpeg')",
+// 		},
+// 	  },
+// 	},
+//   }
+  

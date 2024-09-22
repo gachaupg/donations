@@ -31,7 +31,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`p-4 flex justify-between items-center relative transition-all duration-300 ${theme === 'dark' ? 'nav-dark text-white' : 'nav-light text-black'}`}>
+    <nav className={`p-4 flex justify-between items-center relative transition-all duration-300 ${theme === 'dark' ? 'nav-dark text-white' : 'nav-light text-black'}`} 
+    style={{ zIndex: 1000 }}>
       <div className="text-xl">
         <img className='h-12' src="https://res.cloudinary.com/pitz/image/upload/v1727001297/WhatsApp_Image_2024-09-22_at_13.07.54_z6oksz.jpg" alt="Logo" />
       </div>

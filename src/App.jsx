@@ -3,7 +3,8 @@ import { Toaster } from "react-hot-toast";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navabar";
 import Home from "./pages/Home";
-
+import Gallery from "./pages/Gallery";
+import Donate from "./pages/Donate";
 
 function App() {
   return (
@@ -13,10 +14,10 @@ function App() {
         <div className="mt-20">
           <Routes>
             <Route path="/" element={<Home />} />
-            {/* <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
+            {/* <Route path="/about" element={<About />} /> */}
+            {/* <Route path="/contact" element={<Contact />} /> */}
             <Route path="/gallery" element={<Gallery />} />
-            <Route path="/donate" element={<Donate />} /> */}
+            <Route path="/donate" element={<Donate />} /> 
           </Routes>
         </div>
         <Footer />

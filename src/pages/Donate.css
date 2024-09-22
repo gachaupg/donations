@@ -1,0 +1,60 @@
+.donate-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 0 auto; /* Centering the container */
+  }
+
+  .donate-container h2{
+    color: black;
+    font-weight: bolder;
+  }
+
+  .donate-container p{
+    color: black;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .payment-details {
+    background-color: #2C3E50; /* Darker background for contrast */
+    color: #ECF0F1; /* Light color for text */
+    padding: 20px; /* Increased padding */
+    border-radius: 8px; /* More rounded corners */
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+  }
+
+  .payment-details h3 {
+    font-size: 1.5em; /* Larger heading size */
+    margin-bottom: 10px; /* Space below heading */
+    text-align: center; /* Center the heading */
+  }
+
+  .payment-details p{
+    color: rgb(255, 255, 255);
+    margin: 5px 0; /* Space between paragraphs */
+    line-height: 1.6; /* Increased line height for readability */
+  }
+  
+  .call-to-action {
+    text-align: center;
+  }
+  
+  .btn {
+    background-color: #007BFF; /* Blue button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
