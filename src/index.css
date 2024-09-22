@@ -1,0 +1,38 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background-color-dark: hsl(220, 26%, 14%);
+  --background-color-light: #fff;
+}
+.nav-dark{
+  background-color: var(--background-color-dark);
+  color: rgb(245, 240, 240);
+  position: fixed;
+  width: 100% !important;
+}
+.nav-light{
+  background-color:#e6e1e1;
+  color: rgb(45, 45, 45);
+  position: fixed;
+  width: 100% !important;
+
+}
+html.dark {
+  background-color: var(--background-color-dark);
+  color: rgb(236, 234, 234);
+}
+
+html.light {
+  background-color: var(--background-color-light);
+  color: rgb(45, 45, 45);
+}
+
+  @media screen and (max-width: 600px) {
+    .main{
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+  }
