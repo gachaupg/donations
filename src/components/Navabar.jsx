@@ -38,22 +38,24 @@ const Navbar = () => {
       </div>
 
       <div className="hidden md:flex space-x-8">
-        <Link to="/" className="hover:underline">
+        <Link onClick={()=>{
+          setIsMenuOpen(false);
+        }} to="/" className="hover:underline">
           Home
         </Link>
-        <Link to="/about" className="hover:underline">
+        <Link onClick={toggleMenu} to="/about" className="hover:underline">
           About Us
         </Link>
-        <Link to="/contact" className="hover:underline">
+        <Link onClick={toggleMenu} to="/contact" className="hover:underline">
           Contact
         </Link>
-        <Link to="/gallery" className="hover:underline">
+        <Link onClick={toggleMenu} to="/gallery" className="hover:underline">
           Gallery
         </Link>
       </div>
 
       <div className="flex items-center space-x-4">
-        <button className='p-1 rounded-lg w-28 bg-green-900 text-white'>
+        <button onClick={toggleMenu} className='p-1 rounded-lg w-28 bg-green-900 text-white'>
           <Link to="/donate" className="hover:underline">
             Donate
           </Link>
@@ -69,31 +71,32 @@ const Navbar = () => {
       </div>
 
       {isMenuOpen && (
-        <motion.div
-          className={`absolute top-16 left-0 right-0 p-6 flex flex-col space-y-4 z-10 transition-all duration-300 ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-black'}`}
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Link to="/" className="hover:underline">
-            Home
-          </Link>
-          <a to="/about" className="hover:underline">
-            About Us
-          </a>
-          <a to="/contact" className="hover:underline">
-            Contact
-          </a>
-          <a to="/gallery" className="hover:underline">
-            Gallery
-          </a>
-          <button className='p-2 rounded-lg bg-green-900 text-white'>
-            <a to="/donate" className="hover:underline">
-              Donate
-            </a>
-          </button>
-        </motion.div>
-      )}
+  <motion.div
+    className={`absolute top-16 left-0 right-0 p-6 flex flex-col space-y-4 z-10 transition-all duration-300 ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-black'}`}
+    initial={{ opacity: 0, y: -50 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+  >
+    <Link onClick={() => setIsMenuOpen(false)} to="/" className="hover:underline">
+      Home
+    </Link>
+    <Link onClick={() => setIsMenuOpen(false)} to="/about" className="hover:underline">
+      About Us
+    </Link>
+    <Link onClick={() => setIsMenuOpen(false)} to="/contact" className="hover:underline">
+      Contact
+    </Link>
+    <Link onClick={() => setIsMenuOpen(false)} to="/gallery" className="hover:underline">
+      Gallery
+    </Link>
+    <button className='p-2 rounded-lg bg-green-900 text-white' onClick={() => setIsMenuOpen(false)}>
+      <Link to="/donate" className="hover:underline">
+        Donate
+      </Link>
+    </button>
+  </motion.div>
+)}
+
     </nav>
   );
 };

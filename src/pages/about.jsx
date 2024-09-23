@@ -13,16 +13,16 @@ const About = () => {
     })
 
     return (
-        <div className='fade-in-left text-black flex flex-col gap-16 items-center justify-center p-10'>
+        <div className='fade-in-left fade-in-left animate-fadeIn small  text-black flex flex-col gap-16 items-center justify-center p-10'>
             <h2 className={`text-4xl font-bold text-green-700 mb-8 ${section1InView ? 'animate-fadeIn' : ''}`}>
                 About Us
             </h2>
 
-            <div ref={section1Ref} className={`flex flex-row gap-10 items-start justify-center ${section1InView ? 'animate-fadeIn' : ''}`}>
-                <div className='w-1/2'>
-                    <img className='w-full rounded-lg shadow-lg' src="https://res.cloudinary.com/pitz/image/upload/v1727035164/WhatsApp_Image_2024-09-22_at_13.06.50_w4efmx.jpg" alt="Wairicu Family Farm" />
+            <div ref={section1Ref} className={`flex fade-in-left small animate-fadeIn wrap  flex-row gap-10 items-start justify-center ${section1InView ? 'animate-fadeIn' : ''}`}>
+                <div className='w-1/2 small'>
+                    <img className='w-full small rounded-lg shadow-lg' src="https://res.cloudinary.com/pitz/image/upload/v1727035164/WhatsApp_Image_2024-09-22_at_13.06.50_w4efmx.jpg" alt="Wairicu Family Farm" />
                 </div>
-                <div className='w-1/2 text-justify'>
+                <div className='w-1/2 small text-justify'>
                     <h3 className='text-2xl text-green-700 font-semibold mb-4'>The Journey</h3>
                     <p className='leading-7 text-gray-700'>
                         In the early 70's, Mr & Mrs Reuben Wairicu relocated to Kitale. Their farm was neighboring "Farm Prison" as it was known.
@@ -41,11 +41,11 @@ const About = () => {
                 </div>
             </div>
 
-            <div ref={section2Ref} className={`flex flex-row gap-10 items-start justify-center ${section2InView ? 'animate-fadeIn' : ''}`}>
-                <div className='w-1/2'>
+            <div ref={section2Ref} className={`flex flex-row small wrap gap-10 items-start justify-center ${section2InView ? 'animate-fadeIn' : ''}`}>
+                <div className='w-1/2 small'>
                     <img className='w-full rounded-lg shadow-lg' src="https://res.cloudinary.com/pitz/image/upload/v1727035586/WhatsApp_Image_2024-09-22_at_13.06.47_1_l4xolk.jpg" alt="Community Support" />
                 </div>
-                <div className='w-1/2 text-justify'>
+                <div className='w-1/2 text-justify small'>
                     <h3 className='text-2xl text-green-700 font-semibold mb-4'>Our Prison Ministry</h3>
                     <p className='leading-7 text-gray-700'>
                         As the years progressed, our visits became regular, occurring quarterly in recent years. Even during COVID, we continued supporting inmates with basic needs via prison administration.

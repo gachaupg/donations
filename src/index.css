@@ -59,6 +59,14 @@ html.light {
       margin-left: 0 !important;
       margin-right: 0 !important;
     }
+    .wrap{
+      display: flex !important;
+      flex-direction: column !important;
+      width: 100% !important;
+    }
+    .small{
+      width: 100% !important;
+    }
   }
 
   body {

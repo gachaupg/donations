@@ -1,6 +1,7 @@
 import React from 'react';
 import './Home.css'; // Assuming you have a CSS file for styling
 import { Link } from 'react-router-dom';
+import ContactForm from './contact';
 
 const Home = () => {
   return (
@@ -51,6 +52,7 @@ const Home = () => {
         <button className="btn">Donate Now</button>
         </Link>
       </section>
+      <ContactForm/>
     </div>
   );
 };
