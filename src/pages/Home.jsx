@@ -7,20 +7,22 @@ const Home = () => {
       {/* Hero Section */}
       <section className="hero">
         <h1 className="hero-title">Giving Hope, Sharing Love, Touching Hearts</h1>
-        <button className="btn">Learn More</button>
+        <Link to='/about' className="btn">
+          <button className="btn">Learn More</button>
+        </Link>
       </section>
 
-     {/* About the Foundation */}
-    <section className="about">
-      <h2>About Us</h2>
-      <p>
-        The Reuben Wairicu Foundation supports vulnerable groups including the elderly, inmates, and people living with disabilities.
-      </p>
-      <ul>
-        <li>Founded in honor of Mr. & Mrs. Reuben Wairicu</li>
-        <li>Community support since the 70s with a focus on giving back and improving lives</li>
-      </ul>
-    </section>
+      {/* About the Foundation */}
+      <section className="about">
+        <h2>About Us</h2>
+        <p>
+          The Reuben Wairicu Foundation supports vulnerable groups including the elderly, inmates, and people living with disabilities.
+        </p>
+        <ul>
+          <li>Founded in honor of Mr. & Mrs. Reuben Wairicu</li>
+          <li>Community support since the 70s with a focus on giving back and improving lives</li>
+        </ul>
+      </section>
 
       {/* Programs and Services */}
       <section className="programs">
@@ -41,13 +43,13 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Get Involved */}
       <section className="get-involved">
         <h2>Get Involved</h2>
         <p>Support our mission by donating or volunteering.</p>
+        <Link to='/donate' >
         <button className="btn">Donate Now</button>
+        </Link>
       </section>
-
     </div>
   );
 };
