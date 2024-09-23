@@ -5,11 +5,11 @@ const Footer = () => {
 
     
   return (
-    <footer className="bg-gray-900 text-white py-8">
+    <footer className="primary text-white py-8">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-4">
         <div>
             <img className='h-16' src="https://res.cloudinary.com/pitz/image/upload/v1727001297/WhatsApp_Image_2024-09-22_at_13.07.54_z6oksz.jpg" alt="" />
-          <p className="text-gray-400">
+          <p className="text-white">
             Bringing you the best services with dedication and excellence. Stay connected with us.
           </p>
         </div>

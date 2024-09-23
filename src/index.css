@@ -7,6 +7,12 @@
   --background-color-dark: hsl(220, 26%, 14%);
   --background-color-light: #fff;
 }
+.primary{
+  background-color: #486b4d;
+}
+.primary-text{
+ color: #486b4d;
+}
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -32,7 +38,7 @@
   width: 100% !important;
 }
 .nav-light{
-  background-color:#e6e1e1;
+  background-color:white;
   color: rgb(45, 45, 45);
   position: fixed;
   width: 100% !important;

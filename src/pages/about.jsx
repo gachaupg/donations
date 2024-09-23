@@ -66,7 +66,23 @@ const About = () => {
                     </p>
                 </div>
             </div>
+            <div ref={section1Ref} className={`flex flex-colgap-10 items-start justify-center ${section1InView ? 'animate-fadeIn' : ''}`}>
 
+
+
+            <div className='primary p-4 rounded-lg text-white'>
+            <h2>RAISING MATURE SELFLESS INDIVIDUALS WHO WILL SUPPORT AND GIVE HOPE TO COMMUNITIES.</h2>
+            <p className='text-ex text-lg font-extrabold text-2xl'>Our Core Values</p>
+                <ul className='mt-3'>
+                    <li>1. SUSTAINABILITY</li>
+                    <li>2. INTERGRITY.</li>
+                    <li>3. COLLABORATION.</li>
+                    <li>4. COMPASSION</li>
+                </ul>
+            </div>
+            </div>
+            <div>
+            </div>
             <section className="programs text-white">
                 <h2 className="programs-heading">Our Programs</h2>
                 <div className="program-container">
