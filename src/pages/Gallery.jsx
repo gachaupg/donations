@@ -3,15 +3,15 @@ import './Gallery.css';
 
 // Import images
 import image1 from '../assets/Image_1.jpeg';
-import image2 from '../assets/Image_2.jpeg';
-import image3 from '../assets/Image_3.jpeg';
-import image4 from '../assets/Image_4.jpeg';
-import image5 from '../assets/Image_5.jpeg';
-import image6 from '../assets/Image_6.jpeg';
-import image7 from '../assets/Image_7.jpeg';
-import image8 from '../assets/Image_8.jpeg';
-import image9 from '../assets/Image_9.jpeg';
-import image10 from '../assets/Image_10.jpeg';
+import image2 from '../assets/image_2.jpeg';
+import image3 from '../assets/image_3.jpeg';
+import image4 from '../assets/image_4.jpeg';
+import image5 from '../assets/image_5.jpeg';
+import image6 from '../assets/image_6.jpeg';
+import image7 from '../assets/image_7.jpeg';
+import image8 from '../assets/image_8.jpeg';
+import image9 from '../assets/image_9.jpeg';
+import image10 from '../assets/image_10.jpeg';
 
 const images = [
   { src: image1, description: 'Reuben Wairicu Foundation' },
