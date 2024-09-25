@@ -32,10 +32,11 @@
 }
 
 .nav-dark{
-  background-color: var(--background-color-dark);
-  color: rgb(245, 240, 240);
+  background-color:#486b4d !important;
+  color: rgb(249, 242, 242);
   position: fixed;
   width: 100% !important;
+
 }
 .nav-light{
   background-color:#486b4d !important;
