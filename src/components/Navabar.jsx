@@ -43,25 +43,27 @@ const Navbar = () => {
         }} to="/" className="hover:underline">
           Home
         </Link>
-        <Link onClick={toggleMenu} to="/about" className="hover:underline">
+        <Link to="/about" className="hover:underline">
           About Us
         </Link>
-        <Link onClick={toggleMenu} to="/contact" className="hover:underline">
+        <Link  to="/contact" className="hover:underline">
           Contact
         </Link>
-        <Link onClick={toggleMenu} to="/gallery" className="hover:underline">
+        <Link  to="/gallery" className="hover:underline">
           Gallery
         </Link>
       </div>
 
       <div className="flex items-center space-x-4">
-        <button onClick={toggleMenu} className='p-1 rounded-lg w-28 bg-green-900 text-white'>
+        
           <Link to="/donate" className="hover:underline">
-            Donate
+           <button  className='p-1 rounded-lg w-28 bg-green-900 text-white'>
+             Donate
+             </button>
           </Link>
-        </button>
+       
 
-        <button onClick={toggleTheme} className="text-2xl">
+        <button  className="text-2xl">
           {theme === 'dark' ? <BsSun /> : <BsMoon />}
         </button>
 

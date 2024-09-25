@@ -8,7 +8,7 @@
   --background-color-light: #fff;
 }
 .primary{
-  background-color: #486b4d;
+  background-color: #486b4d !important;
 }
 .primary-text{
  color: #486b4d;
@@ -38,8 +38,8 @@
   width: 100% !important;
 }
 .nav-light{
-  background-color:white;
-  color: rgb(45, 45, 45);
+  background-color:#486b4d !important;
+  color: rgb(249, 242, 242);
   position: fixed;
   width: 100% !important;
 
@@ -74,11 +74,18 @@ html.light {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9; /* Light background */
   }
-  
+  .hero-title1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #0cd13a;
+  }
   .homepage {
     padding: 20px;
   }
-  
+  .img{
+    width: 100%;
+    height: 30rem;
+  }
   .hero {
     background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
     padding: 40px;

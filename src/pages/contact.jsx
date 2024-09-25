@@ -48,27 +48,27 @@ function ContactForm() {
     );
 }
     return (
-        <div className='flex flex-col wrap small justify-center w-full'>
+        <div className='flex flex-col primary text-gray-200 wrap small justify-center w-full'>
             <div className='flex flex-row wrap justify-around p-2 gap-14 items-start'>
                 <div className='fade-in-left small animate-fadeIn flex flex-col gap-7 pl-6'>
-                    <h2 className='text-4xl font-bold text-green-700  mt-5 '>Contact  Us</h2>
-                    <p className='text-slate-700'>We are here to help you. Please feel free to reach out to us.</p>
-                    <div className='mt-6 text-slate-700 flex gap-2 flex-col'>
+                    <h2 className='text-4xl font-bold text-green-200  mt-5 '>Contact  Us</h2>
+                    <p className='text-gray-200'>We are here to help you. Please feel free to reach out to us.</p>
+                    <div className='mt-6 text-gray-200 flex gap-2 flex-col'>
                         <p className='flex flex-row justify-between'>
                             <strong>Email: <FontAwesomeIcon icon={faEnvelope} /> </strong>
-                            <a href="mailto:reubenwairicufoundation@gmail.com" className='text-blue-600 underline'>
+                            <a href="mailto:reubenwairicufoundation@gmail.com" className='text-blue-400 underline'>
                                 reubenwairicufoundation@gmail.com
                             </a>
                         </p>
                         <p className='flex flex-row justify-between'>
                             <strong>Facebook: <FontAwesomeIcon icon={faFacebook} /></strong>
-                            <a href="https://www.facebook.com/Reuben-Wairicu-Foundation" target="_blank" rel="noopener noreferrer" className='text-blue-600 underline'>
+                            <a href="https://www.facebook.com/Reuben-Wairicu-Foundation" target="_blank" rel="noopener noreferrer" className='text-blue-400 underline'>
                                 Reuben Wairicu Foundation
                             </a>
                         </p>
                         <p className='flex flex-row justify-between'>
                             <strong>Instagram: <FontAwesomeIcon icon={faInstagram} /> </strong>
-                            <a href="https://www.instagram.com/ReubenWairicuFoundation" target="_blank" rel="noopener noreferrer" className='text-blue-600 underline'>
+                            <a href="https://www.instagram.com/ReubenWairicuFoundation" target="_blank" rel="noopener noreferrer" className='text-blue-400 underline'>
                                 Reuben Wairicu Foundation
                             </a>
                         </p>
@@ -77,7 +77,7 @@ function ContactForm() {
                         </p>
                         <p className='flex flex-row justify-between'>
                             <strong>Phone: <FontAwesomeIcon icon={faPhone} /></strong>
-                            <a href="tel:+254723237149" className='text-blue-600 underline'>
+                            <a href="tel:+254723237149" className='text-blue-400 underline'>
                                 +254 723 237149
                             </a>
                         </p>
@@ -92,7 +92,7 @@ function ContactForm() {
                 >
                     <label htmlFor="name"><FontAwesomeIcon icon={faUser} /> Full name</label>
                     <input
-                        className='text-slate-700 border p-2 border-slate-700 rounded-lg'
+                        className='text-gray-200 border p-2 border-gray-200 rounded-lg'
                         id="name"
                         type="text"
                         name="name"
@@ -102,7 +102,7 @@ function ContactForm() {
 
                     <label htmlFor="subject"><FontAwesomeIcon icon={faFileAlt} /> Subject</label>
                     <input
-                        className='text-slate-700 border p-2 border-slate-700 rounded-lg'
+                        className='text-gray-200 border p-2 border-gray-200 rounded-lg'
                         id="subject"
                         type="text"
                         name="subject"
@@ -112,7 +112,7 @@ function ContactForm() {
 
                     <label htmlFor="email"><FontAwesomeIcon icon={faEnvelope} /> Email Address</label>
                     <input
-                        className='text-slate-700 border p-2 border-slate-700 rounded-lg'
+                        className='text-gray-200 border p-2 border-gray-200 rounded-lg'
                         id="email"
                         type="email"
                         name="email"
@@ -122,7 +122,7 @@ function ContactForm() {
 
                     <label htmlFor="message"><FontAwesomeIcon icon={faPaperPlane} /> Message</label>
                     <textarea
-                        className='text-slate-700 border p-2 border-slate-700 rounded-lg'
+                        className='text-gray-200 border p-2 border-gray-200 rounded-lg'
                         id="message"
                         name="message"
                         placeholder='Enter your message'

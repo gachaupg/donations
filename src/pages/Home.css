@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9; /* Light background */
+    background-color: #486b4d; /* Light background */
   }
   
   .homepage {
@@ -19,7 +19,6 @@ body {
   .hero-title {
     font-size: 2.5rem;
     margin-bottom: 20px;
-    color: #4caf50; /* Primary color */
   }
   
   .btn {
@@ -35,23 +34,24 @@ body {
   .about,
   .programs,
   .get-involved {
-    background-color: #ffffff; /* White background */
+    background-color: #486b4d !important; 
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 20px;
+    color: white !important;
   }
   
  .about h2 {
-    color: #333; /* Dark text for headings */
+    color: #ffff !important; /* Dark text for headings */
     font-weight: bold;
   }
 
   .about p {
-    color: #333; /* Dark text for headings */
+    color: #ffff !important; /* Dark text for headings */
   }
 
   .about li {
-    color: #333; /* Dark text for headings */
+    color: #ffff !important; /* Dark text for headings */
   }
   
    .programs {
@@ -62,9 +62,11 @@ body {
   .programs-heading {
     font-size: 2rem; /* Size of the heading */
     margin-bottom: 20px; /* Space below the heading */
+    color: #ffff !important; /* Dark text for headings */
   }
   
   .program-container {
+
     display: flex; /* Use flexbox for alignment */
     justify-content: center; /* Center the program items */
     flex-wrap: wrap; /* Allow wrapping */
@@ -81,17 +83,19 @@ body {
   }
   
   .programs h2 {
-    color: #333; /* Dark text for headings */
+    color: #ffff; /* Dark text for headings */
+    /* Dark text for headings */
     font-weight: bold;
   }
 
   .get-involved h2{
-    color: #333; 
+    color: #ffff !important; /* Dark text for headings */
     font-weight: bold;
   }
 
   .get-involved p{
-    color: #333; 
+    color: #ffff !important; /* Dark text for headings */
+
   }
 
   .about, .get-involved {

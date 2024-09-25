@@ -13,8 +13,8 @@ const About = () => {
     })
 
     return (
-        <div className='fade-in-left fade-in-left animate-fadeIn small  text-black flex flex-col gap-16 items-center justify-center p-10'>
-            <h2 className={`text-4xl font-bold text-green-700 mb-8 ${section1InView ? 'animate-fadeIn' : ''}`}>
+        <div className='fade-in-left fade-in-left text-white primary animate-fadeIn small  text-black flex flex-col gap-16 items-center justify-center p-10'>
+            <h2 className={`text-4xl font-bold text-white mb-8 ${section1InView ? 'animate-fadeIn' : ''}`}>
                 About Us
             </h2>
 
@@ -23,18 +23,18 @@ const About = () => {
                     <img className='w-full small rounded-lg shadow-lg' src="https://res.cloudinary.com/pitz/image/upload/v1727035164/WhatsApp_Image_2024-09-22_at_13.06.50_w4efmx.jpg" alt="Wairicu Family Farm" />
                 </div>
                 <div className='w-1/2 small text-justify'>
-                    <h3 className='text-2xl text-green-700 font-semibold mb-4'>The Journey</h3>
-                    <p className='leading-7 text-gray-700'>
+                    <h3 className='text-2xl text-100-700 font-semibold mb-4'>The Journey</h3>
+                    <p className='leading-7 text-gray-300'>
                         In the early 70's, Mr & Mrs Reuben Wairicu relocated to Kitale. Their farm was neighboring "Farm Prison" as it was known.
                         As children in the Wairicu family, we interacted with the Prison Wardens as they would get milk from our farm and occasionally accompanied inmates during small tasks outside the facilities.
                     </p>
-                    <p className='mt-4 leading-7 text-gray-700'>
+                    <p className='mt-4 leading-7 text-gray-300'>
                         For us, these were our brothers and sisters as we knew some of them personally from neighboring villages, schools, churches, and other community gatherings.
                         We also enjoyed the indirect support from the prison in terms of security and the creative works produced by the inmates.
                         <br /><br />
                         Our vision is to support communities targeting the elderly, inmates, teenage moms, widowers, people living with disabilities, recovering addicts, and vulnerable persons.
                     </p>
-                    <p className='mt-4 leading-7 text-gray-700'>
+                    <p className='mt-4 leading-7 text-gray-300'>
                         Reuben Wairicu Foundation (RWF) is a registered family initiative, started by the 8 children of Mr. Reuben and Mrs. Hellen Wairicu of Waigama Farm, Kitale, Kenya.
                         The foundation gives back to the community, originally starting small with family members using their gifts and abilities.
                     </p>
@@ -46,13 +46,13 @@ const About = () => {
                     <img className='w-full rounded-lg shadow-lg' src="https://res.cloudinary.com/pitz/image/upload/v1727035586/WhatsApp_Image_2024-09-22_at_13.06.47_1_l4xolk.jpg" alt="Community Support" />
                 </div>
                 <div className='w-1/2 text-justify small'>
-                    <h3 className='text-2xl text-green-700 font-semibold mb-4'>Our Prison Ministry</h3>
-                    <p className='leading-7 text-gray-700'>
+                    <h3 className='text-2xl text-green-200 font-semibold mb-4'>Our Prison Ministry</h3>
+                    <p className='leading-7 text-gray-300'>
                         As the years progressed, our visits became regular, occurring quarterly in recent years. Even during COVID, we continued supporting inmates with basic needs via prison administration.
                         <br /><br />
                         Simple items like bars of soap became precious to inmates, and though meeting the increasing needs was challenging, with the help of friends and community members, we were able to provide soap, toilet rolls, and baby supplies.
                     </p>
-                    <p className='mt-4 leading-7 text-gray-700'>
+                    <p className='mt-4 leading-7 text-gray-300'>
                         <strong>Our impact has been:</strong>
                         <ol className='list-decimal ml-6'>
                             <li>Building great friendships.</li>
@@ -61,7 +61,7 @@ const About = () => {
                             <li>Assisting with integration into families and society to reduce stigma.</li>
                         </ol>
                     </p>
-                    <p className='mt-4 leading-7 text-gray-700'>
+                    <p className='mt-4 leading-7 text-gray-300'>
                         We appreciate your support as we hope to engage more with the community and targeted groups.
                     </p>
                 </div>
@@ -100,6 +100,11 @@ const About = () => {
                     </div>
                 </div>
             </section>
+            <div className="flex flex-col small items-center justify-center">
+                <h3 className='text-3xl'>Certificate of registration</h3>
+                <p>Reuben Wairicu Foundation is a registered foundation. Have a look at the registration certificate below</p>
+                <img src="https://res.cloudinary.com/pitz/image/upload/v1727252899/Screenshot_2024-09-25_112750_ykeimq.png" alt="" />
+            </div>
         </div>
     )
 }

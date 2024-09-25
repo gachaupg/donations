@@ -41,7 +41,7 @@ const Gallery = () => {
   };
 
   return (
-    <div className="gallery">
+    <div className="gallery primary fade-in-left fade-in-left text-white primary animate-fadeIn">
       {images.map((image, index) => (
         <div className="gallery-item" key={index} onClick={() => openLightbox(image.src)}>
           <img src={image.src} alt="" className="gallery-image" />

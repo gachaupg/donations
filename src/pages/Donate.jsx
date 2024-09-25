@@ -3,7 +3,10 @@ import './Donate.css';
 
 const Donate = () => {
   return (
-    <div className="donate-container">
+    <div className='fade-in-left fade-in-left text-white primary animate-fadeIn small w-full'>
+
+
+    <div className=" donate-container primary">
       <h2 className="text-center">Support the Reuben Wairicu Foundation</h2>
       <p className="text-center">
         Your generous contributions will help us support vulnerable groups, including the elderly, inmates, and people living with disabilities. Every donation counts!
@@ -27,6 +30,7 @@ const Donate = () => {
         <p>Thank you for considering a donation!</p>
         <button className="btn">Donate Now</button>
       </div>
+    </div>
     </div>
   );
 };
