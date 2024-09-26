@@ -14,9 +14,38 @@ const About = () => {
 
     return (
         <div className='fade-in-left fade-in-left text-white primary animate-fadeIn small  text-black flex flex-col gap-16 items-center justify-center p-10'>
-            <h2 className={`text-4xl font-bold text-white mb-8 ${section1InView ? 'animate-fadeIn' : ''}`}>
+            <h2 className={`text-4xl font-bold text-white  ${section1InView ? 'animate-fadeIn' : ''}`}>
                 About Us
             </h2>
+            <div ref={section1Ref} className={`flex fade-in-left small animate-fadeIn wrap flex-row gap-10 items-start justify-center ${section1InView ? 'animate-fadeIn' : ''}`}>
+                <div className='w-full'>
+                    <img
+                        style={{
+                            width: '100%',
+                            borderRadius: '12px',
+                            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+                        }}
+                        className='w-full small'
+                        src="https://res.cloudinary.com/pitz/image/upload/v1727035164/WhatsApp_Image_2024-09-22_at_13.06.50_w4efmx.jpg"
+                        alt="Wairicu Family Farm"
+                    />
+                </div>
+                <div className="flex flex-col small items-start justify-center">
+                    <h3 className='text-3xl hero-title1 font-semibold text-gray-800'>Certificate of Registration</h3>
+                    <p className='text-white small text-justify mt-2'>
+                        <p className='mt-6'>                        The Reuben Wairicu Foundation (RWF) is registered under Section 10 of the Non-Governmental Organizations Co-ordination Act.
+                        </p>
+                        <br />
+                        <p className='mt-6'>                        RWF supports the elderly, inmates, people living with disabilities, widowers, teen mums, and other vulnerable people we encounter.
+                        </p>
+                        <br />
+                        <p className='mt-6'>
+                            RWF was founded in honor of Mr. & Mrs. Reuben Wairicu, focusing on community support since the 70s with a mission to give back and improve lives.
+
+                        </p>
+                    </p>
+                </div>
+            </div>
 
             <div ref={section1Ref} className={`flex fade-in-left small animate-fadeIn wrap  flex-row gap-10 items-start justify-center ${section1InView ? 'animate-fadeIn' : ''}`}>
                 <div className='w-1/2 small'>
@@ -100,17 +129,7 @@ const About = () => {
                     </div>
                 </div>
             </section>
-            <div className="flex flex-col small items-center justify-center">
-                <h3 className='text-3xl hero-title1'>Certificate of registration</h3>
-                <p style={{ width: "80%" }}  className='small w-96'>
-                    The Reuben Wairicu Foundation (RWF) is registered under Section 10 of the Non-Govermental Oganizations Co-ordination Act.  
-                    <br />
-                    RWF supports the elderly, inmates, people living with disabilities, widowers, teen mums and other vulnerable people we encounter.
 
-                    RWF was founded in honor of Mr. & Mrs. Reuben Wairicu
-                    Community support since the 70s with a focus on giving back and improving lives
-                </p>
-            </div>
         </div>
     )
 }
