@@ -70,16 +70,16 @@ const About = () => {
 
 
 
-            <div className='primary p-4 rounded-lg text-white'>
-            <h2>RAISING MATURE SELFLESS INDIVIDUALS WHO WILL SUPPORT AND GIVE HOPE TO COMMUNITIES.</h2>
-            <p className='text-ex text-lg font-extrabold text-2xl'>Our Core Values</p>
-                <ul className='mt-3'>
-                    <li>1. SUSTAINABILITY</li>
-                    <li>2. INTERGRITY.</li>
-                    <li>3. COLLABORATION.</li>
-                    <li>4. COMPASSION</li>
-                </ul>
-            </div>
+                <div className='primary p-4 rounded-lg text-white'>
+                    <h2>RAISING MATURE SELFLESS INDIVIDUALS WHO WILL SUPPORT AND GIVE HOPE TO COMMUNITIES.</h2>
+                    <p className='text-ex text-lg font-extrabold text-2xl'>Our Core Values</p>
+                    <ul className='mt-3'>
+                        <li>1. SUSTAINABILITY</li>
+                        <li>2. INTERGRITY.</li>
+                        <li>3. COLLABORATION.</li>
+                        <li>4. COMPASSION</li>
+                    </ul>
+                </div>
             </div>
             <div>
             </div>
@@ -101,9 +101,15 @@ const About = () => {
                 </div>
             </section>
             <div className="flex flex-col small items-center justify-center">
-                <h3 className='text-3xl'>Certificate of registration</h3>
-                <p>Reuben Wairicu Foundation is a registered foundation. Have a look at the registration certificate below</p>
-                <img src="https://res.cloudinary.com/pitz/image/upload/v1727252899/Screenshot_2024-09-25_112750_ykeimq.png" alt="" />
+                <h3 className='text-3xl hero-title1'>Certificate of registration</h3>
+                <p style={{ width: "80%" }}  className='small w-96'>
+                    The Reuben Wairicu Foundation (RWF) is registered under Section 10 of the Non-Govermental Oganizations Co-ordination Act.  
+                    <br />
+                    RWF supports the elderly, inmates, people living with disabilities, widowers, teen mums and other vulnerable people we encounter.
+
+                    RWF was founded in honor of Mr. & Mrs. Reuben Wairicu
+                    Community support since the 70s with a focus on giving back and improving lives
+                </p>
             </div>
         </div>
     )

@@ -6,7 +6,13 @@
 body{
   background-color: #486b4d !important;
 }
-
+.white{
+  color: #fff !important;
+}
+.text{
+ color: #0cd13a!important;
+  font-size: 1.6rem !important;
+}
 :root {
   --background-color-dark: hsl(220, 26%, 14%);
   --background-color-light: #fff;

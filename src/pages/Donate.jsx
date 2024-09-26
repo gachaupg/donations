@@ -7,10 +7,11 @@ const Donate = () => {
 
 
     <div className=" donate-container primary">
-      <h2 className="text-center">Support the Reuben Wairicu Foundation</h2>
-      <p className="text-center">
-        Your generous contributions will help us support vulnerable groups, including the elderly, inmates, and people living with disabilities. Every donation counts!
-      </p>
+      <h2 className="text-center text mb-3">Support the Reuben Wairicu Foundation!
+      </h2>
+      <p className="text-center white">
+      Your generous contributions will help us support the vulnerable people      </p>
+      <p className='white ml-8'>Every donation counts!</p>
 
       <div className="payment-details">
         <h3>For Financial Support:</h3>
