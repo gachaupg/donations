@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+  background-color: #486b4d !important;
+}
+
 :root {
   --background-color-dark: hsl(220, 26%, 14%);
   --background-color-light: #fff;
@@ -36,7 +40,6 @@
   color: rgb(249, 242, 242);
   position: fixed;
   width: 100% !important;
-
 }
 .nav-light{
   background-color:#486b4d !important;

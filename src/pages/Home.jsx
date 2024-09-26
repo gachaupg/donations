@@ -17,9 +17,9 @@ const Home = () => {
 
 
   return (
-    <div ref={section1Ref} className="homepage  fade-in-left fade-in-left text-white primary animate-fadeIn">
+    <div ref={section1Ref} className={`homepage  fade-in-left fade-in-left text-white primary animate-fadeIn ${section1InView ? 'animate-fadeIn' : ''}`}>
       {/* Hero Section */}
-      <section ref={section1Ref} className="flex flex-row small gap-10 wrap'">
+      <div ref={section1Ref} className={`flex flex-row small gap-10 wrap  ${section1InView ? 'animate-fadeIn' : ''}`}>
         <div className='small w-full flex flex-col  gap-10  wrap'>
           <h1 style={{
             color: '',
@@ -38,11 +38,11 @@ const Home = () => {
         <img className='small img wrap'
           src="https://res.cloudinary.com/pitz/image/upload/v1727269505/WhatsApp_Image_2024-09-22_at_13.06.43_domw8a.jpg" alt="" />
 
-      </section>
+      </div>
       {/* About the Foundation */}
       <section style={{
         color: 'white'
-      }} ref={section1Ref} className="about text-zinc-50">
+      }} ref={section1Ref} className={` ${section1InView ? 'animate-fadeIn' : ''} about text-zinc-50 `}>
         <h2 style={{
           color: 'white'
         }} className='text-white'>About Us</h2>
