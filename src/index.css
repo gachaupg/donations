@@ -10,7 +10,7 @@ body{
   color: #fff !important;
 }
 .text{
- color: #0cd13a!important;
+ color: #fff!important;
   font-size: 1.6rem !important;
 }
 :root {
@@ -77,6 +77,10 @@ html.light {
     .small{
       width: 100% !important;
     }
+    .img{
+      width: 100%;
+      height: 20rem !important;
+    }
   }
 
   body {
@@ -84,10 +88,15 @@ html.light {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9; /* Light background */
   }
+  .donate{
+    font-weight: 600;
+    color: red !important;
+    font-size: 1rem;
+  }
   .hero-title1 {
     font-size: 2.5rem;
     margin-bottom: 20px;
-    color: #0cd13a;
+    color: #fff;
   }
   .homepage {
     padding: 20px;
@@ -107,7 +116,7 @@ html.light {
   .hero-title {
     font-size: 2.5rem;
     margin-bottom: 20px;
-    color: #4caf50; /* Primary color */
+    color: #fff; /* Primary color */
   }
   
   .btn {

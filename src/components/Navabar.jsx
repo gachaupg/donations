@@ -58,7 +58,7 @@ const Navbar = () => {
 
         <Link to="/donate" className="hover:underline">
         <button 
-    className='p-1 rounded-lg w-28 bg-white text-red-600 uppercase shadow-2xl hover:shadow-3xl transition-shadow'
+    className='p-1 donate rounded-lg w-28 bg-white text-red-600   uppercase shadow-2xl hover:shadow-3xl transition-shadow'
     style={{ boxShadow: '0 10px 20px rgba(0, 0.5, 0.5, 0.5)' }} // Custom shadow for even more visibility
 >
     Donate
@@ -79,7 +79,7 @@ const Navbar = () => {
 
       {isMenuOpen && (
         <motion.div
-          className={`absolute top-16 left-0 right-0 p-6 flex flex-col space-y-4 z-10 transition-all duration-300 ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-black'}`}
+          className={`absolute primary text-white top-16 left-0 right-0 p-6 flex flex-col space-y-4 z-10 transition-all duration-300 ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-black'}`}
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -96,11 +96,12 @@ const Navbar = () => {
           <Link onClick={() => setIsMenuOpen(false)} to="/gallery" className="hover:underline">
             Gallery
           </Link>
-          <button className='p-2 rounded-lg bg-green-900 text-white' onClick={() => setIsMenuOpen(false)}>
-            <Link to="/donate" className="hover:underline">
-              Donate
-            </Link>
-          </button>
+          <button 
+    className='p-1 donate rounded-lg w-28 bg-white text-red-600   uppercase shadow-2xl hover:shadow-3xl transition-shadow'
+    style={{ boxShadow: '0 10px 20px rgba(0, 0.5, 0.5, 0.5)' }} // Custom shadow for even more visibility
+>
+    Donate
+</button>
         </motion.div>
       )}
 
