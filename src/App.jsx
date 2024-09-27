@@ -9,6 +9,7 @@ import Contact from "./pages/contact";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import About from "./pages/about";
+import Programs from "./pages/programs";
 function App() {
   return (
     <BrowserRouter>
@@ -22,6 +23,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/donate" element={<Donate />} />
+            <Route path="/programs" element={<Programs />} />
           </Routes>
         </div>
         <Footer />

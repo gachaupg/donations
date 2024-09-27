@@ -74,6 +74,12 @@ html.light {
       flex-direction: column !important;
       width: 100% !important;
     }
+    .w{
+      margin: 0 !important;
+      padding: 0 !important; 
+      padding: 1px;
+      width: 100% !important;
+    }
     .small{
       width: 100% !important;
     }
