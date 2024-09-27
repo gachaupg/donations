@@ -56,9 +56,9 @@ function ContactForm() {
                     <div className='mt-6 text-gray-200 flex gap-2 flex-col'>
                         <p className='flex flex-row justify-between'>
                             <strong>Email: <FontAwesomeIcon icon={faEnvelope} /> </strong>
-                            <a href="/" className='text-blue-400 underline'>
+                            <Link to="/" className='text-blue-400 underline'>
                                 reubenwairicufoundation@gmail.com
-                            </a>
+                            </Link>
                         </p>
                         <p className='flex flex-row justify-between'>
                             <strong>Facebook: <FontAwesomeIcon icon={faFacebook} /></strong>
@@ -68,18 +68,18 @@ function ContactForm() {
                         </p>
                         <p className='flex flex-row justify-between'>
                             <strong>Instagram: <FontAwesomeIcon icon={faInstagram} /> </strong>
-                            <a href="/" target="_blank" rel="noopener noreferrer" className='text-blue-400 underline'>
+                            <Link to="/" className='text-blue-400 underline'>
                                 Reuben Wairicu Foundation
-                            </a>
+                            </Link>
                         </p>
                         <p className='flex flex-row justify-between'>
                             <strong>Contact Person:</strong> Millie Ochoki
                         </p>
                         <p className='flex flex-row justify-between'>
                             <strong>Phone: <FontAwesomeIcon icon={faPhone} /></strong>
-                            <a href="tel:+254723237149" className='text-blue-400 underline'>
+                            <Link to="tel:+254723237149" className='text-blue-400 underline'>
                                 +254 723 237149
-                            </a>
+                            </Link>
                         </p>
                     </div>
                 </div>
