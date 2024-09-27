@@ -3,6 +3,7 @@ import './Home.css'; // Assuming you have a CSS file for styling
 import { Link } from 'react-router-dom';
 import ContactForm from './contact';
 import { useInView } from 'react-intersection-observer'
+import Programs from './programs';
 
 const Home = () => {
   const { ref: section1Ref, inView: section1InView } = useInView({
@@ -63,28 +64,7 @@ const Home = () => {
         </ul>
       </section>
 
-      {/* Programs and Services */}
-      <section ref={section1Ref} className="programs">
-        <h2 style={{
-          color: 'white'
-        }} className="programs-heading">Our Programs</h2>
-        <div style={{
-          color: 'white'
-        }} className="program-container">
-          <div className="program">
-            <h3>Prison Ministry</h3>
-            <p>Supporting inmates with basic needs and counseling.</p>
-          </div>
-          <div className="program">
-            <h3>Elderly Care</h3>
-            <p>Providing assistance and companionship to the elderly.</p>
-          </div>
-          <div className="program">
-            <h3>Support for Teen Mums</h3>
-            <p>Empowering young mothers with skills and support.</p>
-          </div>
-        </div>
-      </section>
+     <Programs/>
 
       <section ref={section1Ref} className="get-involved">
         <h2>Get Involved</h2>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useInView } from 'react-intersection-observer'
+import Programs from './programs'
 
 const About = () => {
     const { ref: section1Ref, inView: section1InView } = useInView({
@@ -112,24 +113,7 @@ const About = () => {
             </div>
             <div>
             </div>
-            <section className="programs text-white">
-                <h2 className="programs-heading">Our Programs</h2>
-                <div className="program-container">
-                    <div className="program">
-                        <h3>Prison Ministry</h3>
-                        <p>Supporting inmates with basic needs and counseling.</p>
-                    </div>
-                    <div className="program">
-                        <h3>Elderly Care</h3>
-                        <p>Providing assistance and companionship to the elderly.</p>
-                    </div>
-                    <div className="program">
-                        <h3>Support for Teen Mums</h3>
-                        <p>Empowering young mothers with skills and support.</p>
-                    </div>
-                </div>
-            </section>
-
+            <Programs/>
         </div>
     )
 }
