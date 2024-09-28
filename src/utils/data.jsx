@@ -7,12 +7,12 @@ export const data = [
     {
       title: 'Support for Teen Mums',
       description: 'Providing mentorship and training as they rebuild their lives.',
-      image:"https://res.cloudinary.com/pitz/image/upload/v1727422150/WhatsApp_Image_2024-09-22_at_13.06.45_yxcdw4.jpg"
+      image:"https://res.cloudinary.com/pitz/image/upload/v1727439918/WhatsApp_Image_2024-09-27_at_15.06.49_1_divzhc.jpg"
     },
     {
       title: 'Elderly Care',
       description: 'Provide basic needs, help them to seek medical support, plan age appropriate activities.',
-      image:"https://res.cloudinary.com/pitz/image/upload/v1727422149/WhatsApp_Image_2024-09-22_at_13.06.47_2_xc7qxa.jpg"
+      image:"https://res.cloudinary.com/pitz/image/upload/v1727439404/WhatsApp_Image_2024-09-27_at_15.07.14_lwcztg.jpg"
     },
     {
       title: 'Widowers',

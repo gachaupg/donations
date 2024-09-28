@@ -50,7 +50,7 @@ const About = () => {
 
             <div ref={section1Ref} className={`flex fade-in-left small animate-fadeIn wrap  flex-row gap-10 items-start justify-center ${section1InView ? 'animate-fadeIn' : ''}`}>
                 <div className='w-1/2 small'>
-                    <img className='w-full small rounded-lg shadow-lg' src="https://res.cloudinary.com/pitz/image/upload/v1727035164/WhatsApp_Image_2024-09-22_at_13.06.50_w4efmx.jpg" alt="Wairicu Family Farm" />
+                    <img className='w-full small rounded-lg shadow-lg' src="https://res.cloudinary.com/pitz/image/upload/v1727439404/WhatsApp_Image_2024-09-27_at_15.07.02_dfrybe.jpg" alt="Wairicu Family Farm" />
                 </div>
                 <div className='w-1/2 small text-justify'>
                     <h3 className='text-2xl text-100-700 font-semibold mb-4'>The Journey</h3>
