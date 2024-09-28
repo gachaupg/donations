@@ -12,7 +12,7 @@ const Programs = () => {
                 return(
                     <>
                     <div className='bg-white small  w-64 rounded-lg text-black '>
-                        <img src={i.image} className='w-full object-cover h-48 rounded-lg' alt={i.title} />
+                        <img src={i.image} className='w-full object-fit h-48 rounded-lg' alt={i.title} />
                       <div className='p-2'>
                       <h3 className='text-2xl font-bold'>{i.title}</h3>
                       <p>{i.description}</p>

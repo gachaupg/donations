@@ -18,16 +18,16 @@ const About = () => {
             <h2 className={`text-4xl font-bold text-white  ${section1InView ? 'animate-fadeIn' : ''}`}>
                 About Us
             </h2>
-            <div ref={section1Ref} className={`flex fade-in-left small animate-fadeIn wrap flex-row gap-10 items-start justify-center ${section1InView ? 'animate-fadeIn' : ''}`}>
+            <div ref={section1Ref} className={`flex fade-in-left small animate-fadeIn wrap flex-row gap-5 items-start justify-center ${section1InView ? 'animate-fadeIn' : ''}`}>
                 <div className='w-full'>
                     <img
                         style={{
-                            width: '100%',
+                            width: '90%',
                             borderRadius: '12px',
                             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
                         }}
-                        className='w-full small'
-                        src="https://res.cloudinary.com/pitz/image/upload/v1727035164/WhatsApp_Image_2024-09-22_at_13.06.50_w4efmx.jpg"
+                        className='w-full small object-contain '
+                        src="https://res.cloudinary.com/pitz/image/upload/v1727543722/images_1_qnydeo.png"
                         alt="Wairicu Family Farm"
                     />
                 </div>
