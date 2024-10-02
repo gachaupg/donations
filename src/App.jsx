@@ -10,6 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import About from "./pages/about";
 import Programs from "./pages/programs";
+import Admin from "./Admin/Admin";
 function App() {
   return (
     <BrowserRouter>
@@ -24,6 +25,7 @@ function App() {
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/donate" element={<Donate />} />
             <Route path="/programs" element={<Programs />} />
+            <Route path="/admin" element={<Admin/>} />
           </Routes>
         </div>
         <Footer />

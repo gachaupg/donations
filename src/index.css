@@ -74,6 +74,14 @@ html.light {
       flex-direction: column !important;
       width: 100% !important;
     }
+    .tab{
+      display: flex;
+     justify-content: space-between;
+    }
+    .sidebar{
+      display: flex;
+      flex-direction: column;
+    }
     .w{
       margin: 0 !important;
       padding: 0 !important; 
