@@ -1,12 +1,18 @@
 import React from 'react';
 import { BsFacebook, BsTwitter, BsInstagram, BsYoutube } from 'react-icons/bs'; 
+import { useBranding } from '../context/BrandingContext.jsx';
 
 const Footer = () => {
+  const { branding } = useBranding();
+  const logoUrl =
+    branding?.logoUrl ||
+    'https://res.cloudinary.com/pitz/image/upload/v1727001297/WhatsApp_Image_2024-09-22_at_13.07.54_z6oksz.jpg';
+
   return (
     <footer className="bg-white text-black py-4">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-4 px-4">
         <div>
-          <img className='h-16' src="https://res.cloudinary.com/pitz/image/upload/v1727001297/WhatsApp_Image_2024-09-22_at_13.07.54_z6oksz.jpg" alt="" />
+          <img className='h-16' src={logoUrl} alt="Reuben Wairicu Foundation logo" />
           <p className="text-gray-600">
             Bringing you the best services with dedication and excellence. Stay connected with us.
           </p>

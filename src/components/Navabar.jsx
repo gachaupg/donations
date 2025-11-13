@@ -1,170 +1,159 @@
 import React, { useState, useEffect } from "react";
 import { BsSun, BsMoon, BsList } from "react-icons/bs";
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { Link, useLocation } from "react-router-dom";
+import "./Navbar.css";
+import { useAuth } from "../context/AuthContext.jsx";
+import { useBranding } from "../context/BrandingContext.jsx";
+
+const navLinks = [
+  { label: "Home", path: "/" },
+  { label: "About Us", path: "/about" },
+  { label: "Programs", path: "/programs" },
+  { label: "Gallery", path: "/gallery" },
+  { label: "Contact", path: "/contact" },
+];
 
 const Navbar = () => {
   const [theme, setTheme] = useState("light");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const { user } = useAuth();
+  const { branding } = useBranding();
 
-  // UseEffect to handle theme loading from localStorage
+  const logoUrl =
+    branding?.logoUrl ||
+    "https://res.cloudinary.com/pitz/image/upload/v1739433241/Screenshot_2025-02-13_104904__1_-removebg-preview_hbjaqg.png";
+
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "light"; // Default to light if nothing is saved
+    const savedTheme = localStorage.getItem("theme") || "light";
     setTheme(savedTheme);
-    document.documentElement.className = savedTheme; // Ensures theme is applied
+    document.documentElement.className = savedTheme;
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 24);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
-    document.documentElement.className = newTheme; // Properly switch theme class
-    localStorage.setItem("theme", newTheme); // Save to localStorage
+    document.documentElement.className = newTheme;
+    localStorage.setItem("theme", newTheme);
   };
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen((prev) => !prev);
   };
 
+  const closeMenu = () => setIsMenuOpen(false);
+
   return (
-    <nav
-      className={`p-2 flex justify-between items-center fixed w-full top-0 transition-all duration-300 ${
-        theme === "dark" ? "bg-gray-800 text-white" : "bg-gray-100 text-black"
+    <header
+      className={`navbar ${theme === "dark" ? "navbar--dark" : "navbar--light"} ${
+        isScrolled ? "navbar--scrolled" : ""
       }`}
-      style={{ zIndex: 1000, height: "60px" }}
     >
-      <div className="text-xl">
-        <Link to="/">
+      <div className="navbar__inner">
+        <Link to="/" className="navbar__brand" aria-label="Reuben Wairicu Foundation">
           <img
-            className="h-14 object-cover"
-            src="https://res.cloudinary.com/pitz/image/upload/v1739433241/Screenshot_2025-02-13_104904__1_-removebg-preview_hbjaqg.png"
-            alt="Logo"
+            src={logoUrl}
+            alt="Reuben Wairicu Foundation logo"
           />
+          <div className="navbar__brand-text">
+            <span className="navbar__brand-eyebrow">Reuben Wairicu</span>
+            <span className="navbar__brand-title">Foundation</span>
+          </div>
         </Link>
-      </div>
 
-      <div className="hidden md:flex space-x-6">
-        <Link
-          to="/"
-          className={`font-bold hover:underline text-lg ${
-            theme === "dark" ? "text-white" : "text-black"
-          }`}
-        >
-          Home
-        </Link>
-        <Link
-          to="/about"
-          className={`font-bold hover:underline text-lg ${
-            theme === "dark" ? "text-white" : "text-black"
-          }`}
-        >
-          About Us
-        </Link>
-        <Link
-          to="/contact"
-          className={`font-bold hover:underline text-lg ${
-            theme === "dark" ? "text-white" : "text-black"
-          }`}
-        >
-          Contact
-        </Link>
-        <Link
-          to="/gallery"
-          className={`font-bold hover:underline text-lg ${
-            theme === "dark" ? "text-white" : "text-black"
-          }`}
-        >
-          Gallery
-        </Link>
-        <Link
-          to="/programs"
-          className={`font-bold hover:underline text-lg ${
-            theme === "dark" ? "text-white" : "text-black"
-          }`}
-        >
-          Programs
-        </Link>
-      </div>
+        <nav className="navbar__links">
+          {navLinks.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              className={`navbar__link ${location.pathname === link.path ? "is-active" : ""}`}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
 
-      <div className="flex items-center space-x-4">
-        <Link to="/donate" className="hover:underline">
-          <button className="p-1 donate rounded-lg w-24 bg-white text-red-600 uppercase shadow-lg hover:shadow-xl transition-shadow">
+        <div className="navbar__actions">
+          <Link to="/donate" className="btn donate-btn">
             Donate
+          </Link>
+          <Link
+            to={user ? "/dashboard" : "/login"}
+            className={`btn ${user ? "dashboard-btn" : "login-btn"}`}
+          >
+            {user ? "Dashboard" : "Login"}
+          </Link>
+          <button
+            type="button"
+            className="icon-button"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? <BsSun /> : <BsMoon />}
           </button>
-        </Link>
-
-        <button className="text-2xl" onClick={toggleTheme}>
-          {theme === "dark" ? <BsSun /> : <BsMoon />}
-        </button>
-
-        <button onClick={toggleMenu} className="md:hidden text-2xl">
-          <BsList size={28} />
-        </button>
+          <button
+            type="button"
+            className="icon-button navbar__menu-toggle"
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
+          >
+            <BsList size={22} />
+          </button>
+        </div>
       </div>
 
-      {isMenuOpen && (
-        <motion.div
-          className={`absolute top-14 left-0 right-0 p-4 flex flex-col space-y-4 z-10 ${
-            theme === "dark"
-              ? "bg-gray-800 text-white"
-              : "bg-gray-200 text-black"
-          }`}
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Link
-            onClick={() => setIsMenuOpen(false)}
-            to="/"
-            className={`font-bold hover:underline text-lg ${
-              theme === "dark" ? "text-white" : "text-black"
-            }`}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.nav
+            key="mobile-nav"
+            className="navbar__mobile"
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.25 }}
           >
-            Home
-          </Link>
-          <Link
-            onClick={() => setIsMenuOpen(false)}
-            to="/about"
-            className={`font-bold hover:underline text-lg ${
-              theme === "dark" ? "text-white" : "text-black"
-            }`}
-          >
-            About Us
-          </Link>
-          <Link
-            onClick={() => setIsMenuOpen(false)}
-            to="/contact"
-            className={`font-bold hover:underline text-lg ${
-              theme === "dark" ? "text-white" : "text-black"
-            }`}
-          >
-            Contact
-          </Link>
-          <Link
-            onClick={() => setIsMenuOpen(false)}
-            to="/gallery"
-            className={`font-bold hover:underline text-lg ${
-              theme === "dark" ? "text-white" : "text-black"
-            }`}
-          >
-            Gallery
-          </Link>
-          <Link
-            onClick={() => setIsMenuOpen(false)}
-            to="/programs"
-            className={`font-bold hover:underline text-lg ${
-              theme === "dark" ? "text-white" : "text-black"
-            }`}
-          >
-            Programs
-          </Link>
-          <Link to="/donate" className="hover:underline">
-            <button className="p-1 donate rounded-lg w-24 bg-white text-red-600 uppercase shadow-lg hover:shadow-xl transition-shadow">
-              Donate
-            </button>
-          </Link>
-        </motion.div>
-      )}
-    </nav>
+            <div className="navbar__mobile-links">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`navbar__mobile-link ${
+                    location.pathname === link.path ? "is-active" : ""
+                  }`}
+                  onClick={closeMenu}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+            <div className="navbar__mobile-cta">
+              <Link to="/donate" className="btn donate-btn" onClick={closeMenu}>
+                Donate
+              </Link>
+              <Link
+                to={user ? "/dashboard" : "/login"}
+                className={`btn ${user ? "dashboard-btn" : "login-btn"}`}
+                onClick={closeMenu}
+              >
+                {user ? "Dashboard" : "Login"}
+              </Link>
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </header>
   );
 };
 

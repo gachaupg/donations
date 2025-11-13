@@ -1,79 +1,189 @@
 import React from 'react';
-import './Home.css'; // Assuming you have a CSS file for styling
+import './Home.css';
 import { Link } from 'react-router-dom';
 import ContactForm from './contact';
-import { useInView } from 'react-intersection-observer'
 import Programs from './programs';
+import { useInView } from 'react-intersection-observer';
 
 const Home = () => {
-  const { ref: section1Ref, inView: section1InView } = useInView({
-    triggerOnce: true, // Trigger animation only once
-    threshold: 0.1, // Trigger when 10% of the element is in view
-  })
-  const { ref: section2Ref, inView: section2InView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  })
-
-
+  const { ref: heroRef, inView: heroInView } = useInView({ triggerOnce: true, threshold: 0.2 });
+  const { ref: missionRef, inView: missionInView } = useInView({ triggerOnce: true, threshold: 0.2 });
+  const { ref: impactRef, inView: impactInView } = useInView({ triggerOnce: true, threshold: 0.2 });
+  const { ref: ctaRef, inView: ctaInView } = useInView({ triggerOnce: true, threshold: 0.2 });
 
   return (
-    <div ref={section1Ref} className={`homepage  fade-in-left fade-in-left text-white primary animate-fadeIn ${section1InView ? 'animate-fadeIn' : ''}`}>
-      {/* Hero Section */}
-      <div ref={section1Ref} className={`flex flex-row small gap-10 wrap  ${section1InView ? 'animate-fadeIn' : ''}`}>
-        <div className='small w-full flex flex-col  gap-10  wrap'>
-          <h1 style={{
-            color: '',
-          }} className="hero-title1 small wrap">Giving Hope, Sharing Love, Touching Hearts</h1>
-          <h5 className='text-slate-300 text-lg '>
-            Our mission is to empower individuals and uplift communities through our various initiatives.
+    <div className="homepage">
+      <section ref={heroRef} className={`hero fold ${heroInView ? 'is-visible' : ''}`}>
+        <div className="hero__content">
+          <div className="hero__tag">Rooted in Community</div>
+          <h1>Giving Hope, Sharing Love, Touching Hearts</h1>
+          <p>
+            We uplift vulnerable families across Kenya with food security, health outreach, and
+            restorative programs. Together, we honour the legacy of Reuben Wairicu by building a
+            future where dignity is a human right, not a privilege.
+          </p>
+          <div className="hero__actions">
+            <Link to="/donate" className="btn btn--primary">
+              Donate Now
+            </Link>
+            <Link to="/about" className="btn btn--outline">
+              Discover Our Story
+            </Link>
+          </div>
+          <div className="hero__stats">
+            <div className="stat-card">
+              <span className="stat-card__value">1.2k+</span>
+              <span className="stat-card__label">Families Supported</span>
+            </div>
+            <div className="stat-card">
+              <span className="stat-card__value">37</span>
+              <span className="stat-card__label">Partner Communities</span>
+            </div>
+            <div className="stat-card">
+              <span className="stat-card__value">150</span>
+              <span className="stat-card__label">Dedicated Volunteers</span>
+            </div>
+          </div>
+        </div>
+        <div className="hero__media">
+          <div className="hero__image-frame">
+            <img
+              src="https://res.cloudinary.com/pitz/image/upload/v1727269505/WhatsApp_Image_2024-09-22_at_13.06.43_domw8a.jpg"
+              alt="Volunteers delivering care packages to families"
+            />
+            <div className="hero__badge">Serving since 1970s</div>
+          </div>
+          <div className="hero__note">
+            <strong>Community First</strong>
+            <p>
+              Every donation fuels on-the-ground initiatives that restore dignity and open doors to
+              opportunity.
+            </p>
+          </div>
+        </div>
+      </section>
 
-            By providing resources, support, and opportunities, we aim to make a lasting impact on the lives of those in need.
+      <section
+        ref={missionRef}
+        className={`mission fold ${missionInView ? 'is-visible' : ''}`}
+      >
+        <div className="section-header">
+          <span className="section-header__tag">About The Foundation</span>
+          <h2>Carrying Forward A Legacy Of Compassion</h2>
+          <p>
+            The Reuben Wairicu Foundation offers holistic support to elders, caregivers, inmates, and
+            persons with disabilities. We combine practical aid with mentorship to spark lasting
+            change.
+          </p>
+        </div>
+        <div className="mission__grid">
+          <article className="info-card">
+            <div className="info-card__icon">★</div>
+            <h3>Our Why</h3>
+            <p>
+              Celebrating a lifetime dedicated to generosity, we stand in the gap for neighbours who
+              are overlooked and underserved.
+            </p>
+          </article>
+          <article className="info-card">
+            <div className="info-card__icon">🤝</div>
+            <h3>Our Approach</h3>
+            <p>
+              We respond quickly to urgent needs while empowering communities to design sustainable
+              solutions for themselves.
+            </p>
+          </article>
+          <article className="info-card">
+            <div className="info-card__icon">✓</div>
+            <h3>Our Promise</h3>
+            <p>
+              Transparency and stewardship are central to everything we do—every shilling is
+              accounted for and invested with care.
+            </p>
+          </article>
+        </div>
+      </section>
 
-            Together, we can create positive change.
-          </h5>
-          <Link to='/about' >
-            <button className="btn">Learn More</button>
+      <section
+        ref={impactRef}
+        className={`impact fold ${impactInView ? 'is-visible' : ''}`}
+      >
+        <div className="section-header">
+          <span className="section-header__tag">Our Focus</span>
+          <h2>Programs That Meet People Where They Are</h2>
+          <p>
+            From food baskets to rehabilitation courses, our programs wrap around families with the
+            support they need most.
+          </p>
+        </div>
+        <div className="impact__grid">
+          <article className="impact-card">
+            <h3>Restoring Dignity</h3>
+            <p>
+              Home visits deliver nutrition essentials, companionship, and wellness checks to elderly
+              caregivers and guardians.
+            </p>
+          </article>
+          <article className="impact-card">
+            <h3>Second Chances</h3>
+            <p>
+              Reintegration pathways provide mentorship, counselling, and vocational skills for
+              inmates returning home.
+            </p>
+          </article>
+          <article className="impact-card">
+            <h3>Inclusive Futures</h3>
+            <p>
+              Assistive devices, therapy partnerships, and advocacy empower people living with
+              disabilities to access opportunity.
+            </p>
+          </article>
+          <article className="impact-card">
+            <h3>Youth Empowerment</h3>
+            <p>
+              Leadership camps and scholarship support equip young people to become community
+              champions.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section className="programs-section fold is-visible">
+        <Programs />
+      </section>
+
+      <section ref={ctaRef} className={`call-to-action fold ${ctaInView ? 'is-visible' : ''}`}>
+        <div className="cta__content">
+          <span className="section-header__tag">Get Involved</span>
+          <h2>Every Act Of Generosity Keeps Hope Alive</h2>
+          <p>
+            Become a monthly donor, host a fundraiser, or volunteer your time. Your support helps us
+            stretch our reach to more families across the country.
+          </p>
+        </div>
+        <div className="hero__actions">
+          <Link to="/donate" className="btn btn--primary">
+            Donate Today
+          </Link>
+          <Link to="/contact" className="btn btn--ghost">
+            Talk To Our Team
           </Link>
         </div>
-        <img className='small img wrap'
-          src="https://res.cloudinary.com/pitz/image/upload/v1727269505/WhatsApp_Image_2024-09-22_at_13.06.43_domw8a.jpg" alt="" />
-
-      </div>
-      {/* About the Foundation */}
-      <section style={{
-        color: 'white'
-      }} ref={section1Ref} className={` ${section1InView ? 'animate-fadeIn' : ''} about text-zinc-50 `}>
-        <h2 style={{
-          color: 'white'
-        }} className='text-white'>About Us</h2>
-        <p style={{
-          color: 'white'
-        }} >
-          The Reuben Wairicu Foundation supports vulnerable groups including the elderly, inmates, and people living with disabilities.
-        </p>
-        <ul style={{
-          color: 'white'
-        }} >
-          <li style={{
-            color: 'white'
-          }} >Founded in honor of Mr. & Mrs. Reuben Wairicu</li>
-          <li style={{
-            color: 'white'
-          }} >Community support since the 70s with a focus on giving back and improving lives</li>
-        </ul>
       </section>
 
-     <Programs/>
-
-      <section ref={section1Ref} className="get-involved">
-        <h2>Get Involved</h2>
-        <p>Support our mission by donating or volunteering.</p>
-        <Link to='/donate' >
-          <button className="btn">Donate Now</button>
+      <section className="support-strip">
+        <div className="support-strip__content">
+          <h3>Together we can reach even more families.</h3>
+          <p>Share our story with your community or invite us to speak at your next event.</p>
+        </div>
+        <Link to="/gallery" className="btn btn--lime">
+          Explore Impact Stories
         </Link>
       </section>
-      <ContactForm />
+
+      <div className="contact-section">
+        <ContactForm />
+      </div>
     </div>
   );
 };
