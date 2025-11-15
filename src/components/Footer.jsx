@@ -9,7 +9,7 @@ const Footer = () => {
     'https://res.cloudinary.com/pitz/image/upload/v1727001297/WhatsApp_Image_2024-09-22_at_13.07.54_z6oksz.jpg';
 
   return (
-    <footer className="bg-white text-black py-4">
+    <footer className="text-black py-4">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-4 px-4">
         <div>
           <img className='h-16' src={logoUrl} alt="Reuben Wairicu Foundation logo" />

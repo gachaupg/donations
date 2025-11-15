@@ -75,14 +75,14 @@ const Gallery = () => {
   };
 
   return (
-    <div className="bg-white py-12 px-4 text-slate-900 sm:px-6">
+    <div className="py-12 px-4 text-white sm:px-6">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-10">
         <header className="space-y-3 text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-700">
             Impact gallery
           </span>
           <h1 className="text-3xl font-semibold sm:text-4xl">Stories of hope in motion</h1>
-          <p className="mx-auto max-w-3xl text-sm leading-relaxed text-slate-600 sm:text-base">
+          <p className="mx-auto max-w-3xl text-sm leading-relaxed text-white/90 sm:text-base">
             Moments captured from our programmes, volunteers, and community partners. Every image
             represents generosity transformed into action.
           </p>

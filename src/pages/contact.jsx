@@ -61,7 +61,7 @@ function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="flex min-h-[calc(100vh-80px)] flex-col items-center justify-center bg-white px-4 text-slate-900">
+      <div className="flex min-h-[calc(100vh-80px)] flex-col items-center justify-center px-4 text-white">
         <div className="w-full max-w-md space-y-4 rounded-3xl border border-emerald-200/50 bg-emerald-50 p-8 text-center shadow-lg">
           <p className="text-lg font-semibold text-emerald-800">
             Thanks for sending your message!
@@ -89,7 +89,7 @@ function ContactForm() {
   }
 
   return (
-    <div className="bg-white py-12 px-4 text-slate-900 sm:px-6">
+    <div className="py-12 px-4 text-white sm:px-6">
       <div className="mx-auto grid w-full max-w-6xl gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)]">
         <div className="space-y-6">
           <div className="space-y-3">
@@ -99,7 +99,7 @@ function ContactForm() {
             <h1 className="text-3xl font-semibold sm:text-4xl">
               We are here to help you keep hope alive
             </h1>
-            <p className="text-sm leading-relaxed text-slate-600 sm:text-base">
+            <p className="text-sm leading-relaxed text-white/90 sm:text-base">
               Reach out with questions, ideas, or partnership opportunities. We’d love to hear from
               you and explore how we can serve together.
             </p>

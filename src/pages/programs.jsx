@@ -70,18 +70,22 @@ const Programs = () => {
   const programList = programs.length > 0 ? programs : programSeedData;
 
   return (
-    <div className="bg-white">
-      <div className="mx-auto flex min-h-[calc(100vh-80px)] max-w-6xl flex-col gap-6 px-4 py-8 text-slate-900 sm:px-6">
-      <header className="space-y-3 text-center">
+    <div>
+      <div className="mx-auto flex min-h-[calc(100vh-80px)] max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6">
+      <header className="space-y-3 text-center mb-4">
         <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-700">
           Foundation programmes
         </span>
-        <h2 className="text-3xl font-semibold text-emerald-700 sm:text-4xl">Our Programs</h2>
+        <h2 className="text-3xl font-semibold text-white sm:text-4xl drop-shadow-lg">Our Programs</h2>
       </header>
 
         {loading ? (
-          <div className="flex h-48 w-full items-center justify-center rounded-[26px] border border-dashed border-emerald-200/40 bg-emerald-50 text-sm font-semibold text-emerald-600/70">
-            Loading programs…
+          <div className="flex flex-col items-center justify-center py-20 w-full">
+            <div className="relative">
+              <div className="w-16 h-16 border-4 border-emerald-200/30 border-t-emerald-600 rounded-full animate-spin mb-4"></div>
+              <div className="absolute inset-0 w-16 h-16 border-4 border-transparent border-r-emerald-400 rounded-full animate-spin" style={{ animationDirection: 'reverse', animationDuration: '0.8s' }}></div>
+            </div>
+            <p className="text-emerald-100 text-base font-medium mt-4">Loading programs...</p>
           </div>
         ) : programList.length === 0 ? (
           <div className="flex flex-col items-center justify-center gap-3 rounded-[26px] border border-dashed border-emerald-200/40 bg-emerald-50 py-14 text-center">

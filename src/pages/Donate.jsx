@@ -4,7 +4,7 @@ import PayPalDonate from '../components/PayPalDonate.jsx';
 
 const Donate = () => {
   return (
-    <div className="min-h-[calc(100vh-80px)] bg-white py-8 px-4 text-slate-900 sm:px-8">
+    <div className="min-h-[calc(100vh-80px)] py-8 px-4 text-white sm:px-8">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-8">
         <div className="grid gap-6 lg:grid-cols-2">
           <div className="h-full">
@@ -51,7 +51,7 @@ const Donate = () => {
           </ol>
         </div>
 
-        <footer className="text-center text-xs text-slate-500">
+        <footer className="text-center text-xs text-white/70">
           Thank you for partnering with the Reuben Wairicu Foundation. Together we restore dignity,
           unlock opportunity, and ensure no neighbour is left behind.
         </footer>

@@ -21,13 +21,18 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-gradient-to-br relative overflow-hidden">
+      <div className="min-h-screen relative overflow-hidden" style={{ backgroundColor: '#486b4d' }}>
         <Navbar />
         <ToastContainer />
         <div className="mt-20">
           {initializing ? (
-            <div className="w-full py-16 flex items-center justify-center text-slate-500">
-              Checking session…
+            <div className="w-full py-16 flex items-center justify-center text-white">
+              <div className="flex flex-col items-center gap-3">
+                <div className="relative">
+                  <div className="w-12 h-12 border-4 border-emerald-200/30 border-t-emerald-400 rounded-full animate-spin"></div>
+                </div>
+                <p className="text-sm font-medium">Checking session…</p>
+              </div>
             </div>
           ) : (
             <Routes>

@@ -3,16 +3,16 @@ import Programs from './programs';
 
 const About = () => {
   return (
-    <div className="bg-white py-12 px-4 text-slate-900 sm:px-6">
+    <div className="py-12 px-4 sm:px-6">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-16">
         <header className="space-y-3 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-700">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-transparent px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-white">
             Our Story
           </span>
-          <h1 className="text-3xl font-semibold sm:text-4xl">
+          <h1 className="text-3xl font-semibold text-white sm:text-4xl">
             Honouring a legacy of compassion across generations
           </h1>
-          <p className="mx-auto max-w-3xl text-sm leading-relaxed text-slate-600 sm:text-base">
+          <p className="mx-auto max-w-3xl text-sm leading-relaxed text-white/90 sm:text-base">
             The Reuben Wairicu Foundation (RWF) is a registered family initiative rooted in Kitale,
             Kenya. Founded by the eight children of Mr. Reuben and Mrs. Hellen Wairicu, we continue
             their lifelong commitment to giving hope, restoring dignity, and empowering neighbours who
@@ -28,7 +28,7 @@ const About = () => {
               className="h-full w-full rounded-3xl object-cover"
             />
           </div>
-          <div className="space-y-4">
+          <div className="space-y-4 rounded-3xl border border-white/20 bg-white p-6 shadow-lg">
             <h2 className="text-2xl font-semibold text-emerald-700">
               Registered to serve with integrity
             </h2>
@@ -57,11 +57,11 @@ const About = () => {
         </section>
 
         <section className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
-          <div className="space-y-4">
+          <div className="space-y-4 rounded-3xl border border-white/20 bg-white p-6 shadow-lg">
             <h2 className="text-2xl font-semibold text-emerald-700">Our journey in community</h2>
             <p className="text-sm leading-relaxed text-slate-600 sm:text-base">
               When the Wairicu family relocated to Kitale in the early 70s, their farm bordered what
-              locals called “Farm Prison.” The family quickly forged relationships with prison staff
+              locals called "Farm Prison." The family quickly forged relationships with prison staff
               and inmates through everyday interactions—sharing milk, learning together, and
               collaborating on creative projects.
             </p>
@@ -70,7 +70,7 @@ const About = () => {
               often forgets. What began as regular family visits evolved into organised outreach that
               now spans mentorship, education, counselling, and practical aid.
             </p>
-            <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5 shadow-sm">
               <p className="text-xs uppercase tracking-[0.35em] text-emerald-600">Vision</p>
               <p className="mt-2 text-sm text-slate-600">
                 To raise mature, selfless individuals who extend hope to communities through
@@ -95,14 +95,14 @@ const About = () => {
               className="h-full w-full rounded-3xl object-cover"
             />
           </div>
-          <div className="space-y-4">
+          <div className="space-y-4 rounded-3xl border border-white/20 bg-white p-6 shadow-lg">
             <h2 className="text-2xl font-semibold text-emerald-700">Our prison ministry</h2>
             <p className="text-sm leading-relaxed text-slate-600 sm:text-base">
               Quarterly prison visits provide essential supplies, mentorship, and encouragement. Even
               during the COVID-19 pandemic, we sustained support through coordinated deliveries of soap,
               toiletries, and baby supplies.
             </p>
-            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-600">
+            <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5 text-sm text-slate-600">
               <p className="text-xs uppercase tracking-[0.3em] text-emerald-600">Impact highlights</p>
               <ul className="mt-3 space-y-2 list-disc pl-5">
                 <li>Trusted friendships with inmates and wardens built on mutual respect.</li>
@@ -118,7 +118,7 @@ const About = () => {
           </div>
         </section>
 
-        <section className="rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
+        <section className="rounded-3xl border border-white/20 bg-white p-6 shadow-lg sm:p-8">
           <h2 className="text-2xl font-semibold text-emerald-700">Our core values</h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
