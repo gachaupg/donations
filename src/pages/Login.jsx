@@ -6,8 +6,8 @@ import { useAuth } from '../context/AuthContext.jsx';
 import './Login.css';
 
 const DEFAULT_ADMIN = {
-  email: 'admin@rwfoundation.org',
-  password: 'Hope@2025!',
+  email: '',
+  password: '',
 };
 
 const Login = () => {
@@ -123,15 +123,13 @@ const Login = () => {
           </button>
         </form>
 
-        <div className="login-hint">
-          <strong>Tip:</strong> Leave the password field blank to use the default admin password.
-        </div>
-        <div className="login-switch">
+        
+        {/* <div className="login-switch">
           Don&apos;t have an account yet?{' '}
           <Link to="/register" className="login-switch__link">
             Create one here
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );
