@@ -397,17 +397,17 @@ const PayPalDonate = () => {
   }, [secretKey]);
 
   return (
-    <div className="rounded-3xl border border-emerald-200 bg-white/95 p-8 shadow-2xl shadow-emerald-500/10">
-      <header className="mb-6 space-y-2 text-center">
-        <h3 className="text-2xl font-semibold text-slate-900">Donate Securely with PayPal</h3>
-        <p className="text-sm text-slate-600">
+    <div className="rounded-[28px] border border-emerald-100 bg-white/95 p-5 shadow-xl shadow-emerald-500/5 sm:p-6">
+      <header className="mb-5 space-y-1 text-center">
+        <h3 className="text-xl font-semibold text-slate-900 sm:text-[1.35rem]">Donate Securely with PayPal</h3>
+        <p className="text-xs text-slate-500 sm:text-sm">
           Every contribution helps us extend critical support to vulnerable communities.
         </p>
       </header>
 
-      <div className="mb-6 grid gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,180px)] sm:items-center">
+      <div className="mb-5 grid gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,170px)] sm:items-center">
         <div className="space-y-2">
-          <label className="text-sm font-semibold text-slate-600">
+          <label className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
             Donation amount (AUD)
           </label>
           <input
@@ -425,14 +425,14 @@ const PayPalDonate = () => {
         </p>
       )}
         </div>
-        <div className="flex flex-wrap gap-2 text-xs text-slate-500">
-          <span className="rounded-full border border-slate-200 px-3 py-1">
+        <div className="flex flex-wrap gap-2 text-[11px] text-slate-500">
+          <span className="rounded-full border border-slate-200 px-3 py-0.5">
             Secure checkout
           </span>
-          <span className="rounded-full border border-slate-200 px-3 py-1">
+          <span className="rounded-full border border-slate-200 px-3 py-0.5">
             Instant confirmation
           </span>
-          <span className="rounded-full border border-slate-200 px-3 py-1">
+          <span className="rounded-full border border-slate-200 px-3 py-0.5">
             Tax deductible
           </span>
         </div>
@@ -444,19 +444,19 @@ const PayPalDonate = () => {
         </div>
       )}
 
-      <div className="relative flex min-h-[60px] items-center justify-center">
+      <div className="relative flex min-h-[56px] items-center justify-center">
         {loading && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-white/50 backdrop-blur-sm rounded-xl">
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 rounded-xl bg-white/60 backdrop-blur-sm">
             <div className="relative">
-              <div className="w-10 h-10 border-4 border-emerald-200/30 border-t-emerald-600 rounded-full animate-spin"></div>
+              <div className="h-8 w-8 animate-spin rounded-full border-4 border-emerald-200/30 border-t-emerald-600"></div>
             </div>
-            <p className="text-sm font-medium text-emerald-700">Loading PayPal…</p>
+            <p className="text-xs font-medium text-emerald-700">Loading PayPal…</p>
           </div>
         )}
         {!error && <div ref={containerRef} className="w-full" />}
       </div>
 
-      <p className="mt-6 text-center text-xs text-slate-500">
+      <p className="mt-5 text-center text-[11px] text-slate-500">
         Your payment is processed securely by PayPal. Configure live credentials via environment variables for production.
       </p>
     </div>

@@ -6,7 +6,7 @@ const Donate = () => {
   return (
     <div className="min-h-[calc(100vh-80px)] py-8 px-4 text-white sm:px-8">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-8">
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] items-stretch">
           <div className="h-full">
             <PayPalDonate />
           </div>
