@@ -40,7 +40,7 @@ header.navbar {
 }
 
 .navbar__brand img {
-  height: 48px;
+  height: 64px;
   width: auto;
   object-fit: contain;
 }
@@ -109,7 +109,7 @@ header.navbar {
   background: linear-gradient(135deg, #facc15, #f59e0b);
   color: #3f3f46;
   border-radius: 999px;
-  padding: 0.6rem 1.6rem;
+  padding: 0.5rem 1.35rem;
   font-weight: 700;
   font-size: 0.95rem;
   box-shadow: 0 14px 28px -18px rgba(250, 204, 21, 0.9);
@@ -130,7 +130,7 @@ header.navbar {
   background: rgba(15, 23, 42, 0.08);
   color: inherit;
   border-radius: 999px;
-  padding: 0.55rem 1.45rem;
+  padding: 0.48rem 1.2rem;
   font-weight: 600;
   font-size: 0.95rem;
   text-decoration: none;
@@ -159,7 +159,7 @@ header.navbar {
   background: linear-gradient(135deg, rgba(22, 163, 74, 0.12), rgba(22, 163, 74, 0.2));
   color: #166534;
   border-radius: 999px;
-  padding: 0.55rem 1.45rem;
+  padding: 0.5rem 1.25rem;
   font-weight: 600;
   font-size: 0.95rem;
   text-decoration: none;
@@ -203,6 +203,19 @@ header.navbar {
 
 .navbar__mobile {
   display: none;
+}
+
+.navbar__mobile-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 0 0;
+}
+
+.navbar__mobile-brand img {
+  height: clamp(90px, 24vw, 130px);
+  width: auto;
+  max-height: 140px;
 }
 
 @media (max-width: 980px) {
@@ -285,7 +298,11 @@ header.navbar {
   }
 
   .navbar__brand img {
-    height: 42px;
+    height: 68px;
+  }
+
+  .navbar__mobile-brand img {
+    height: clamp(110px, 28vw, 160px);
   }
 }
 

@@ -68,14 +68,27 @@ const DirectTransferSpotlight = () => {
   const transferSections = useMemo(
     () => [
       {
-        id: 'bank',
-        label: 'Bank Transfer',
-        icon: 'BK',
-        headline: 'Direct deposit details',
+        id: 'australia',
+        label: 'Australia Support',
+        headline: 'Direct bank deposit (AUD)',
+        description:
+          'Make a local AUD transfer using the account below so gifts route straight to priority work.',
         fields: [
           { key: 'accountName', label: 'Account name', value: 'Jane Nalianya' },
           { key: 'bsb', label: 'BSB', value: '083495' },
           { key: 'account', label: 'Account', value: '161373692' },
+        ],
+      },
+      {
+        id: 'kenya',
+        label: 'Kenya Support',
+        headline: 'Reuben Wairicu Foundation — Equity Bank, Kitale',
+        description: 'For Financial Support. Thanking you in advance.',
+        fields: [
+          { key: 'accountNameKe', label: 'Account name', value: 'Reuben Wairicu Foundation' },
+          { key: 'accountKe', label: 'Account number', value: '0330284842169' },
+          { key: 'bankKe', label: 'Bank', value: 'Equity Bank, Kitale' },
+          { key: 'mpesaKe', label: 'Mpesa line', value: '+254 723 237149 (Milcah Ochoki)' },
         ],
       },
     ],
@@ -102,17 +115,20 @@ const DirectTransferSpotlight = () => {
         </p>
         <h2 className="text-2xl font-semibold text-slate-900 sm:text-[2.1rem]">Direct bank deposit</h2>
         <p className="text-sm text-slate-600">
-          Send a fee-free gift straight to our foundation using the verified account details below. Funds arrive
-          instantly and are allocated to urgent community needs.
+          Use the verified details below for a fee-free transfer. Funds land quickly and move right to urgent
+          programs.
         </p>
       </div>
 
-      <div className="mt-6 grid w-full gap-5">
+      <div className="mt-6 grid w-full gap-5 md:grid-cols-2">
         {transferSections.map((section) => (
           <div key={section.id} className="w-full space-y-4">
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.3em] text-emerald-600">{section.label}</p>
-              <p className="text-base font-semibold text-slate-900">{section.headline}</p>
+            <div className="space-y-2">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-emerald-600">{section.label}</p>
+                <p className="text-base font-semibold text-slate-900">{section.headline}</p>
+              </div>
+              {section.description && <p className="text-sm text-slate-600">{section.description}</p>}
             </div>
             <dl className="w-full divide-y divide-slate-200 text-sm text-slate-600">
               {section.fields.map((field) => {

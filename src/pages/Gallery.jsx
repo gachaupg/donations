@@ -93,24 +93,26 @@ const Gallery = () => {
             Loading gallery…
           </div>
         ) : (
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {itemsToShow.map((image, index) => (
-            <button
-              key={index}
-              type="button"
-              onClick={() => openLightbox(image.src)}
-              className="group relative flex h-64 w-full overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
-            >
-              <img
-                src={image.src}
-                alt={image.description}
-                className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-              />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/70 to-transparent px-4 pb-4 pt-12 text-left">
-                <p className="text-sm font-semibold text-white">{image.description}</p>
-              </div>
-            </button>
-          ))}
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {itemsToShow.map((image) => (
+              <button
+                key={image.id || image.src}
+                type="button"
+                onClick={() => openLightbox(image.src)}
+                className="group relative w-full overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+              >
+                <div className="aspect-[4/3] w-full">
+                  <img
+                    src={image.src}
+                    alt={image.description}
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/70 to-transparent px-4 pb-3 pt-10 text-left">
+                  <p className="text-sm font-semibold text-white">{image.description}</p>
+                </div>
+              </button>
+            ))}
           </div>
         )}
       </div>

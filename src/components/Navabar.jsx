@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BsSun, BsMoon, BsList } from "react-icons/bs";
+import { BsList } from "react-icons/bs";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
@@ -41,13 +41,6 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleTheme = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-    document.documentElement.className = newTheme;
-    localStorage.setItem("theme", newTheme);
-  };
-
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
   };
@@ -66,10 +59,7 @@ const Navbar = () => {
             src={logoUrl}
             alt="Reuben Wairicu Foundation logo"
           />
-          <div className="navbar__brand-text">
-            <span className="navbar__brand-eyebrow">Reuben Wairicu</span>
-            <span className="navbar__brand-title">Foundation</span>
-          </div>
+         
         </Link>
 
         <nav className="navbar__links">
@@ -96,14 +86,6 @@ const Navbar = () => {
           </Link>
           <button
             type="button"
-            className="icon-button"
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-          >
-            {theme === "dark" ? <BsSun /> : <BsMoon />}
-          </button>
-          <button
-            type="button"
             className="icon-button navbar__menu-toggle"
             onClick={toggleMenu}
             aria-label="Toggle menu"
@@ -124,6 +106,17 @@ const Navbar = () => {
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.25 }}
           >
+            <Link
+              to="/"
+              className="navbar__mobile-brand"
+              aria-label="Reuben Wairicu Foundation"
+              onClick={closeMenu}
+            >
+              <img
+                src={logoUrl}
+                alt="Reuben Wairicu Foundation logo"
+              />
+            </Link>
             <div className="navbar__mobile-links">
               {navLinks.map((link) => (
                 <Link
