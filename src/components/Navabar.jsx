@@ -10,6 +10,7 @@ const navLinks = [
   { label: "Home", path: "/" },
   { label: "About Us", path: "/about" },
   { label: "Programs", path: "/programs" },
+  { label: "Sponsorship", path: "/sponsorship" },
   { label: "Gallery", path: "/gallery" },
   { label: "Contact", path: "/contact" },
 ];
@@ -81,6 +82,7 @@ const Navbar = () => {
           <Link
             to={user ? "/dashboard" : "/login"}
             className={`btn ${user ? "dashboard-btn" : "login-btn"}`}
+            style={{ minWidth: '80px', textAlign: 'center' }}
           >
             {user ? "Dashboard" : "Login"}
           </Link>

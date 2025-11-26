@@ -15,6 +15,11 @@ import {
   FiTrash2,
   FiX,
   FiType,
+  FiInfo,
+  FiStar,
+  FiAward,
+  FiCheck,
+  FiXCircle,
 } from 'react-icons/fi';
 import { signOut } from 'firebase/auth';
 import { auth, db, storage } from '../../firebase';
@@ -39,6 +44,9 @@ const sidebarLinks = [
   { label: 'Overview', icon: FiHome, tab: 'overview' },
   { label: 'Programs', icon: FiLayers, tab: 'programs' },
   { label: 'Gallery', icon: FiImage, tab: 'gallery' },
+  { label: 'About', icon: FiInfo, tab: 'about' },
+  { label: 'Testimonials', icon: FiStar, tab: 'testimonials' },
+  { label: 'Sponsorships', icon: FiAward, tab: 'sponsorships' },
   { label: 'Messages', icon: FiMessageSquare, tab: 'messages' },
   { label: 'Branding', icon: FiType, tab: 'branding' },
   { label: 'Transactions', icon: FiCreditCard, tab: 'transactions' },
@@ -77,6 +85,21 @@ const Dashboard = () => {
   const [brandingFile, setBrandingFile] = useState(null);
   const [brandingFileKey, setBrandingFileKey] = useState(0);
   const [savingBranding, setSavingBranding] = useState(false);
+  const [aboutData, setAboutData] = useState(null);
+  const [aboutLoading, setAboutLoading] = useState(true);
+  const [savingAbout, setSavingAbout] = useState(false);
+  const [testimonials, setTestimonials] = useState([]);
+  const [testimonialsLoading, setTestimonialsLoading] = useState(true);
+  const [newTestimonial, setNewTestimonial] = useState({ name: '', role: '', content: '', image: '' });
+  const [newTestimonialFile, setNewTestimonialFile] = useState(null);
+  const [testimonialFileKey, setTestimonialFileKey] = useState(0);
+  const [savingTestimonial, setSavingTestimonial] = useState(false);
+  const [editingTestimonialId, setEditingTestimonialId] = useState(null);
+  const [deletingTestimonialId, setDeletingTestimonialId] = useState(null);
+  const [isTestimonialModalOpen, setIsTestimonialModalOpen] = useState(false);
+  const [sponsorships, setSponsorships] = useState([]);
+  const [sponsorshipsLoading, setSponsorshipsLoading] = useState(true);
+  const [updatingSponsorshipId, setUpdatingSponsorshipId] = useState(null);
 
   const handleSignOut = async () => {
     try {
@@ -230,6 +253,56 @@ const Dashboard = () => {
                 title: item.title,
                 image: item.image || '',
                 storagePath: '',
+                createdAt: serverTimestamp(),
+              })
+            )
+          );
+        }
+
+        // Seed About content if it doesn't exist
+        const aboutRef = doc(db, 'about', 'content');
+        const aboutSnapshot = await getDocs(collection(db, 'about'));
+        if (aboutSnapshot.empty) {
+          await setDoc(aboutRef, {
+            title: 'Reuben Wairicu Foundation',
+            description: 'We uplift vulnerable families across Kenya with food security, health outreach, and restorative programs. Together, we honour the legacy of Reuben Wairicu by building a future where dignity is a human right, not a privilege.',
+            mission: 'To provide holistic support to elders, caregivers, inmates, and persons with disabilities. We combine practical aid with mentorship to spark lasting change.',
+            vision: 'A future where every person has access to dignity, opportunity, and community support regardless of their circumstances.',
+            updatedAt: serverTimestamp(),
+          }, { merge: true });
+        }
+
+        // Seed Testimonials if none exist
+        const testimonialsCollection = collection(db, 'testimonials');
+        const testimonialsSnapshot = await getDocs(testimonialsCollection);
+        if (testimonialsSnapshot.empty) {
+          const testimonialSeeds = [
+            {
+              name: 'Jane Wairicu',
+              role: 'Foundation Director',
+              content: 'The foundation has transformed countless lives in our community. Every donation makes a real difference.',
+              image: '',
+              storagePath: '',
+            },
+            {
+              name: 'John Mwangi',
+              role: 'Volunteer',
+              content: 'Volunteering with the foundation has been one of the most rewarding experiences of my life.',
+              image: '',
+              storagePath: '',
+            },
+            {
+              name: 'Mary Ochieng',
+              role: 'Beneficiary',
+              content: 'The support I received helped me rebuild my life. I am forever grateful to the foundation.',
+              image: '',
+              storagePath: '',
+            },
+          ];
+          await Promise.all(
+            testimonialSeeds.map((item) =>
+              addDoc(testimonialsCollection, {
+                ...item,
                 createdAt: serverTimestamp(),
               })
             )
@@ -576,9 +649,271 @@ const Dashboard = () => {
     return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    const aboutRef = doc(db, 'about', 'content');
+    const unsubscribe = onSnapshot(
+      aboutRef,
+      (snapshot) => {
+        setAboutData(snapshot.exists() ? snapshot.data() : null);
+        setAboutLoading(false);
+      },
+      () => {
+        setAboutData(null);
+        setAboutLoading(false);
+      }
+    );
+
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    const testimonialsQuery = query(collection(db, 'testimonials'), orderBy('createdAt', 'desc'));
+    const unsubscribe = onSnapshot(
+      testimonialsQuery,
+      (snapshot) => {
+        setTestimonials(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+        );
+        setTestimonialsLoading(false);
+      },
+      () => {
+        setTestimonials([]);
+        setTestimonialsLoading(false);
+      }
+    );
+
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    const sponsorshipsQuery = query(collection(db, 'sponsors'), orderBy('createdAt', 'desc'));
+    const unsubscribe = onSnapshot(
+      sponsorshipsQuery,
+      (snapshot) => {
+        setSponsorships(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+        );
+        setSponsorshipsLoading(false);
+      },
+      () => {
+        setSponsorships([]);
+        setSponsorshipsLoading(false);
+      }
+    );
+
+    return () => unsubscribe();
+  }, []);
+
+  const handleSaveAbout = async (event) => {
+    event.preventDefault();
+    const aboutForm = event.target;
+    const formData = new FormData(aboutForm);
+    const title = formData.get('aboutTitle')?.trim() || '';
+    const description = formData.get('aboutDescription')?.trim() || '';
+    const mission = formData.get('aboutMission')?.trim() || '';
+    const vision = formData.get('aboutVision')?.trim() || '';
+
+    if (!title || !description) {
+      return;
+    }
+
+    try {
+      setSavingAbout(true);
+      const aboutRef = doc(db, 'about', 'content');
+      await setDoc(
+        aboutRef,
+        {
+          title,
+          description,
+          mission,
+          vision,
+          updatedAt: serverTimestamp(),
+        },
+        { merge: true }
+      );
+    } catch (error) {
+      console.error('Failed to save about content', error);
+    } finally {
+      setSavingAbout(false);
+    }
+  };
+
+  const resetTestimonialForm = () => {
+    setEditingTestimonialId(null);
+    setNewTestimonial({ name: '', role: '', content: '', image: '' });
+    setNewTestimonialFile(null);
+    setTestimonialFileKey((prev) => prev + 1);
+  };
+
+  const openTestimonialModalForCreate = () => {
+    resetTestimonialForm();
+    setIsTestimonialModalOpen(true);
+  };
+
+  const handleEditTestimonial = (testimonial) => {
+    setEditingTestimonialId(testimonial.id);
+    setNewTestimonial({
+      name: testimonial.name || '',
+      role: testimonial.role || '',
+      content: testimonial.content || '',
+      image: testimonial.image || '',
+    });
+    setNewTestimonialFile(null);
+    setTestimonialFileKey((prev) => prev + 1);
+    setIsTestimonialModalOpen(true);
+  };
+
+  const handleCancelTestimonialEdit = () => {
+    setIsTestimonialModalOpen(false);
+    resetTestimonialForm();
+  };
+
+  const handleDeleteTestimonial = async (testimonial) => {
+    if (!testimonial?.id) {
+      return;
+    }
+    const shouldDelete = window.confirm(`Delete testimonial from "${testimonial.name || 'this person'}"?`);
+    if (!shouldDelete) {
+      return;
+    }
+
+    try {
+      setDeletingTestimonialId(testimonial.id);
+      await deleteDoc(doc(db, 'testimonials', testimonial.id));
+      if (testimonial.storagePath) {
+        try {
+          await deleteObject(ref(storage, testimonial.storagePath));
+        } catch (error) {
+          console.error('Failed to delete testimonial image from storage', error);
+        }
+      }
+      if (editingTestimonialId === testimonial.id) {
+        handleCancelTestimonialEdit();
+      }
+    } catch (error) {
+      console.error('Failed to delete testimonial', error);
+    } finally {
+      setDeletingTestimonialId(null);
+    }
+  };
+
+  const handleSaveTestimonial = async (event) => {
+    event.preventDefault();
+    if (!newTestimonial.name.trim() || !newTestimonial.content.trim()) {
+      return;
+    }
+
+    try {
+      setSavingTestimonial(true);
+      const trimmedName = newTestimonial.name.trim();
+      const trimmedRole = newTestimonial.role.trim();
+      const trimmedContent = newTestimonial.content.trim();
+      const isEditing = Boolean(editingTestimonialId);
+      let uploadedImageUrl = '';
+      let uploadedStoragePath = '';
+      let previousStoragePath = '';
+
+      // File is optional for both create and edit
+
+      if (newTestimonialFile) {
+        uploadedStoragePath = `testimonials/${Date.now()}-${newTestimonialFile.name.replace(/\s+/g, '-')}`;
+        const fileRef = ref(storage, uploadedStoragePath);
+        await uploadBytes(fileRef, newTestimonialFile);
+        uploadedImageUrl = await getDownloadURL(fileRef);
+      }
+
+      if (isEditing && editingTestimonialId) {
+        const testimonialRef = doc(db, 'testimonials', editingTestimonialId);
+        const existingTestimonial = testimonials.find((t) => t.id === editingTestimonialId);
+        if (existingTestimonial?.storagePath) {
+          previousStoragePath = existingTestimonial.storagePath;
+        }
+
+        const updates = {
+          name: trimmedName,
+          role: trimmedRole,
+          content: trimmedContent,
+        };
+
+        if (newTestimonialFile) {
+          updates.image = uploadedImageUrl;
+          updates.storagePath = uploadedStoragePath;
+        }
+
+        await updateDoc(testimonialRef, updates);
+
+        if (newTestimonialFile && previousStoragePath) {
+          try {
+            await deleteObject(ref(storage, previousStoragePath));
+          } catch (error) {
+            console.error('Failed to delete previous testimonial image', error);
+          }
+        }
+      } else {
+        await addDoc(collection(db, 'testimonials'), {
+          name: trimmedName,
+          role: trimmedRole,
+          content: trimmedContent,
+          image: uploadedImageUrl,
+          storagePath: uploadedStoragePath,
+          createdAt: serverTimestamp(),
+        });
+      }
+
+      resetTestimonialForm();
+      setIsTestimonialModalOpen(false);
+    } catch (error) {
+      console.error('Failed to save testimonial', error);
+    } finally {
+      setSavingTestimonial(false);
+    }
+  };
+
+  const handleUpdateSponsorshipStatus = async (sponsorshipId, newStatus) => {
+    try {
+      setUpdatingSponsorshipId(sponsorshipId);
+      const sponsorshipRef = doc(db, 'sponsors', sponsorshipId);
+      await updateDoc(sponsorshipRef, {
+        status: newStatus,
+        updatedAt: serverTimestamp(),
+      });
+    } catch (error) {
+      console.error('Failed to update sponsorship status', error);
+    } finally {
+      setUpdatingSponsorshipId(null);
+    }
+  };
+
+  const handleDeleteSponsorship = async (sponsorship) => {
+    if (!sponsorship?.id) {
+      return;
+    }
+    const shouldDelete = window.confirm(`Delete sponsorship from "${sponsorship.companyName || 'this sponsor'}"?`);
+    if (!shouldDelete) {
+      return;
+    }
+
+    try {
+      setUpdatingSponsorshipId(sponsorship.id);
+      await deleteDoc(doc(db, 'sponsors', sponsorship.id));
+    } catch (error) {
+      console.error('Failed to delete sponsorship', error);
+    } finally {
+      setUpdatingSponsorshipId(null);
+    }
+  };
+
   const programsCount = programs.length;
   const galleryCount = galleryItems.length;
   const messageCount = messages.length;
+  const sponsorshipCount = sponsorships.length;
+  const pendingSponsorshipsCount = sponsorships.filter((s) => s.status === 'pending').length;
   const donationTotal = transactions.reduce((sum, txn) => {
     const value = typeof txn.amount === 'number' ? txn.amount : parseFloat(txn.amount);
     return sum + (Number.isFinite(value) ? value : 0);
@@ -1181,6 +1516,308 @@ const Dashboard = () => {
               </div>
             </section>
           )}
+
+          {activeTab === 'about' && (
+            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg space-y-6">
+              <header className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <h2 className="text-2xl font-semibold text-slate-900">About Content</h2>
+                  <p className="text-sm text-slate-500">
+                    Manage the about page content including title, description, mission, and vision.
+                  </p>
+                </div>
+              </header>
+              {aboutLoading ? (
+                <div className="flex items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 py-12 text-sm font-semibold text-slate-500">
+                  Loading about content…
+                </div>
+              ) : (
+                <form className="grid gap-6" onSubmit={handleSaveAbout}>
+                  <div className="grid gap-4">
+                    <div className="grid gap-2">
+                      <label className="text-sm font-semibold text-slate-600">Title</label>
+                      <input
+                        type="text"
+                        name="aboutTitle"
+                        defaultValue={aboutData?.title || ''}
+                        placeholder="Enter about page title"
+                        className="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
+                        required
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <label className="text-sm font-semibold text-slate-600">Description</label>
+                      <textarea
+                        name="aboutDescription"
+                        defaultValue={aboutData?.description || ''}
+                        rows={6}
+                        placeholder="Enter about page description"
+                        className="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
+                        required
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <label className="text-sm font-semibold text-slate-600">Mission</label>
+                      <textarea
+                        name="aboutMission"
+                        defaultValue={aboutData?.mission || ''}
+                        rows={4}
+                        placeholder="Enter mission statement"
+                        className="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <label className="text-sm font-semibold text-slate-600">Vision</label>
+                      <textarea
+                        name="aboutVision"
+                        defaultValue={aboutData?.vision || ''}
+                        rows={4}
+                        placeholder="Enter vision statement"
+                        className="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <button
+                      type="submit"
+                      disabled={savingAbout}
+                      className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-500/30 transition hover:bg-emerald-600 disabled:cursor-not-allowed disabled:bg-emerald-400"
+                    >
+                      {savingAbout ? 'Saving…' : 'Save About Content'}
+                    </button>
+                  </div>
+                </form>
+              )}
+            </section>
+          )}
+
+          {activeTab === 'sponsorships' && (
+            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg space-y-6">
+              <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <h2 className="text-2xl font-semibold text-slate-900">Sponsorships</h2>
+                  <p className="text-sm text-slate-500">
+                    Manage sponsorship applications. Approve or reject sponsorship requests.
+                  </p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="text-right">
+                    <p className="text-xs font-semibold text-slate-500">Total Sponsorships</p>
+                    <p className="text-2xl font-semibold text-slate-900">{sponsorshipCount}</p>
+                  </div>
+                  {pendingSponsorshipsCount > 0 && (
+                    <div className="rounded-full bg-amber-100 px-4 py-2">
+                      <p className="text-xs font-semibold text-amber-700">
+                        {pendingSponsorshipsCount} Pending
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </header>
+              {sponsorshipsLoading ? (
+                <div className="flex items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 py-12 text-sm font-semibold text-slate-500">
+                  Loading sponsorships…
+                </div>
+              ) : sponsorships.length === 0 ? (
+                <div className="flex items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 py-12 text-sm font-semibold text-slate-500">
+                  No sponsorship applications yet.
+                </div>
+              ) : (
+                <div className="overflow-hidden rounded-2xl border border-slate-200">
+                  <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
+                    <thead className="bg-slate-50 text-xs uppercase tracking-[0.2em] text-slate-500">
+                      <tr>
+                        <th className="px-4 py-3 font-semibold">Company</th>
+                        <th className="px-4 py-3 font-semibold">Description</th>
+                        <th className="px-4 py-3 font-semibold">Amount</th>
+                        <th className="px-4 py-3 font-semibold">Payment Method</th>
+                        <th className="px-4 py-3 font-semibold">Status</th>
+                        <th className="px-4 py-3 font-semibold">Date</th>
+                        <th className="px-4 py-3 font-semibold text-right">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-200">
+                      {sponsorships.map((sponsorship) => (
+                        <tr key={sponsorship.id} className="hover:bg-slate-50">
+                          <td className="px-4 py-3">
+                            <div>
+                              <p className="font-semibold text-slate-900">{sponsorship.companyName}</p>
+                              {sponsorship.websiteUrl && (
+                                <a
+                                  href={sponsorship.websiteUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-xs text-emerald-600 hover:underline"
+                                >
+                                  {sponsorship.websiteUrl}
+                                </a>
+                              )}
+                            </div>
+                          </td>
+                          <td className="px-4 py-3">
+                            <p className="max-w-md text-sm text-slate-600 line-clamp-2">
+                              {sponsorship.description}
+                            </p>
+                          </td>
+                          <td className="px-4 py-3">
+                            {sponsorship.amount ? (
+                              <span className="font-semibold text-slate-900">
+                                ${typeof sponsorship.amount === 'number' 
+                                  ? sponsorship.amount.toFixed(2)
+                                  : parseFloat(sponsorship.amount).toFixed(2)} AUD
+                              </span>
+                            ) : (
+                              <span className="text-xs text-slate-400">N/A</span>
+                            )}
+                          </td>
+                          <td className="px-4 py-3">
+                            <span className="inline-flex rounded-full px-3 py-1 text-xs font-semibold bg-slate-100 text-slate-700">
+                              {sponsorship.paymentMethod === 'paypal' ? 'PayPal' : 'Cash/Transfer'}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3">
+                            <span
+                              className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
+                                sponsorship.status === 'approved'
+                                  ? 'bg-emerald-100 text-emerald-700'
+                                  : sponsorship.status === 'rejected'
+                                  ? 'bg-red-100 text-red-700'
+                                  : 'bg-amber-100 text-amber-700'
+                              }`}
+                            >
+                              {sponsorship.status || 'pending'}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3 text-xs text-slate-500">
+                            {sponsorship.createdAt?.toDate
+                              ? sponsorship.createdAt.toDate().toLocaleDateString()
+                              : 'N/A'}
+                          </td>
+                          <td className="px-4 py-3">
+                            <div className="flex justify-end gap-2">
+                              {sponsorship.status === 'pending' && (
+                                <>
+                                  <button
+                                    type="button"
+                                    onClick={() => handleUpdateSponsorshipStatus(sponsorship.id, 'approved')}
+                                    disabled={updatingSponsorshipId === sponsorship.id}
+                                    className="inline-flex items-center gap-2 rounded-full border border-emerald-200 px-3 py-1.5 text-xs font-semibold text-emerald-600 transition hover:border-emerald-300 hover:bg-emerald-50 disabled:cursor-not-allowed disabled:opacity-60"
+                                  >
+                                    <FiCheck />
+                                    Approve
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => handleUpdateSponsorshipStatus(sponsorship.id, 'rejected')}
+                                    disabled={updatingSponsorshipId === sponsorship.id}
+                                    className="inline-flex items-center gap-2 rounded-full border border-red-200 px-3 py-1.5 text-xs font-semibold text-red-600 transition hover:border-red-300 hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-60"
+                                  >
+                                    <FiXCircle />
+                                    Reject
+                                  </button>
+                                </>
+                              )}
+                              <button
+                                type="button"
+                                onClick={() => handleDeleteSponsorship(sponsorship)}
+                                disabled={updatingSponsorshipId === sponsorship.id}
+                                className="inline-flex items-center gap-2 rounded-full border border-red-200 px-3 py-1.5 text-xs font-semibold text-red-600 transition hover:border-red-300 hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-60"
+                              >
+                                <FiTrash2 />
+                                {updatingSponsorshipId === sponsorship.id ? '...' : 'Delete'}
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </section>
+          )}
+
+          {activeTab === 'testimonials' && (
+            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg space-y-6">
+              <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <h2 className="text-2xl font-semibold text-slate-900">Testimonials</h2>
+                  <p className="text-sm text-slate-500">
+                    Manage testimonials from supporters and beneficiaries. Add, edit, or remove testimonials.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={openTestimonialModalForCreate}
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-500/30 transition hover:bg-emerald-600"
+                >
+                  <FiPlusCircle />
+                  Add Testimonial
+                </button>
+              </header>
+              {testimonialsLoading ? (
+                <div className="flex items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 py-12 text-sm font-semibold text-slate-500">
+                  Loading testimonials…
+                </div>
+              ) : testimonials.length === 0 ? (
+                <div className="flex items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 py-12 text-sm font-semibold text-slate-500">
+                  No testimonials added yet.
+                </div>
+              ) : (
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  {testimonials.map((testimonial) => {
+                    const imageSrc = testimonial.image || testimonial.imageUrl || '';
+                    return (
+                      <div
+                        key={testimonial.id}
+                        className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+                      >
+                        <div className="flex items-start gap-4">
+                          {imageSrc ? (
+                            <img
+                              src={imageSrc}
+                              alt={testimonial.name}
+                              className="h-12 w-12 rounded-full object-cover flex-shrink-0"
+                            />
+                          ) : (
+                            <div className="h-12 w-12 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0">
+                              <FiStar className="text-emerald-600" />
+                            </div>
+                          )}
+                          <div className="flex-1 min-w-0">
+                            <h3 className="text-sm font-semibold text-slate-900">{testimonial.name}</h3>
+                            {testimonial.role && (
+                              <p className="text-xs text-slate-500 mt-1">{testimonial.role}</p>
+                            )}
+                            <p className="text-sm text-slate-600 mt-2 line-clamp-3">{testimonial.content}</p>
+                          </div>
+                        </div>
+                        <div className="mt-4 flex justify-end gap-2">
+                          <button
+                            type="button"
+                            onClick={() => handleEditTestimonial(testimonial)}
+                            className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-600"
+                          >
+                            <FiEdit />
+                            Edit
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleDeleteTestimonial(testimonial)}
+                            disabled={deletingTestimonialId === testimonial.id}
+                            className="inline-flex items-center gap-2 rounded-full border border-red-200 px-3 py-1.5 text-xs font-semibold text-red-600 transition hover:border-red-300 hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-60"
+                          >
+                            <FiTrash2 />
+                            {deletingTestimonialId === testimonial.id ? 'Deleting…' : 'Delete'}
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </section>
+          )}
         </div>
       </main>
       {isProgramModalOpen && (
@@ -1303,6 +1940,90 @@ const Dashboard = () => {
               <button
                 type="button"
                 onClick={handleCancelGalleryEdit}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-600 transition hover:border-slate-400 hover:bg-slate-100"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </DashboardModal>
+      )}
+      {isTestimonialModalOpen && (
+        <DashboardModal
+          title={editingTestimonialId ? 'Edit testimonial' : 'Add testimonial'}
+          description="Add or edit testimonials from supporters and beneficiaries."
+          onClose={handleCancelTestimonialEdit}
+        >
+          <form className="grid gap-4" onSubmit={handleSaveTestimonial}>
+            <div className="grid gap-2">
+              <label className="text-sm font-semibold text-slate-600">Name</label>
+              <input
+                value={newTestimonial.name}
+                onChange={(event) =>
+                  setNewTestimonial((prev) => ({ ...prev, name: event.target.value }))
+                }
+                placeholder="Person's name"
+                className="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
+                required
+              />
+            </div>
+            <div className="grid gap-2">
+              <label className="text-sm font-semibold text-slate-600">Role/Title</label>
+              <input
+                value={newTestimonial.role}
+                onChange={(event) =>
+                  setNewTestimonial((prev) => ({ ...prev, role: event.target.value }))
+                }
+                placeholder="e.g., Volunteer, Beneficiary, Donor"
+                className="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
+              />
+            </div>
+            <div className="grid gap-2">
+              <label className="text-sm font-semibold text-slate-600">Testimonial Content</label>
+              <textarea
+                value={newTestimonial.content}
+                onChange={(event) =>
+                  setNewTestimonial((prev) => ({ ...prev, content: event.target.value }))
+                }
+                rows={5}
+                placeholder="Enter the testimonial text"
+                className="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
+                required
+              />
+            </div>
+            <div className="grid gap-2">
+              <label className="text-sm font-semibold text-slate-600">
+                {editingTestimonialId ? 'Replace photo (optional)' : 'Upload photo (optional)'}
+              </label>
+              <input
+                key={testimonialFileKey}
+                type="file"
+                accept="image/*"
+                onChange={(event) => setNewTestimonialFile(event.target.files?.[0] || null)}
+                className="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 outline-none file:mr-3 file:rounded-lg file:border-0 file:bg-emerald-500 file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-white hover:file:bg-emerald-600 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
+              />
+              <p className="text-xs text-slate-500">
+                Upload a profile photo for the testimonial (optional).
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                type="submit"
+                disabled={savingTestimonial}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-500/30 transition hover:bg-emerald-600 disabled:cursor-not-allowed disabled:bg-emerald-400"
+              >
+                <FiPlusCircle />
+                {savingTestimonial
+                  ? editingTestimonialId
+                    ? 'Saving changes…'
+                    : 'Saving…'
+                  : editingTestimonialId
+                    ? 'Save changes'
+                    : 'Add testimonial'}
+              </button>
+              <button
+                type="button"
+                onClick={handleCancelTestimonialEdit}
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-600 transition hover:border-slate-400 hover:bg-slate-100"
               >
                 Cancel

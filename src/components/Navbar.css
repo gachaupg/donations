@@ -103,6 +103,7 @@ header.navbar {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  flex-shrink: 0;
 }
 
 .btn.donate-btn {
@@ -127,11 +128,11 @@ header.navbar {
 }
 
 .btn.login-btn {
-  background: rgba(15, 23, 42, 0.08);
-  color: inherit;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  color: #ffffff;
   border-radius: 999px;
-  padding: 0.48rem 1.2rem;
-  font-weight: 600;
+  padding: 0.5rem 1.35rem;
+  font-weight: 700;
   font-size: 0.95rem;
   text-decoration: none;
   border: none;
@@ -139,20 +140,23 @@ header.navbar {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 14px 28px -18px rgba(22, 163, 74, 0.4);
 }
 
 .navbar--dark .btn.login-btn {
-  background: rgba(248, 250, 252, 0.12);
-  color: #f8fafc;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  color: #ffffff;
 }
 
 .btn.login-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 28px -20px rgba(15, 23, 42, 0.18);
+  box-shadow: 0 18px 36px -24px rgba(22, 163, 74, 0.5);
+  background: linear-gradient(135deg, #15803d, #16a34a);
 }
 
 .navbar--dark .btn.login-btn:hover {
-  box-shadow: 0 16px 30px -24px rgba(15, 23, 42, 0.6);
+  box-shadow: 0 18px 36px -24px rgba(22, 163, 74, 0.6);
+  background: linear-gradient(135deg, #15803d, #16a34a);
 }
 
 .btn.dashboard-btn {
@@ -231,8 +235,11 @@ header.navbar {
     gap: 0.6rem;
   }
 
-  .btn.donate-btn {
+  .btn.donate-btn,
+  .btn.login-btn,
+  .btn.dashboard-btn {
     padding: 0.55rem 1.25rem;
+    font-size: 0.9rem;
   }
 
   .navbar__mobile {

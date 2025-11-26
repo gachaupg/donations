@@ -10,6 +10,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import About from "./pages/about";
 import Programs from "./pages/programs";
+import Sponsorship from "./pages/Sponsorship";
 import Admin from "./Admin/Admin";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
@@ -42,6 +43,7 @@ function App() {
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/donate" element={<Donate />} />
               <Route path="/programs" element={<Programs />} />
+              <Route path="/sponsorship" element={<Sponsorship />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/dashboard" element={<Dashboard />} />
