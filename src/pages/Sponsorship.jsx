@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { collection, addDoc, serverTimestamp, query, orderBy, onSnapshot, where, onSnapshot as onSnapshotListener } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { toast } from 'react-toastify';
-import { FiHeart, FiUsers, FiDollarSign, FiGlobe, FiFileText, FiCheckCircle, FiAward, FiCopy } from 'react-icons/fi';
+import { FiHeart, FiUsers, FiDollarSign, FiGlobe, FiFileText, FiCheckCircle, FiAward, FiCopy, FiArrowUpRight } from 'react-icons/fi';
 
 // Simple PayPal Buttons Component - just the buttons
 const PayPalButtonsOnly = ({ amount, onPaymentSuccess }) => {
@@ -266,9 +266,12 @@ const Sponsorship = () => {
       id: 'petergachau',
       companyName: 'Peter Gachau',
       websiteUrl: 'https://www.petergachau.co.ke/',
-      description: 'Software Developed - Sponsored the website',
-      amount: 'Website Development',
-      paymentMethod: 'cash',
+    },
+    {
+      id: 'aufrican-vybz',
+      companyName: 'Home - Sydenham-Caroline Springs Uniting Church',
+      websiteUrl: 'https://share.google/oc4Z9gupzA2i3PB5I',
+      logoUrl: 'https://res.cloudinary.com/pitz/image/upload/v1764248243/WhatsApp_Image_2025-11-27_at_15.27.45_89b5ee30_xrvjok.jpg',
     },
   ];
 
@@ -395,24 +398,52 @@ const Sponsorship = () => {
         {/* Main Content Grid - Text and Form in Row */}
         <div className="mb-12 grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-start">
           {/* Become a Sponsor Text Content */}
-          <div className="rounded-[28px] border border-emerald-200/40 bg-white/10 backdrop-blur-sm p-8 sm:p-10">
-            <div className="space-y-4">
+          <div className="rounded-[28px] border border-emerald-200/40 bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur p-8 sm:p-10">
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200/40 bg-white/10 px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-emerald-200">
+                Impact
+              </div>
               <div className="space-y-4 text-sm leading-relaxed text-white/90">
-                <p>
-                  Through <strong className="text-emerald-300">love and sharing hearts</strong>, visits, and support programs, we work tirelessly to make a difference in the lives of those in need. By becoming a sponsor, you are supporting our foundation's mission to serve <strong className="text-emerald-300">prison organizations, charities, and communities</strong> across all our programs.
+                <p className="text-lg font-semibold text-white">
+                  Through love and sharing hearts, visits, and support programs, we fight every day to restore dignity for families across Kenya.
                 </p>
                 <p>
-                  Your sponsorship enables us to continue our vital work, providing essential services, resources, and hope to those who need it most. Together, we can create lasting positive change.
+                  Your sponsorship fuels all outreach to <strong className="text-emerald-200">prison organizations, charities, and community caregivers</strong>. Every contribution unlocks essential services, nutritious food, trauma care, and mentorship for those who need it most.
                 </p>
+                <div className="grid gap-3 rounded-2xl border border-emerald-200/30 bg-white/5 p-4 text-xs text-white/80">
+                  <div className="flex items-center gap-2">
+                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-200 text-[11px] font-semibold">
+                      1
+                    </span>
+                    <p>Choose a sponsorship channel that aligns with your organization.</p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-200 text-[11px] font-semibold">
+                      2
+                    </span>
+                    <p>Invest in programs that keep vulnerable children, elders, and inmates supported.</p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-200 text-[11px] font-semibold">
+                      3
+                    </span>
+                    <p>Receive quarterly gratitude updates showcasing the lives changed through your gift.</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Become a Sponsor Form */}
-          <div className="rounded-[28px] border border-emerald-200/40 bg-white/10 backdrop-blur-sm p-8 sm:p-10">
+          <div className="rounded-[28px] border border-emerald-200/40 bg-white/95 p-8 shadow-xl shadow-emerald-900/10 sm:p-10">
+            <div className="mb-6 space-y-2">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-emerald-500">Sponsor Details</p>
+              <h3 className="text-2xl font-semibold text-slate-900">Share how your organization will stand with us</h3>
+              <p className="text-sm text-slate-500">Complete the form, choose a payment option, and we will follow up with a tailored impact report.</p>
+            </div>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="companyName" className="mb-2 block text-xs font-semibold text-white">
+                <label htmlFor="companyName" className="mb-2 block text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">
                   Company Name <span className="text-red-400">*</span>
                 </label>
                 <input
@@ -422,13 +453,13 @@ const Sponsorship = () => {
                   value={formData.companyName}
                   onChange={handleInputChange}
                   required
-                  className="w-full rounded-xl border border-emerald-200/40 bg-white/95 px-4 py-3 text-slate-900 outline-none transition focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200/50"
+                  className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
                   placeholder="Enter your company name"
                 />
               </div>
 
               <div>
-                <label htmlFor="websiteUrl" className="mb-2 block text-xs font-semibold text-white">
+                <label htmlFor="websiteUrl" className="mb-2 block text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">
                   Website URL
                 </label>
                 <div className="relative">
@@ -446,7 +477,7 @@ const Sponsorship = () => {
               </div>
 
               <div>
-                <label htmlFor="description" className="mb-2 block text-xs font-semibold text-white">
+                <label htmlFor="description" className="mb-2 block text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">
                   Description <span className="text-red-400">*</span>
                 </label>
                 <div className="relative">
@@ -465,7 +496,7 @@ const Sponsorship = () => {
               </div>
 
               <div>
-                <label htmlFor="paymentMethod" className="mb-2 block text-xs font-semibold text-white">
+                <label htmlFor="paymentMethod" className="mb-2 block text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">
                   Payment Method <span className="text-red-400">*</span>
                 </label>
                 <select
@@ -474,7 +505,7 @@ const Sponsorship = () => {
                   value={formData.paymentMethod}
                   onChange={handleInputChange}
                   required
-                  className="w-full rounded-xl border border-emerald-200/40 bg-white/95 px-4 py-3 text-slate-900 outline-none transition focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200/50"
+                  className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
                 >
                   <option value="paypal">PayPal</option>
                   <option value="cash">Cash / Bank Transfer</option>
@@ -483,7 +514,7 @@ const Sponsorship = () => {
 
               {formData.paymentMethod === 'paypal' && (
                 <div>
-                  <label htmlFor="amount" className="mb-2 block text-xs font-semibold text-white">
+                  <label htmlFor="amount" className="mb-2 block text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">
                     Sponsorship Amount (AUD) <span className="text-red-400">*</span>
                   </label>
                   <div className="relative">
@@ -706,37 +737,75 @@ const Sponsorship = () => {
           </header>
 
           {loading ? (
-            <div className="flex flex-col items-center justify-center py-16">
+            <div className="flex flex-col items-center justify-center py-12">
               <div className="relative">
-                <div className="w-12 h-12 border-4 border-emerald-200/30 border-t-emerald-400 rounded-full animate-spin"></div>
+                <div className="w-10 h-10 border-4 border-emerald-200/30 border-t-emerald-400 rounded-full animate-spin"></div>
               </div>
-              <p className="mt-4 text-xs text-white/70">Loading sponsors...</p>
+              <p className="mt-3 text-xs text-white/70">Loading sponsors...</p>
             </div>
           ) : allSponsors.length === 0 ? (
-            <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-emerald-200/40 bg-emerald-50/10 py-16 text-center">
-              <FiAward className="text-4xl text-emerald-400/50" />
-              <p className="text-base font-semibold text-white">No sponsors yet.</p>
+            <div className="flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-emerald-200/40 bg-emerald-50/10 py-12 text-center">
+              <FiAward className="text-3xl text-emerald-400/50" />
+              <p className="text-sm font-semibold text-white">No sponsors yet.</p>
               <p className="max-w-md text-xs text-white/70">
                 Be the first to sponsor our foundation and make a difference!
               </p>
             </div>
           ) : (
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              {allSponsors.map((sponsor) => (
-                <a
-                  key={sponsor.id}
-                  href={sponsor.websiteUrl || '#'}
-                  target={sponsor.websiteUrl ? "_blank" : undefined}
-                  rel={sponsor.websiteUrl ? "noopener noreferrer" : undefined}
-                  className="group inline-flex items-center gap-2 rounded-full border border-emerald-200/40 bg-white/95 px-4 py-2 transition hover:border-emerald-300 hover:bg-emerald-50/50"
-                >
-                  <FiAward className="text-base text-emerald-600" />
-                  <span className="text-sm font-semibold text-emerald-700">{sponsor.companyName}</span>
-                  {sponsor.websiteUrl && (
-                    <FiGlobe className="text-xs text-emerald-500 opacity-70 group-hover:opacity-100" />
-                  )}
-                </a>
-              ))}
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {allSponsors.map((sponsor) => {
+                const hasLogo = Boolean(sponsor.logoUrl);
+                const initials =
+                  sponsor.companyName
+                    ?.split(' ')
+                    .slice(0, 2)
+                    .map((word) => word[0])
+                    .join('')
+                    .toUpperCase() || 'RW';
+
+                return (
+                  <article
+                    key={sponsor.id}
+                    className="flex flex-col gap-4 rounded-2xl border border-emerald-200/50 bg-white/95 p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-emerald-500/20"
+                  >
+                    <div className="flex items-center gap-3">
+                      {hasLogo ? (
+                        <img
+                          src={sponsor.logoUrl}
+                          alt={sponsor.companyName}
+                          className="h-12 w-12 rounded-full object-cover ring-2 ring-emerald-100"
+                        />
+                      ) : (
+                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-50 text-sm font-bold text-emerald-700 ring-2 ring-emerald-100">
+                          {initials}
+                        </div>
+                      )}
+                      <div>
+                        <p className="text-sm font-semibold text-emerald-900">{sponsor.companyName}</p>
+                        <p className="text-[11px] text-slate-500">
+                          {sponsor.description ? sponsor.description : 'Impact partner'}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] uppercase tracking-[0.28em] text-slate-400">
+                        Featured sponsor
+                      </span>
+                      {sponsor.websiteUrl && (
+                        <a
+                          href={sponsor.websiteUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 rounded-full bg-emerald-600 px-3 py-1 text-[11px] font-semibold text-white transition hover:bg-emerald-700"
+                        >
+                          Visit
+                          <FiArrowUpRight className="text-xs" />
+                        </a>
+                      )}
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           )}
         </section>
