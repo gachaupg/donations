@@ -273,6 +273,31 @@ const Sponsorship = () => {
       websiteUrl: 'https://share.google/oc4Z9gupzA2i3PB5I',
       logoUrl: 'https://res.cloudinary.com/pitz/image/upload/v1764248243/WhatsApp_Image_2025-11-27_at_15.27.45_89b5ee30_xrvjok.jpg',
     },
+    {
+      id: 'sponsor-1',
+      companyName: 'Sponsor Partner',
+      logoUrl: 'https://res.cloudinary.com/pitz/image/upload/v1764305169/WhatsApp_Image_2025-11-27_at_21.44.07_8258f218_etk5qf.jpg',
+    },
+    {
+      id: 'sponsor-2',
+      companyName: 'Sponsor Partner',
+      logoUrl: 'https://res.cloudinary.com/pitz/image/upload/v1764305168/WhatsApp_Image_2025-11-27_at_21.44.22_699c93c2_bw3dol.jpg',
+    },
+    {
+      id: 'sponsor-3',
+      companyName: 'Sponsor Partner',
+      logoUrl: 'https://res.cloudinary.com/pitz/image/upload/v1764305169/WhatsApp_Image_2025-11-27_at_21.43.36_80a8bc29_zb7slm.jpg',
+    },
+    {
+      id: 'sponsor-4',
+      companyName: 'Sponsor Partner',
+      logoUrl: 'https://res.cloudinary.com/pitz/image/upload/v1764305169/WhatsApp_Image_2025-11-27_at_21.44.07_d5c22cde_cb5277.jpg',
+    },
+    {
+      id: 'sponsor-5',
+      companyName: 'Sponsor Partner',
+      logoUrl: 'https://res.cloudinary.com/pitz/image/upload/v1764305168/WhatsApp_Image_2025-11-27_at_21.52.47_40282e4a_odoqsk.jpg',
+    },
   ];
 
   useEffect(() => {
@@ -752,7 +777,7 @@ const Sponsorship = () => {
               </p>
             </div>
           ) : (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {allSponsors.map((sponsor) => {
                 const hasLogo = Boolean(sponsor.logoUrl);
                 const initials =
@@ -766,41 +791,54 @@ const Sponsorship = () => {
                 return (
                   <article
                     key={sponsor.id}
-                    className="flex flex-col gap-4 rounded-2xl border border-emerald-200/50 bg-white/95 p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-emerald-500/20"
+                    className="group flex flex-col gap-4 rounded-2xl border border-emerald-200/50 bg-white/95 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg hover:shadow-emerald-500/20"
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex flex-col items-center gap-4 text-center">
                       {hasLogo ? (
-                        <img
-                          src={sponsor.logoUrl}
-                          alt={sponsor.companyName}
-                          className="h-12 w-12 rounded-full object-cover ring-2 ring-emerald-100"
-                        />
+                        <div className="relative overflow-hidden rounded-xl">
+                          <img
+                            src={sponsor.logoUrl}
+                            alt={sponsor.companyName}
+                            className="h-32 w-full object-contain transition-transform group-hover:scale-105"
+                            onError={(e) => {
+                              e.target.style.display = 'none';
+                              e.target.nextSibling.style.display = 'flex';
+                            }}
+                          />
+                          <div className="hidden h-32 w-full items-center justify-center rounded-xl bg-emerald-50 text-2xl font-bold text-emerald-700">
+                            {initials}
+                          </div>
+                        </div>
                       ) : (
-                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-50 text-sm font-bold text-emerald-700 ring-2 ring-emerald-100">
+                        <div className="flex h-32 w-full items-center justify-center rounded-xl bg-emerald-50 text-3xl font-bold text-emerald-700 ring-2 ring-emerald-100">
                           {initials}
                         </div>
                       )}
-                      <div>
-                        <p className="text-sm font-semibold text-emerald-900">{sponsor.companyName}</p>
-                        <p className="text-[11px] text-slate-500">
-                          {sponsor.description ? sponsor.description : 'Impact partner'}
-                        </p>
+                      <div className="w-full">
+                        <p className="text-base font-semibold text-emerald-900">{sponsor.companyName}</p>
+                        {sponsor.description && (
+                          <p className="mt-1 text-xs text-slate-500">
+                            {sponsor.description}
+                          </p>
+                        )}
                       </div>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] uppercase tracking-[0.28em] text-slate-400">
-                        Featured sponsor
-                      </span>
-                      {sponsor.websiteUrl && (
+                    <div className="flex items-center justify-center pt-2">
+                      {sponsor.websiteUrl ? (
                         <a
                           href={sponsor.websiteUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 rounded-full bg-emerald-600 px-3 py-1 text-[11px] font-semibold text-white transition hover:bg-emerald-700"
+                          className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-700"
                         >
-                          Visit
-                          <FiArrowUpRight className="text-xs" />
+                          Visit Website
+                          <FiArrowUpRight className="text-sm" />
                         </a>
+                      ) : (
+                        <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700">
+                          Featured Sponsor
+                          <FiAward className="text-sm" />
+                        </span>
                       )}
                     </div>
                   </article>
