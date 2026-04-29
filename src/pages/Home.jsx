@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import ContactForm from './contact';
 import Programs from './programs';
 import { useInView } from 'react-intersection-observer';
+import ShareButtons from '../components/ShareButtons';
+import heroImage from '../assets/Image_1.jpeg';
+import SponsorsSection from '../components/SponsorsSection.jsx';
 
 const Home = () => {
   const { ref: heroRef, inView: heroInView } = useInView({ triggerOnce: true, threshold: 0.2 });
@@ -30,25 +33,11 @@ const Home = () => {
               Discover Our Story
             </Link>
           </div>
-          <div className="hero__stats">
-            <div className="stat-card">
-              <span className="stat-card__value">1.2k+</span>
-              <span className="stat-card__label">Families Supported</span>
-            </div>
-            <div className="stat-card">
-              <span className="stat-card__value">37</span>
-              <span className="stat-card__label">Partner Communities</span>
-            </div>
-            <div className="stat-card">
-              <span className="stat-card__value">150</span>
-              <span className="stat-card__label">Dedicated Volunteers</span>
-            </div>
-          </div>
         </div>
         <div className="hero__media">
           <div className="hero__image-frame">
             <img
-              src="https://res.cloudinary.com/pitz/image/upload/v1727269505/WhatsApp_Image_2024-09-22_at_13.06.43_domw8a.jpg"
+              src={heroImage}
               alt="Volunteers delivering care packages to families"
             />
             <div className="hero__badge">Serving since 1970s</div>
@@ -75,6 +64,73 @@ const Home = () => {
             persons with disabilities. We combine practical aid with mentorship to spark lasting
             change.
           </p>
+        </div>
+        <div className="mission-pillars">
+          <article className="pillar-card pillar-card--mission">
+            <div className="pillar-card__top">
+              <span className="pillar-card__badge">Our Mission</span>
+              <h3 className="pillar-card__title">Restore dignity with practical help + mentorship</h3>
+              <p className="pillar-card__lead">
+                We mobilise resources and partnerships to support vulnerable households across Kenya
+                with timely aid, mentorship, and consistent follow-up—so support turns into stability.
+              </p>
+            </div>
+            <div className="pillar-card__body">
+              <p className="pillar-card__label">Concrete work we do</p>
+              <ul className="pillar-card__list">
+                <li>
+                  <strong>Home visits + food support</strong> for elderly caregivers, guardians, and
+                  widowers.
+                </li>
+                <li>
+                  <strong>Prison ministry</strong> with essential supplies, counselling, and reintegration
+                  mentorship.
+                </li>
+                <li>
+                  <strong>Teen mums support</strong> through mentorship, family follow-ups, and referrals.
+                </li>
+              </ul>
+              <div className="pillar-card__chips">
+                <span className="chip">Follow-up</span>
+                <span className="chip">Mentorship</span>
+                <span className="chip">Partnerships</span>
+                <span className="chip">Accountability</span>
+              </div>
+            </div>
+          </article>
+
+          <article className="pillar-card pillar-card--vision">
+            <div className="pillar-card__top">
+              <span className="pillar-card__badge">Our Vision</span>
+              <h3 className="pillar-card__title">Communities where hope is sustainable and shared</h3>
+              <p className="pillar-card__lead">
+                To raise mature, selfless individuals who extend hope through sustainable and compassionate
+                action—so families can thrive, not just survive.
+              </p>
+            </div>
+            <div className="pillar-card__body">
+              <p className="pillar-card__label">What that looks like</p>
+              <ul className="pillar-card__list">
+                <li>
+                  <strong>Youth empowerment</strong> through leadership training, scholarships, and
+                  mentorship.
+                </li>
+                <li>
+                  <strong>Inclusive futures</strong> through assistive devices, advocacy, and access to
+                  services.
+                </li>
+                <li>
+                  <strong>Second chances</strong> through skills-building and support for returning citizens.
+                </li>
+              </ul>
+              <div className="pillar-card__chips">
+                <span className="chip">Sustainability</span>
+                <span className="chip">Dignity</span>
+                <span className="chip">Inclusion</span>
+                <span className="chip">Second chances</span>
+              </div>
+            </div>
+          </article>
         </div>
         <div className="mission__grid">
           <article className="info-card">
@@ -152,6 +208,11 @@ const Home = () => {
         <Programs />
       </section>
 
+      <SponsorsSection
+        title="Our Sponsors"
+        subtitle="Thank you to the partners who help us keep hope alive."
+      />
+
       <section ref={ctaRef} className={`call-to-action fold ${ctaInView ? 'is-visible' : ''}`}>
         <div className="cta__content">
           <span className="section-header__tag">Get Involved</span>
@@ -176,9 +237,16 @@ const Home = () => {
           <h3>Together we can reach even more families.</h3>
           <p>Share our story with your community or invite us to speak at your next event.</p>
         </div>
-        <Link to="/gallery" className="btn btn--lime">
-          Explore Impact Stories
-        </Link>
+        <div className="flex flex-wrap items-center gap-3">
+          <Link to="/gallery" className="btn btn--lime">
+            Explore Impact Stories
+          </Link>
+          <ShareButtons
+            title="Reuben Wairicu Foundation"
+            text="Help us restore dignity across Kenya. Learn our mission and get involved."
+            path="/"
+          />
+        </div>
       </section>
 
       <div className="contact-section">

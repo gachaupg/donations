@@ -1,75 +1,135 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { BsFacebook, BsTwitter, BsInstagram, BsYoutube } from 'react-icons/bs'; 
 import { useBranding } from '../context/BrandingContext.jsx';
+import defaultLogo from '../assets/rwf-logo.png';
 
 const Footer = () => {
   const { branding } = useBranding();
-  const logoUrl =
-    branding?.logoUrl ||
-    'https://res.cloudinary.com/pitz/image/upload/v1727001297/WhatsApp_Image_2024-09-22_at_13.07.54_z6oksz.jpg';
+  const resolvedBrandLogo = useMemo(() => {
+    const candidate = typeof branding?.logoUrl === 'string' ? branding.logoUrl.trim() : '';
+    return candidate.length > 0 ? candidate : defaultLogo;
+  }, [branding?.logoUrl]);
+
+  const [logoSrc, setLogoSrc] = useState(resolvedBrandLogo);
+
+  useEffect(() => {
+    setLogoSrc(resolvedBrandLogo);
+  }, [resolvedBrandLogo]);
 
   return (
-    <footer className="text-black py-4">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-4 px-4">
-        <div>
-          <img className='h-16' src={logoUrl} alt="Reuben Wairicu Foundation logo" />
-          <p className="text-gray-600">
-            Bringing you the best services with dedication and excellence. Stay connected with us.
+    <footer className="mt-14 border-t border-white/10 bg-slate-950/30 text-white">
+      <div className="container mx-auto grid grid-cols-1 gap-8 px-4 py-10 md:grid-cols-4">
+        <div className="space-y-4">
+          <img
+            className="h-16 w-auto object-contain"
+            src={logoSrc}
+            alt="Reuben Wairicu Foundation logo"
+            onError={() => setLogoSrc(defaultLogo)}
+          />
+          <p className="text-sm leading-relaxed text-white/80">
+            The Reuben Wairicu Foundation supports vulnerable families across Kenya through practical
+            aid, mentorship, and restorative programmes—so dignity and opportunity are within reach.
           </p>
-        </div>
-
-        <div>
-          <h3 className="text-xl font-semibold mb-2">Quick Links</h3>
-          <ul className="space-y-1">
-            <li><a href="/about" className="hover:underline text-black">About Us</a></li>
-            <li><a href="/contact" className="hover:underline text-black">Contact Us</a></li>
-            <li><a href="/gallery" className="hover:underline text-black">Gallery</a></li>
-            <li><a href="/donate" className="hover:underline text-black">Donate</a></li>
-            <li><a href="/programs" className="hover:underline text-black">Programs</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 className="text-xl font-semibold mb-2">Follow Us</h3>
-          <div className="flex space-x-4">
-            <a href="https://facebook.com" className="text-2xl text-blue-600 hover:text-gray-600">
-              <BsFacebook />
+          <div className="flex flex-wrap gap-2">
+            <a
+              href="/donate"
+              className="inline-flex items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-white/90"
+            >
+              Donate
             </a>
-            <a href="https://twitter.com" className="text-2xl text-blue-400 hover:text-gray-600">
-              <BsTwitter />
-            </a>
-            <a href="https://instagram.com" className="text-2xl text-pink-600 hover:text-gray-600">
-              <BsInstagram />
-            </a>
-            <a href="https://youtube.com" className="text-2xl text-red-600 hover:text-gray-600">
-              <BsYoutube />
+            <a
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/15"
+            >
+              Partner with us
             </a>
           </div>
         </div>
 
-        <div>
-          <h3 className="text-xl font-semibold mb-2">Subscribe to our Newsletter</h3>
-          <form className="flex flex-col space-y-2">
+        <div className="space-y-3">
+          <h3 className="text-sm font-semibold uppercase tracking-[0.25em] text-white/80">
+            Quick links
+          </h3>
+          <ul className="space-y-2 text-sm text-white/85">
+            {[
+              { label: 'Home', href: '/' },
+              { label: 'About', href: '/about' },
+              { label: 'Programs', href: '/programs' },
+              { label: 'Sponsorship', href: '/sponsorship' },
+              { label: 'Gallery', href: '/gallery' },
+              { label: 'Contact', href: '/contact' },
+              { label: 'Donate', href: '/donate' },
+            ].map((link) => (
+              <li key={link.href}>
+                <a className="transition hover:text-white hover:underline" href={link.href}>
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-sm font-semibold uppercase tracking-[0.25em] text-white/80">
+            Follow us
+          </h3>
+          <div className="flex flex-wrap gap-3">
+            {[
+              { href: 'https://www.facebook.com/reuben.wairicufoundation?_rdc=1&_rdr#', label: 'Facebook', Icon: BsFacebook },
+              { href: 'https://twitter.com', label: 'X', Icon: BsTwitter },
+              { href: 'https://instagram.com', label: 'Instagram', Icon: BsInstagram },
+              { href: 'https://youtube.com', label: 'YouTube', Icon: BsYoutube },
+            ].map(({ href, label, Icon }) => (
+              <a
+                key={href}
+                href={href}
+                aria-label={label}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/10 text-xl text-white/90 backdrop-blur transition hover:bg-white/15"
+              >
+                <Icon />
+              </a>
+            ))}
+          </div>
+          <p className="text-sm text-white/70">
+            Share our story and help more families find support.
+          </p>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-sm font-semibold uppercase tracking-[0.25em] text-white/80">
+            Newsletter
+          </h3>
+          <p className="text-sm text-white/80">
+            Get updates on outreach, upcoming visits, and ways to partner.
+          </p>
+          <form className="grid gap-2">
             <input
               type="email"
-              className="p-2 bg-gray-200 rounded text-black focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full rounded-2xl border border-white/15 bg-white/10 px-4 py-2.5 text-sm text-white placeholder:text-white/60 outline-none transition focus:border-white/30 focus:bg-white/15"
               placeholder="Enter your email"
               required
             />
             <button
               type="submit"
-              className="bg-green-600 hover:bg-green-700 py-1 px-2 rounded text-white font-semibold transition-colors"
+              className="inline-flex items-center justify-center rounded-2xl bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-white/90"
             >
               Subscribe
             </button>
           </form>
+          <p className="text-xs text-white/60">
+            We respect your inbox. Unsubscribe anytime.
+          </p>
         </div>
       </div>
 
-      <div className="text-center py-2 mt-4">
-        <p className="text-gray-600">
+      <div className="border-t border-white/10">
+        <div className="container mx-auto px-4 py-5 text-center">
+          <p className="text-sm text-white/70">
           &copy; {new Date().getFullYear()} Reuben Wairicu Foundation. All Rights Reserved.
-        </p>
+          </p>
+        </div>
       </div>
     </footer>
   );

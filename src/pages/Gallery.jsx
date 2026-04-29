@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { db } from '../../firebase';
-
 import image1 from '../assets/Image_1.jpeg';
 import image2 from '../assets/image_2.jpeg';
 import image3 from '../assets/image_3.jpeg';
@@ -13,16 +12,70 @@ import image8 from '../assets/image_8.jpeg';
 import image9 from '../assets/image_9.jpeg';
 import image10 from '../assets/image_10.jpeg';
 
+const LOCAL_GALLERY_IMAGES = [
+  image1,
+  image2,
+  image3,
+  image4,
+  image5,
+  image6,
+  image7,
+  image8,
+  image9,
+  image10,
+];
+
+function hashStringToIndex(value, modulo) {
+  const str = String(value ?? '');
+  let hash = 0;
+  for (let i = 0; i < str.length; i += 1) {
+    hash = (hash * 31 + str.charCodeAt(i)) >>> 0;
+  }
+  return modulo > 0 ? hash % modulo : 0;
+}
+
+const FALLBACK_PLACEHOLDER =
+  'data:image/svg+xml;charset=UTF-8,' +
+  encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+      <defs>
+        <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0" stop-color="#e2e8f0"/>
+          <stop offset="1" stop-color="#f8fafc"/>
+        </linearGradient>
+      </defs>
+      <rect width="1200" height="900" fill="url(#g)"/>
+      <rect x="70" y="70" width="1060" height="760" rx="48" fill="#ffffff" stroke="#cbd5e1" stroke-width="8"/>
+      <path d="M170 690l220-250 210 190 180-210 250 270" fill="none" stroke="#94a3b8" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="380" cy="350" r="70" fill="#cbd5e1"/>
+      <text x="600" y="520" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="46" text-anchor="middle" fill="#475569">
+        Image unavailable
+      </text>
+      <text x="600" y="580" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="28" text-anchor="middle" fill="#64748b">
+        Check the URL or upload a new photo.
+      </text>
+    </svg>`
+  );
+
 const fallbackImages = [
-  { src: image1, description: 'Community outreach in Kitale' },
-  { src: image2, description: 'Nutritional support for caregivers' },
-  { src: image3, description: 'Mentorship sessions with returning citizens' },
+  {
+    src: image1,
+    description: 'Community outreach in Kitale',
+  },
+  {
+    src: image2,
+    description: 'Nutritional support for caregivers',
+  },
+  {
+    src: image3,
+    description: 'Mentorship sessions with returning citizens',
+  },
   { src: image4, description: 'Prison ministry in partnership with wardens' },
   { src: image5, description: 'Youth leadership workshops' },
   { src: image6, description: 'Assistive device distribution' },
-  { src: image7, description: 'Teen mums receiving mentorship' },
-  { src: image8, description: 'Family support visits' },
-  { src: image9, description: 'Volunteer teams preparing care packages' },
+  { src: image7, description: 'Second chances and reintegration support' },
+  { src: image8, description: 'Volunteer teams preparing care packages' },
+  { src: image9, description: 'Community support distribution day' },
   { src: image10, description: 'Celebrating community milestones' },
 ];
 
@@ -55,11 +108,15 @@ const Gallery = () => {
 
   const itemsToShow = useMemo(() => {
     if (galleryItems.length > 0) {
-      return galleryItems.map((item) => ({
+      const normalized = galleryItems
+        .map((item) => ({
         id: item.id,
         src: item.image || item.imageUrl || '',
         description: item.title || 'Impact moment',
-      }));
+        }))
+        .filter((item) => Boolean(item.src && String(item.src).trim().length > 0));
+
+      if (normalized.length > 0) return normalized;
     }
     return fallbackImages;
   }, [galleryItems]);
@@ -105,6 +162,17 @@ const Gallery = () => {
                   <img
                     src={image.src}
                     alt={image.description}
+                    onError={(event) => {
+                      if (event.currentTarget.dataset.fallbackApplied) return;
+                      event.currentTarget.dataset.fallbackApplied = '1';
+
+                      const seed = image.id || image.description || image.src;
+                      const localFallback =
+                        LOCAL_GALLERY_IMAGES[
+                          hashStringToIndex(seed, LOCAL_GALLERY_IMAGES.length)
+                        ];
+                      event.currentTarget.src = localFallback || FALLBACK_PLACEHOLDER;
+                    }}
                     className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                   />
                 </div>
@@ -128,6 +196,11 @@ const Gallery = () => {
           <img
             src={currentImage}
             alt="Impact highlight"
+            onError={(event) => {
+              if (event.currentTarget.dataset.fallbackApplied) return;
+              event.currentTarget.dataset.fallbackApplied = '1';
+              event.currentTarget.src = image1 || FALLBACK_PLACEHOLDER;
+            }}
             className="max-h-[85vh] w-full max-w-4xl rounded-3xl object-contain shadow-2xl"
           />
         </div>

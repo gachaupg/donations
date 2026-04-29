@@ -123,7 +123,7 @@ function ContactForm() {
                 Facebook
               </span>
               <a
-                href="https://www.facebook.com/profile.php?id=61554326003956&mibextid=rS40aB7S9Ucbxw6v"
+                href="https://www.facebook.com/reuben.wairicufoundation?_rdc=1&_rdr#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-emerald-700 underline underline-offset-2"

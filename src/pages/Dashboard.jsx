@@ -20,6 +20,7 @@ import {
   FiAward,
   FiCheck,
   FiXCircle,
+  FiRefreshCw,
 } from 'react-icons/fi';
 import { signOut } from 'firebase/auth';
 import { auth, db, storage } from '../../firebase';
@@ -47,6 +48,7 @@ const sidebarLinks = [
   { label: 'About', icon: FiInfo, tab: 'about' },
   { label: 'Testimonials', icon: FiStar, tab: 'testimonials' },
   { label: 'Sponsorships', icon: FiAward, tab: 'sponsorships' },
+  { label: 'Return & Reintegration', icon: FiRefreshCw, tab: 'reintegration' },
   { label: 'Messages', icon: FiMessageSquare, tab: 'messages' },
   { label: 'Branding', icon: FiType, tab: 'branding' },
   { label: 'Transactions', icon: FiCreditCard, tab: 'transactions' },
@@ -100,6 +102,16 @@ const Dashboard = () => {
   const [sponsorships, setSponsorships] = useState([]);
   const [sponsorshipsLoading, setSponsorshipsLoading] = useState(true);
   const [updatingSponsorshipId, setUpdatingSponsorshipId] = useState(null);
+
+  const [returningWorkers, setReturningWorkers] = useState([]);
+  const [returningWorkersLoading, setReturningWorkersLoading] = useState(true);
+  const [newReturningWorker, setNewReturningWorker] = useState({
+    fullName: '',
+    phone: '',
+    notes: '',
+  });
+  const [savingReturningWorker, setSavingReturningWorker] = useState(false);
+  const [updatingReturningWorkerId, setUpdatingReturningWorkerId] = useState(null);
 
   const handleSignOut = async () => {
     try {
@@ -709,6 +721,70 @@ const Dashboard = () => {
 
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    const workersQuery = query(collection(db, 'returningWorkers'), orderBy('createdAt', 'desc'));
+    const unsubscribe = onSnapshot(
+      workersQuery,
+      (snapshot) => {
+        setReturningWorkers(
+          snapshot.docs.map((docSnap) => ({
+            id: docSnap.id,
+            ...docSnap.data(),
+          }))
+        );
+        setReturningWorkersLoading(false);
+      },
+      () => {
+        setReturningWorkers([]);
+        setReturningWorkersLoading(false);
+      }
+    );
+
+    return () => unsubscribe();
+  }, []);
+
+  const handleAddReturningWorker = async (event) => {
+    event.preventDefault();
+    const fullName = newReturningWorker.fullName.trim();
+    const phone = newReturningWorker.phone.trim();
+    const notes = newReturningWorker.notes.trim();
+
+    if (!fullName) return;
+
+    try {
+      setSavingReturningWorker(true);
+      await addDoc(collection(db, 'returningWorkers'), {
+        fullName,
+        phone,
+        notes,
+        status: 'active',
+        createdAt: serverTimestamp(),
+      });
+      setNewReturningWorker({ fullName: '', phone: '', notes: '' });
+    } catch (error) {
+      console.error('Failed to add returning worker', error);
+    } finally {
+      setSavingReturningWorker(false);
+    }
+  };
+
+  const handleMarkWorkerReturned = async (worker) => {
+    if (!worker?.id) return;
+    if ((worker.status || '').toLowerCase() === 'returned') return;
+
+    try {
+      setUpdatingReturningWorkerId(worker.id);
+      await updateDoc(doc(db, 'returningWorkers', worker.id), {
+        status: 'returned',
+        returnedAt: serverTimestamp(),
+      });
+    } catch (error) {
+      console.error('Failed to mark worker as returned', error);
+    } finally {
+      setUpdatingReturningWorkerId(null);
+    }
+  };
 
   const handleSaveAbout = async (event) => {
     event.preventDefault();
@@ -1730,6 +1806,146 @@ const Dashboard = () => {
                           </td>
                         </tr>
                       ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </section>
+          )}
+
+          {activeTab === 'reintegration' && (
+            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg space-y-6">
+              <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <h2 className="text-2xl font-semibold text-slate-900">Return & Reintegration</h2>
+                  <p className="text-sm text-slate-500">
+                    Track returning workers and mark when a worker has successfully returned.
+                  </p>
+                </div>
+              </header>
+
+              <form
+                onSubmit={handleAddReturningWorker}
+                className="grid gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-5 md:grid-cols-3"
+              >
+                <div className="grid gap-2 md:col-span-1">
+                  <label className="text-sm font-semibold text-slate-600">Full name</label>
+                  <input
+                    value={newReturningWorker.fullName}
+                    onChange={(event) =>
+                      setNewReturningWorker((prev) => ({ ...prev, fullName: event.target.value }))
+                    }
+                    placeholder="e.g., John Mwangi"
+                    className="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
+                    required
+                  />
+                </div>
+                <div className="grid gap-2 md:col-span-1">
+                  <label className="text-sm font-semibold text-slate-600">Phone (optional)</label>
+                  <input
+                    value={newReturningWorker.phone}
+                    onChange={(event) =>
+                      setNewReturningWorker((prev) => ({ ...prev, phone: event.target.value }))
+                    }
+                    placeholder="+254..."
+                    className="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
+                  />
+                </div>
+                <div className="grid gap-2 md:col-span-1">
+                  <label className="text-sm font-semibold text-slate-600">Notes (optional)</label>
+                  <input
+                    value={newReturningWorker.notes}
+                    onChange={(event) =>
+                      setNewReturningWorker((prev) => ({ ...prev, notes: event.target.value }))
+                    }
+                    placeholder="Short note"
+                    className="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
+                  />
+                </div>
+                <div className="md:col-span-3 flex justify-end">
+                  <button
+                    type="submit"
+                    disabled={savingReturningWorker}
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-500/30 transition hover:bg-emerald-600 disabled:cursor-not-allowed disabled:bg-emerald-400"
+                  >
+                    <FiPlusCircle />
+                    {savingReturningWorker ? 'Saving…' : 'Add returning worker'}
+                  </button>
+                </div>
+              </form>
+
+              {returningWorkersLoading ? (
+                <div className="flex items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 py-12 text-sm font-semibold text-slate-500">
+                  Loading returning workers…
+                </div>
+              ) : returningWorkers.length === 0 ? (
+                <div className="flex items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 py-12 text-sm font-semibold text-slate-500">
+                  No returning workers yet.
+                </div>
+              ) : (
+                <div className="overflow-hidden rounded-2xl border border-slate-200">
+                  <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
+                    <thead className="bg-slate-50 text-xs uppercase tracking-[0.2em] text-slate-500">
+                      <tr>
+                        <th className="px-4 py-3 font-semibold">Worker</th>
+                        <th className="px-4 py-3 font-semibold">Phone</th>
+                        <th className="px-4 py-3 font-semibold">Notes</th>
+                        <th className="px-4 py-3 font-semibold">Status</th>
+                        <th className="px-4 py-3 font-semibold text-right">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-200">
+                      {returningWorkers.map((worker) => {
+                        const status = (worker.status || 'active').toLowerCase();
+                        const isReturned = status === 'returned';
+                        const isUpdating = updatingReturningWorkerId === worker.id;
+
+                        return (
+                          <tr key={worker.id} className={isReturned ? 'bg-emerald-50/60' : ''}>
+                            <td className="px-4 py-3">
+                              <p className="font-semibold text-slate-900">{worker.fullName || '—'}</p>
+                              {worker.createdAt?.toDate && (
+                                <p className="text-xs text-slate-500">
+                                  Added {worker.createdAt.toDate().toLocaleDateString()}
+                                </p>
+                              )}
+                            </td>
+                            <td className="px-4 py-3 text-sm text-slate-600">{worker.phone || '—'}</td>
+                            <td className="px-4 py-3 text-sm text-slate-600">
+                              <p className="line-clamp-2 max-w-md">{worker.notes || '—'}</p>
+                            </td>
+                            <td className="px-4 py-3">
+                              <span
+                                className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
+                                  isReturned
+                                    ? 'bg-emerald-100 text-emerald-700'
+                                    : 'bg-amber-100 text-amber-700'
+                                }`}
+                              >
+                                {isReturned ? 'Returned' : 'Active'}
+                              </span>
+                              {worker.returnedAt?.toDate && (
+                                <p className="mt-2 text-xs text-slate-500">
+                                  Returned {worker.returnedAt.toDate().toLocaleDateString()}
+                                </p>
+                              )}
+                            </td>
+                            <td className="px-4 py-3">
+                              <div className="flex justify-end gap-2">
+                                <button
+                                  type="button"
+                                  onClick={() => handleMarkWorkerReturned(worker)}
+                                  disabled={isReturned || isUpdating}
+                                  className="inline-flex items-center gap-2 rounded-full border border-emerald-200 px-3 py-1.5 text-xs font-semibold text-emerald-600 transition hover:border-emerald-300 hover:bg-emerald-50 disabled:cursor-not-allowed disabled:opacity-60"
+                                >
+                                  <FiCheck />
+                                  {isReturned ? 'Returned' : isUpdating ? 'Updating…' : 'Mark as Returned'}
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>

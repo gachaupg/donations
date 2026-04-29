@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
-import { collection, addDoc, serverTimestamp, query, orderBy, onSnapshot, where, onSnapshot as onSnapshotListener } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp, query, orderBy, onSnapshot as onSnapshotListener } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { toast } from 'react-toastify';
 import { FiHeart, FiUsers, FiDollarSign, FiGlobe, FiFileText, FiCheckCircle, FiAward, FiCopy, FiArrowUpRight } from 'react-icons/fi';
+import SponsorsSection from '../components/SponsorsSection.jsx';
 
 // Simple PayPal Buttons Component - just the buttons
 const PayPalButtonsOnly = ({ amount, onPaymentSuccess }) => {
@@ -255,74 +256,8 @@ const Sponsorship = () => {
     paymentMethod: 'paypal',
   });
   const [submitting, setSubmitting] = useState(false);
-  const [sponsors, setSponsors] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [paymentConfirmed, setPaymentConfirmed] = useState(false);
   const [copiedKey, setCopiedKey] = useState('');
-
-  // Current sponsors (hardcoded)
-  const currentSponsors = [
-    {
-      id: 'petergachau',
-      companyName: 'Peter Gachau',
-      websiteUrl: 'https://www.petergachau.co.ke/',
-    },
-    {
-      id: 'aufrican-vybz',
-      companyName: 'Home - Sydenham-Caroline Springs Uniting Church',
-      websiteUrl: 'https://share.google/oc4Z9gupzA2i3PB5I',
-      logoUrl: 'https://res.cloudinary.com/pitz/image/upload/v1764248243/WhatsApp_Image_2025-11-27_at_15.27.45_89b5ee30_xrvjok.jpg',
-    },
-    {
-      id: 'sponsor-1',
-      companyName: 'Sponsor Partner',
-      logoUrl: 'https://res.cloudinary.com/pitz/image/upload/v1764305169/WhatsApp_Image_2025-11-27_at_21.44.07_8258f218_etk5qf.jpg',
-    },
-    {
-      id: 'sponsor-2',
-      companyName: 'Sponsor Partner',
-      logoUrl: 'https://res.cloudinary.com/pitz/image/upload/v1764305168/WhatsApp_Image_2025-11-27_at_21.44.22_699c93c2_bw3dol.jpg',
-    },
-    {
-      id: 'sponsor-3',
-      companyName: 'Sponsor Partner',
-      logoUrl: 'https://res.cloudinary.com/pitz/image/upload/v1764305169/WhatsApp_Image_2025-11-27_at_21.43.36_80a8bc29_zb7slm.jpg',
-    },
-    {
-      id: 'sponsor-4',
-      companyName: 'Sponsor Partner',
-      logoUrl: 'https://res.cloudinary.com/pitz/image/upload/v1764305169/WhatsApp_Image_2025-11-27_at_21.44.07_d5c22cde_cb5277.jpg',
-    },
-    {
-      id: 'sponsor-5',
-      companyName: 'Sponsor Partner',
-      logoUrl: 'https://res.cloudinary.com/pitz/image/upload/v1764305168/WhatsApp_Image_2025-11-27_at_21.52.47_40282e4a_odoqsk.jpg',
-    },
-  ];
-
-  useEffect(() => {
-    // Load approved sponsors from Firebase - updates automatically when sponsors are approved in dashboard
-    const sponsorsQuery = query(collection(db, 'sponsors'), orderBy('createdAt', 'desc'));
-    const unsubscribe = onSnapshot(
-      sponsorsQuery,
-      (snapshot) => {
-        const docs = snapshot.docs
-          .map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }))
-          .filter((doc) => doc.status === 'approved');
-        setSponsors(docs);
-        setLoading(false);
-      },
-      (error) => {
-        console.error('Failed to load sponsors', error);
-        setLoading(false);
-      }
-    );
-
-    return () => unsubscribe();
-  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -406,8 +341,6 @@ const Sponsorship = () => {
       setSubmitting(false);
     }
   };
-
-  const allSponsors = [...currentSponsors, ...sponsors];
 
   return (
     <div className="min-h-[calc(100vh-80px)] pt-6 pb-12 px-4 text-white sm:px-6 lg:px-8">
@@ -752,101 +685,7 @@ const Sponsorship = () => {
           </div>
         </section>
 
-        {/* Our Sponsors Section */}
-        <section className="mb-12 rounded-[28px] border border-emerald-200/40 bg-white/10 backdrop-blur-sm p-8 sm:p-10">
-          <header className="mb-8 text-center">
-            <h2 className="mb-3 text-2xl font-semibold text-white">Our Sponsors</h2>
-            <p className="text-base text-white/80">
-              We are grateful to our sponsors who make our work possible
-            </p>
-          </header>
-
-          {loading ? (
-            <div className="flex flex-col items-center justify-center py-12">
-              <div className="relative">
-                <div className="w-10 h-10 border-4 border-emerald-200/30 border-t-emerald-400 rounded-full animate-spin"></div>
-              </div>
-              <p className="mt-3 text-xs text-white/70">Loading sponsors...</p>
-            </div>
-          ) : allSponsors.length === 0 ? (
-            <div className="flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-emerald-200/40 bg-emerald-50/10 py-12 text-center">
-              <FiAward className="text-3xl text-emerald-400/50" />
-              <p className="text-sm font-semibold text-white">No sponsors yet.</p>
-              <p className="max-w-md text-xs text-white/70">
-                Be the first to sponsor our foundation and make a difference!
-              </p>
-            </div>
-          ) : (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {allSponsors.map((sponsor) => {
-                const hasLogo = Boolean(sponsor.logoUrl);
-                const initials =
-                  sponsor.companyName
-                    ?.split(' ')
-                    .slice(0, 2)
-                    .map((word) => word[0])
-                    .join('')
-                    .toUpperCase() || 'RW';
-
-                return (
-                  <article
-                    key={sponsor.id}
-                    className="group flex flex-col gap-4 rounded-2xl border border-emerald-200/50 bg-white/95 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg hover:shadow-emerald-500/20"
-                  >
-                    <div className="flex flex-col items-center gap-4 text-center">
-                      {hasLogo ? (
-                        <div className="relative overflow-hidden rounded-xl">
-                          <img
-                            src={sponsor.logoUrl}
-                            alt={sponsor.companyName}
-                            className="h-32 w-full object-contain transition-transform group-hover:scale-105"
-                            onError={(e) => {
-                              e.target.style.display = 'none';
-                              e.target.nextSibling.style.display = 'flex';
-                            }}
-                          />
-                          <div className="hidden h-32 w-full items-center justify-center rounded-xl bg-emerald-50 text-2xl font-bold text-emerald-700">
-                            {initials}
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="flex h-32 w-full items-center justify-center rounded-xl bg-emerald-50 text-3xl font-bold text-emerald-700 ring-2 ring-emerald-100">
-                          {initials}
-                        </div>
-                      )}
-                      <div className="w-full">
-                        <p className="text-base font-semibold text-emerald-900">{sponsor.companyName}</p>
-                        {sponsor.description && (
-                          <p className="mt-1 text-xs text-slate-500">
-                            {sponsor.description}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-center pt-2">
-                      {sponsor.websiteUrl ? (
-                        <a
-                          href={sponsor.websiteUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-700"
-                        >
-                          Visit Website
-                          <FiArrowUpRight className="text-sm" />
-                        </a>
-                      ) : (
-                        <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700">
-                          Featured Sponsor
-                          <FiAward className="text-sm" />
-                        </span>
-                      )}
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-          )}
-        </section>
+        <SponsorsSection className="mb-12" />
 
         {/* Additional Information */}
         <section className="rounded-[28px] border border-emerald-200/40 bg-white/10 backdrop-blur-sm p-8 sm:p-10">

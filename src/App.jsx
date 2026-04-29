@@ -16,13 +16,14 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
 import { useAuth } from "./context/AuthContext.jsx";
+import News from "./pages/News.jsx";
 
 function App() {
   const { initializing } = useAuth();
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen relative overflow-hidden" style={{ backgroundColor: '#486b4d' }}>
+      <div className="min-h-screen relative overflow-hidden">
         <Navbar />
         <ToastContainer />
         <div className="mt-20">
@@ -43,6 +44,7 @@ function App() {
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/donate" element={<Donate />} />
               <Route path="/programs" element={<Programs />} />
+              <Route path="/news" element={<News />} />
               <Route path="/sponsorship" element={<Sponsorship />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />

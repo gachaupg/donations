@@ -1,37 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { BsList } from "react-icons/bs";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
 import { useAuth } from "../context/AuthContext.jsx";
 import { useBranding } from "../context/BrandingContext.jsx";
+import defaultLogo from "../assets/rwf-logo.png";
 
 const navLinks = [
   { label: "Home", path: "/" },
   { label: "About Us", path: "/about" },
   { label: "Programs", path: "/programs" },
+  { label: "News & Events", path: "/news" },
   { label: "Sponsorship", path: "/sponsorship" },
   { label: "Gallery", path: "/gallery" },
   { label: "Contact", path: "/contact" },
 ];
 
 const Navbar = () => {
-  const [theme, setTheme] = useState("light");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const { user } = useAuth();
   const { branding } = useBranding();
 
-  const logoUrl =
-    branding?.logoUrl ||
-    "https://res.cloudinary.com/pitz/image/upload/v1739433241/Screenshot_2025-02-13_104904__1_-removebg-preview_hbjaqg.png";
+  const resolvedBrandLogo = useMemo(() => {
+    const candidate = typeof branding?.logoUrl === "string" ? branding.logoUrl.trim() : "";
+    return candidate.length > 0 ? candidate : defaultLogo;
+  }, [branding?.logoUrl]);
+
+  const [logoSrc, setLogoSrc] = useState(resolvedBrandLogo);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "light";
-    setTheme(savedTheme);
-    document.documentElement.className = savedTheme;
-  }, []);
+    setLogoSrc(resolvedBrandLogo);
+  }, [resolvedBrandLogo]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,15 +52,14 @@ const Navbar = () => {
 
   return (
     <header
-      className={`navbar ${theme === "dark" ? "navbar--dark" : "navbar--light"} ${
-        isScrolled ? "navbar--scrolled" : ""
-      }`}
+      className={`navbar navbar--dark ${isScrolled ? "navbar--scrolled" : ""}`}
     >
       <div className="navbar__inner">
         <Link to="/" className="navbar__brand" aria-label="Reuben Wairicu Foundation">
           <img
-            src={logoUrl}
+            src={logoSrc}
             alt="Reuben Wairicu Foundation logo"
+            onError={() => setLogoSrc(defaultLogo)}
           />
          
         </Link>
@@ -115,8 +116,9 @@ const Navbar = () => {
               onClick={closeMenu}
             >
               <img
-                src={logoUrl}
+                src={logoSrc}
                 alt="Reuben Wairicu Foundation logo"
+                onError={() => setLogoSrc(defaultLogo)}
               />
             </Link>
             <div className="navbar__mobile-links">

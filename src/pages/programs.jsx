@@ -2,6 +2,52 @@ import React, { useEffect, useState } from 'react';
 import { collection, query, orderBy, onSnapshot, getDocs, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { data as programSeedData } from '../utils/data';
+import { FiHeart, FiUsers, FiShield, FiSun, FiActivity } from 'react-icons/fi';
+import image2 from '../assets/image_2.jpeg';
+import image5 from '../assets/image_5.jpeg';
+import image6 from '../assets/image_6.jpeg';
+import image8 from '../assets/image_8.jpeg';
+import image10 from '../assets/image_10.jpeg';
+
+const localProgramImagesByTitle = {
+  'prison ministry': image5,
+  'support for teen mums': image10,
+  'elderly care': image6,
+  widowers: image2,
+  'persons with disabilities': image8,
+};
+
+const LOCAL_IMAGE_ROTATION = [image5, image10, image6, image2, image8];
+
+function pickLocalProgramImage(title, index) {
+  const normalized = (title || '').toLowerCase().trim();
+  if (localProgramImagesByTitle[normalized]) return localProgramImagesByTitle[normalized];
+
+  // Keyword-based match to handle variations like "Prison Outreach" / "Teen Moms" etc.
+  if (/(prison|reintegration|returning)/.test(normalized)) return image5;
+  if (/(teen|mum|mother|girls)/.test(normalized)) return image10;
+  if (/(elder|caregiver|senior)/.test(normalized)) return image6;
+  if (/(widow|widower)/.test(normalized)) return image2;
+  if (/(disabil|pwd|assistive)/.test(normalized)) return image8;
+
+  // Last resort: rotate through local images so the grid never looks empty.
+  return LOCAL_IMAGE_ROTATION[index % LOCAL_IMAGE_ROTATION.length];
+}
+
+function pickProgramIcon(title) {
+  const normalized = (title || '').toLowerCase();
+  if (/(prison|reintegration|returning)/.test(normalized)) return FiShield;
+  if (/(teen|mum|mother|girls)/.test(normalized)) return FiHeart;
+  if (/(elder|caregiver|senior)/.test(normalized)) return FiActivity;
+  if (/(widow|widower)/.test(normalized)) return FiUsers;
+  if (/(disabil|pwd|assistive)/.test(normalized)) return FiSun;
+  return FiHeart;
+}
+
+function isHttpUrl(value) {
+  const str = typeof value === 'string' ? value.trim() : '';
+  return /^https?:\/\//i.test(str);
+}
 
 const Programs = () => {
   const [programs, setPrograms] = useState([]);
@@ -97,7 +143,10 @@ const Programs = () => {
         ) : (
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {programList.map((program, index) => {
-              const programImage = program.image || program.imageUrl || '';
+              const localFallback = pickLocalProgramImage(program.title, index);
+              const remoteCandidate = program.image || program.imageUrl || '';
+              const programImage = isHttpUrl(remoteCandidate) ? remoteCandidate.trim() : localFallback;
+              const Icon = pickProgramIcon(program.title);
               return (
                 <article
                   key={program.id || `${program.title}-${index}`}
@@ -108,11 +157,23 @@ const Programs = () => {
                       <img
                         src={programImage}
                         alt={program.title}
+                        onError={(event) => {
+                          if (event.currentTarget.dataset.fallbackApplied) return;
+                          event.currentTarget.dataset.fallbackApplied = '1';
+                          event.currentTarget.src = localFallback;
+                        }}
                         className="h-full w-full object-cover transition duration-500 group-hover:scale-105 group-hover:opacity-95"
                       />
                     ) : (
-                      <div className="flex h-full w-full items-center justify-center bg-emerald-50 text-sm font-semibold text-emerald-400">
-                        No Image
+                      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-emerald-50 to-emerald-100 text-emerald-700">
+                        <div className="flex flex-col items-center gap-2">
+                          <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-sm">
+                            <Icon className="text-2xl" />
+                          </span>
+                          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-emerald-600">
+                            Programme
+                          </span>
+                        </div>
                       </div>
                     )}
                   </div>
