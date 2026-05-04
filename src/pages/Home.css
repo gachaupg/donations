@@ -364,7 +364,7 @@ body {
 
 .impact__grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: clamp(1rem, 2.4vw, 1.6rem);
 }
 
@@ -459,6 +459,11 @@ body {
   padding: clamp(2.2rem, 4vw, 3.2rem);
   border: 1px solid rgba(15, 23, 42, 0.08);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.home-gallery-preview {
+  padding: clamp(1.5rem, 3vw, 2.5rem) 0;
 }
 
 @media (max-width: 1150px) {

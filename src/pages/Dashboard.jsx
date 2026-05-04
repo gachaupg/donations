@@ -40,6 +40,7 @@ import {
 } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { data as programSeedData } from '../utils/data.jsx';
+import { upsertProgramSeeds, dedupeProgramsByTitle } from '../utils/programSeeding';
 
 const sidebarLinks = [
   { label: 'Overview', icon: FiHome, tab: 'overview' },
@@ -225,28 +226,7 @@ const Dashboard = () => {
   useEffect(() => {
     const seedCollectionsIfNeeded = async () => {
       try {
-        const programsCollection = collection(db, 'programs');
-        const programsSnapshot = await getDocs(programsCollection);
-        const existingProgramTitles = new Set(
-          programsSnapshot.docs.map((doc) => (doc.data().title || '').toLowerCase())
-        );
-        const programSeedsToAdd = programSeedData.filter(
-          (item) => !existingProgramTitles.has(item.title.toLowerCase())
-        );
-
-        if (programSeedsToAdd.length > 0) {
-          await Promise.all(
-            programSeedsToAdd.map((item) =>
-              addDoc(programsCollection, {
-                title: item.title,
-                description: item.description,
-                image: item.image || '',
-                storagePath: '',
-                createdAt: serverTimestamp(),
-              })
-            )
-          );
-        }
+        await upsertProgramSeeds(db, programSeedData);
 
         const galleryCollection = collection(db, 'gallery');
         const gallerySnapshot = await getDocs(galleryCollection);
@@ -334,10 +314,12 @@ const Dashboard = () => {
       programsQuery,
       (snapshot) => {
         setPrograms(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }))
+          dedupeProgramsByTitle(
+            snapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }))
+          )
         );
         setProgramsLoading(false);
       },

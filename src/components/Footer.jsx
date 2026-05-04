@@ -21,7 +21,7 @@ const Footer = () => {
       <div className="container mx-auto grid grid-cols-1 gap-8 px-4 py-10 md:grid-cols-4">
         <div className="space-y-4">
           <img
-            className="h-16 w-auto object-contain"
+            className="h-20 w-auto max-w-[min(100%,280px)] object-contain object-left sm:h-24 sm:max-w-[min(100%,320px)]"
             src={logoSrc}
             alt="Reuben Wairicu Foundation logo"
             onError={() => setLogoSrc(defaultLogo)}

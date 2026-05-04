@@ -1,19 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { collection, query, orderBy, onSnapshot, getDocs, addDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { data as programSeedData } from '../utils/data';
+import { upsertProgramSeeds, dedupeProgramsByTitle } from '../utils/programSeeding';
 import { FiHeart, FiUsers, FiShield, FiSun, FiActivity } from 'react-icons/fi';
 import image2 from '../assets/image_2.jpeg';
 import image5 from '../assets/image_5.jpeg';
 import image6 from '../assets/image_6.jpeg';
 import image8 from '../assets/image_8.jpeg';
 import image10 from '../assets/image_10.jpeg';
+import elderlyCareImage from '../assets/elderly-care.png';
+import teenMumsImage from '../assets/teen-mums.png';
+import widowersImage from '../assets/widowers.png';
+import childrenIncarceratedParentImage from '../assets/children-incarcerated-parent.png';
+
+/** These titles always use the bundled local image, even if Firestore still has an old URL */
+const PROGRAM_LOCAL_IMAGE_OVERRIDES_REMOTE = new Set([
+  'elderly care',
+  'support for teen mums',
+  'widowers',
+  'children leaving with an incarcerated parent in prison',
+]);
 
 const localProgramImagesByTitle = {
   'prison ministry': image5,
-  'support for teen mums': image10,
-  'elderly care': image6,
-  widowers: image2,
+  'children leaving with an incarcerated parent in prison': childrenIncarceratedParentImage,
+  'support for teen mums': teenMumsImage,
+  'elderly care': elderlyCareImage,
+  widowers: widowersImage,
   'persons with disabilities': image8,
 };
 
@@ -24,10 +38,10 @@ function pickLocalProgramImage(title, index) {
   if (localProgramImagesByTitle[normalized]) return localProgramImagesByTitle[normalized];
 
   // Keyword-based match to handle variations like "Prison Outreach" / "Teen Moms" etc.
-  if (/(prison|reintegration|returning)/.test(normalized)) return image5;
-  if (/(teen|mum|mother|girls)/.test(normalized)) return image10;
-  if (/(elder|caregiver|senior)/.test(normalized)) return image6;
-  if (/(widow|widower)/.test(normalized)) return image2;
+  if (/(prison|reintegration|returning|incarcerat|parent in prison|leaving with)/.test(normalized)) return image5;
+  if (/(teen|mum|mother|girls)/.test(normalized)) return teenMumsImage;
+  if (/(elder|caregiver|senior)/.test(normalized)) return elderlyCareImage;
+  if (/(widow|widower)/.test(normalized)) return widowersImage;
   if (/(disabil|pwd|assistive)/.test(normalized)) return image8;
 
   // Last resort: rotate through local images so the grid never looks empty.
@@ -36,7 +50,7 @@ function pickLocalProgramImage(title, index) {
 
 function pickProgramIcon(title) {
   const normalized = (title || '').toLowerCase();
-  if (/(prison|reintegration|returning)/.test(normalized)) return FiShield;
+  if (/(prison|reintegration|returning|incarcerat|parent in prison|leaving with)/.test(normalized)) return FiShield;
   if (/(teen|mum|mother|girls)/.test(normalized)) return FiHeart;
   if (/(elder|caregiver|senior)/.test(normalized)) return FiActivity;
   if (/(widow|widower)/.test(normalized)) return FiUsers;
@@ -54,36 +68,13 @@ const Programs = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const seedMissingPrograms = async () => {
+    (async () => {
       try {
-        const programsCollection = collection(db, 'programs');
-        const snapshot = await getDocs(programsCollection);
-        const existingTitles = new Set(
-          snapshot.docs.map((doc) => (doc.data().title || '').toLowerCase())
-        );
-        const seedsToAdd = programSeedData.filter(
-          (item) => !existingTitles.has(item.title.toLowerCase())
-        );
-
-        if (seedsToAdd.length > 0) {
-          await Promise.all(
-            seedsToAdd.map((item) =>
-              addDoc(programsCollection, {
-                title: item.title,
-                description: item.description,
-                image: item.image || '',
-                storagePath: '',
-                createdAt: serverTimestamp(),
-              })
-            )
-          );
-        }
+        await upsertProgramSeeds(db, programSeedData);
       } catch (error) {
         console.error('Failed to seed programs collection', error);
       }
-    };
-
-    seedMissingPrograms();
+    })();
   }, []);
 
   useEffect(() => {
@@ -91,20 +82,24 @@ const Programs = () => {
     const unsubscribe = onSnapshot(
       programsQuery,
       (snapshot) => {
-        const docs = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+        const docs = dedupeProgramsByTitle(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+        );
         setPrograms(docs);
         setLoading(false);
       },
       (error) => {
         console.error('Failed to load programs', error);
         setPrograms(
-          programSeedData.map((item, index) => ({
-            id: `fallback-${index}`,
-            ...item,
-          }))
+          dedupeProgramsByTitle(
+            programSeedData.map((item, index) => ({
+              id: `fallback-${index}`,
+              ...item,
+            }))
+          )
         );
         setLoading(false);
       }
@@ -143,9 +138,14 @@ const Programs = () => {
         ) : (
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {programList.map((program, index) => {
+              const normalizedTitle = (program.title || '').toLowerCase().trim();
               const localFallback = pickLocalProgramImage(program.title, index);
               const remoteCandidate = program.image || program.imageUrl || '';
-              const programImage = isHttpUrl(remoteCandidate) ? remoteCandidate.trim() : localFallback;
+              const programImage = PROGRAM_LOCAL_IMAGE_OVERRIDES_REMOTE.has(normalizedTitle)
+                ? localFallback
+                : isHttpUrl(remoteCandidate)
+                  ? remoteCandidate.trim()
+                  : localFallback;
               const Icon = pickProgramIcon(program.title);
               return (
                 <article

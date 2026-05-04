@@ -30,7 +30,22 @@ export default function SponsorsSection({
         <p className="text-base text-white/80">{subtitle}</p>
       </header>
 
-      <div className="sponsors-marquee">
+      {/* Small screens: two logos per row, no horizontal scroll */}
+      <div className="md:hidden">
+        <div className="mx-auto grid w-full max-w-2xl grid-cols-2 gap-x-6 gap-y-12 justify-items-center px-1 sm:max-w-3xl sm:gap-x-10 sm:gap-y-14">
+          {SPONSOR_LOGOS.map((logo) => (
+            <img
+              key={logo.src}
+              src={logo.src}
+              alt={logo.alt}
+              className="h-[4.5rem] w-full max-w-[16rem] object-contain opacity-95 sm:h-20 sm:max-w-[18.5rem]"
+              loading="lazy"
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="sponsors-marquee hidden md:block">
         <div className="sponsors-marquee__track" aria-label="Sponsors marquee">
           <div className="sponsors-marquee__set">
             {SPONSOR_LOGOS.map((logo) => (

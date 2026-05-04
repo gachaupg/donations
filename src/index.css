@@ -126,7 +126,7 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 72px;
+    width: 96px;
     pointer-events: none;
     z-index: 1;
   }
@@ -155,13 +155,13 @@
   .sponsors-marquee__set {
     display: flex;
     align-items: center;
-    gap: 2.25rem;
-    padding: 0.5rem 2.25rem;
+    gap: 3.25rem;
+    padding: 0.65rem 2.5rem;
   }
 
   .sponsors-marquee__logo {
-    height: 56px;
-    width: 210px;
+    height: 104px;
+    width: 360px;
     object-fit: contain;
     opacity: 0.95;
     filter: saturate(1.02);

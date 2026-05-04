@@ -2,6 +2,7 @@ import React from 'react';
 import './Home.css';
 import { Link } from 'react-router-dom';
 import ContactForm from './contact';
+import Gallery from './Gallery';
 import Programs from './programs';
 import { useInView } from 'react-intersection-observer';
 import ShareButtons from '../components/ShareButtons';
@@ -79,15 +80,20 @@ const Home = () => {
               <p className="pillar-card__label">Concrete work we do</p>
               <ul className="pillar-card__list">
                 <li>
-                  <strong>Home visits + food support</strong> for elderly caregivers, guardians, and
-                  widowers.
+                  <strong>Food security + home visits</strong> — nutrition support, household essentials,
+                  and wellness check-ins for elderly caregivers and vulnerable families.
                 </li>
                 <li>
-                  <strong>Prison ministry</strong> with essential supplies, counselling, and reintegration
-                  mentorship.
+                  <strong>Prison ministry + reintegration</strong> — quarterly visits, counselling, and
+                  aftercare so returning citizens rebuild stable lives.
                 </li>
                 <li>
-                  <strong>Teen mums support</strong> through mentorship, family follow-ups, and referrals.
+                  <strong>Children leaving with an incarcerated parent in prison</strong> — counselling,
+                  safe spaces, caregiver and school coordination, and practical support through transition.
+                </li>
+                <li>
+                  <strong>Teen mums mentorship</strong> — family follow-ups and guidance that protects dignity
+                  and helps young mothers stay on track.
                 </li>
               </ul>
               <div className="pillar-card__chips">
@@ -112,15 +118,16 @@ const Home = () => {
               <p className="pillar-card__label">What that looks like</p>
               <ul className="pillar-card__list">
                 <li>
-                  <strong>Youth empowerment</strong> through leadership training, scholarships, and
-                  mentorship.
+                  <strong>Disability support + advocacy</strong> — assistive support, referrals to services,
+                  and advocacy that promotes inclusion and access.
                 </li>
                 <li>
-                  <strong>Inclusive futures</strong> through assistive devices, advocacy, and access to
-                  services.
+                  <strong>Youth empowerment</strong> — leadership mentorship, skills support, and scholarship
+                  pathways that help young people become community champions.
                 </li>
                 <li>
-                  <strong>Second chances</strong> through skills-building and support for returning citizens.
+                  <strong>Community partnerships</strong> — working with local leaders, institutions, and
+                  volunteers to deliver coordinated, accountable support.
                 </li>
               </ul>
               <div className="pillar-card__chips">
@@ -174,31 +181,51 @@ const Home = () => {
         </div>
         <div className="impact__grid">
           <article className="impact-card">
-            <h3>Restoring Dignity</h3>
+            <h3>Food security + home visits</h3>
             <p>
-              Home visits deliver nutrition essentials, companionship, and wellness checks to elderly
-              caregivers and guardians.
+              Nutrition support, household essentials, and wellness check-ins for elderly caregivers and
+              vulnerable families.
             </p>
           </article>
           <article className="impact-card">
-            <h3>Second Chances</h3>
+            <h3>Prison ministry + reintegration</h3>
             <p>
-              Reintegration pathways provide mentorship, counselling, and vocational skills for
-              inmates returning home.
+              Quarterly visits, counselling, and aftercare support that helps returning citizens rebuild
+              stable lives.
             </p>
           </article>
           <article className="impact-card">
-            <h3>Inclusive Futures</h3>
+            <h3>Children leaving with an incarcerated parent in prison</h3>
             <p>
-              Assistive devices, therapy partnerships, and advocacy empower people living with
-              disabilities to access opportunity.
+              Counselling, safe peer spaces, caregiver and school coordination, and practical support so
+              children stay grounded when a parent is in custody.
             </p>
           </article>
           <article className="impact-card">
-            <h3>Youth Empowerment</h3>
+            <h3>Teen mums mentorship</h3>
             <p>
-              Leadership camps and scholarship support equip young people to become community
-              champions.
+              Mentorship, family follow-ups, and guidance that protects dignity and helps young mothers
+              stay on track.
+            </p>
+          </article>
+          <article className="impact-card">
+            <h3>Disability support + advocacy</h3>
+            <p>
+              Assistive support, referrals to services, and advocacy that promotes inclusion and access.
+            </p>
+          </article>
+          <article className="impact-card">
+            <h3>Youth empowerment</h3>
+            <p>
+              Leadership mentorship, skills support, and scholarship pathways that help young people become
+              community champions.
+            </p>
+          </article>
+          <article className="impact-card">
+            <h3>Community partnerships</h3>
+            <p>
+              Working with local leaders, institutions, and volunteers to deliver coordinated, accountable
+              support.
             </p>
           </article>
         </div>
@@ -250,8 +277,12 @@ const Home = () => {
       </section>
 
       <div className="contact-section">
-        <ContactForm />
+        <ContactForm embedded />
       </div>
+
+      <section className="home-gallery-preview fold is-visible">
+        <Gallery embedded />
+      </section>
     </div>
   );
 };

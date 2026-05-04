@@ -5,19 +5,25 @@ export const data = [
       image:"https://res.cloudinary.com/pitz/image/upload/v1727543324/WhatsApp_Image_2024-09-28_at_16.12.37_kljexb.jpg"
     },
     {
+      title: 'Children leaving with an incarcerated parent in prison',
+      description:
+        "When a parent is taken into custody, children's lives are turned upside down—housing, school, and emotional safety all feel uncertain. We walk with families through that transition: practical help, counselling, safe peer spaces, and coordination with caregivers and schools so children are supported, not left behind.",
+      image: '',
+    },
+    {
       title: 'Support for Teen Mums',
       description: 'Providing mentorship and training as they rebuild their lives.',
-      image:"https://res.cloudinary.com/pitz/image/upload/v1727439918/WhatsApp_Image_2024-09-27_at_15.06.49_1_divzhc.jpg"
+      image: '',
     },
     {
       title: 'Elderly Care',
       description: 'Provide basic needs, help them to seek medical support, plan age appropriate activities.',
-      image:"https://res.cloudinary.com/pitz/image/upload/v1727439305/WhatsApp_Image_2024-09-27_at_15.06.35_cvcium.jpg"
+      image: '',
     },
     {
       title: 'Widowers',
       description: 'Plan catch -up activities, have mobile workshops, safe spaces to share and provide counselling and welfare checks.',
-      image:"https://res.cloudinary.com/pitz/image/upload/v1727439404/WhatsApp_Image_2024-09-27_at_15.07.14_lwcztg.jpg"
+      image: '',
     },
     {
       title: 'Persons with disabilities',

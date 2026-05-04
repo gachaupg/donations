@@ -1,9 +1,9 @@
 import React from 'react';
 import Programs from './programs';
 import ShareButtons from '../components/ShareButtons';
-import image9 from '../assets/image_9.jpeg';
-import image3 from '../assets/image_3.jpeg';
 import image5 from '../assets/image_5.jpeg';
+import aboutJourneyImage from '../assets/about-journey.png';
+import integrityRegisteredImage from '../assets/integrity-registered.png';
 
 const About = () => {
   return (
@@ -57,6 +57,10 @@ const About = () => {
                 <li>
                   <strong className="text-white">Prison ministry</strong> with essentials, counselling,
                   and reintegration support.
+                </li>
+                <li>
+                  <strong className="text-white">Children with a parent in prison</strong> through
+                  counselling, safe spaces, and coordination with caregivers and schools.
                 </li>
                 <li>
                   <strong className="text-white">Teen mums mentorship</strong> with family follow-ups
@@ -113,6 +117,10 @@ const About = () => {
               {[
                 { title: 'Elderly caregivers + widowers', copy: 'Home visits, nutrition support, and companionship.' },
                 { title: 'Inmates + returning citizens', copy: 'Mentorship, counselling, and reintegration pathways.' },
+                {
+                  title: 'Children affected by parental incarceration',
+                  copy: 'Counselling, safe peer spaces, and practical help when a parent is in custody.',
+                },
                 { title: 'Teen mums + vulnerable youth', copy: 'Mentorship, family follow-up, and opportunities.' },
                 { title: 'Persons living with disabilities', copy: 'Assistive support, referrals, and advocacy.' },
               ].map((group) => (
@@ -129,11 +137,11 @@ const About = () => {
         </section>
 
         <section className="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
-          <div className="rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <div className="flex min-h-[200px] items-center justify-center rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:min-h-[240px] lg:min-h-[280px]">
             <img
-              src={image9}
-              alt="Foundation certificate of registration"
-              className="h-full w-full rounded-3xl object-cover"
+              src={integrityRegisteredImage}
+              alt="Word art centred on Integrity, surrounded by values such as Ethics, Accountability, Honesty, and Core Values"
+              className="max-h-[min(52vw,22rem)] w-full object-contain sm:max-h-[min(48vw,26rem)] lg:max-h-[min(40vw,28rem)]"
             />
           </div>
           <div className="space-y-4 rounded-3xl border border-white/20 bg-white p-6 shadow-lg">
@@ -185,6 +193,11 @@ const About = () => {
               {
                 title: 'Prison ministry + reintegration',
                 copy: 'Quarterly visits, counselling, and aftercare support that helps returning citizens rebuild stable lives.',
+              },
+              {
+                title: 'Children leaving with an incarcerated parent in prison',
+                copy:
+                  'When a parent is in custody, children need stability fast. We offer counselling, safe peer spaces, caregiver and school coordination, and practical support so young people stay grounded and connected.',
               },
               {
                 title: 'Teen mums mentorship',
@@ -260,11 +273,11 @@ const About = () => {
               </p>
             </div>
           </div>
-          <div className="rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
             <img
-              src={image3}
-              alt="Community outreach"
-              className="h-full w-full rounded-3xl object-cover"
+              src={aboutJourneyImage}
+              alt="Illustration of a person before many winding paths over green hills, symbolising community journey and choices"
+              className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
         </section>
