@@ -7,8 +7,10 @@ import twoStars from '../assets/sponsors/2stars.png';
 import bridgeworks from '../assets/sponsors/bridgeworks.png';
 import deliverance from '../assets/sponsors/deliverance.png';
 import aufrican from '../assets/sponsors/aufrican.png';
+import carebility from '../assets/sponsors/carebility.png';
 
 const SPONSOR_LOGOS = [
+  { src: carebility, alt: 'Carebility Z Option Inc. logo' },
   { src: barkay, alt: 'Sponsor logo' },
   { src: diamond, alt: 'Sponsor logo' },
   { src: almondskills, alt: 'Sponsor logo' },
