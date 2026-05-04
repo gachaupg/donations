@@ -68,6 +68,18 @@ const DirectTransferSpotlight = () => {
   const transferSections = useMemo(
     () => [
       {
+        id: 'kenya',
+        label: 'Kenya Support',
+        headline: 'Reuben Wairicu Foundation — Equity Bank, Kitale',
+        description: 'For Financial Support. Thanking you in advance.',
+        fields: [
+          { key: 'accountNameKe', label: 'Account name', value: 'Reuben Wairicu Foundation' },
+          { key: 'accountKe', label: 'Account number', value: '0330284842169' },
+          { key: 'bankKe', label: 'Bank', value: 'Equity Bank, Kitale' },
+          { key: 'mpesaKe', label: 'Mpesa line', value: '+254 723 237149 (Milcah Ochoki)' },
+        ],
+      },
+      {
         id: 'australia',
         label: 'Australia Support',
         headline: 'Direct bank deposit (AUD)',
@@ -78,18 +90,6 @@ const DirectTransferSpotlight = () => {
           { key: 'payId', label: 'PAYID', value: '+61434356852' },
           { key: 'bsb', label: 'BSB', value: '083495' },
           { key: 'account', label: 'Account', value: '161373692' },
-        ],
-      },
-      {
-        id: 'kenya',
-        label: 'Kenya Support',
-        headline: 'Reuben Wairicu Foundation — Equity Bank, Kitale',
-        description: 'For Financial Support. Thanking you in advance.',
-        fields: [
-          { key: 'accountNameKe', label: 'Account name', value: 'Reuben Wairicu Foundation' },
-          { key: 'accountKe', label: 'Account number', value: '0330284842169' },
-          { key: 'bankKe', label: 'Bank', value: 'Equity Bank, Kitale' },
-          { key: 'mpesaKe', label: 'Mpesa line', value: '+254 723 237149 (Milcah Ochoki)' },
         ],
       },
     ],

@@ -1,27 +1,46 @@
 import React from 'react';
 import Programs from './programs';
 import ShareButtons from '../components/ShareButtons';
+import image2 from '../assets/image_2.jpeg';
 import image5 from '../assets/image_5.jpeg';
+import image6 from '../assets/image_6.jpeg';
 import aboutJourneyImage from '../assets/about-journey.png';
 import integrityRegisteredImage from '../assets/integrity-registered.png';
+import whoWeAreThumb from '../assets/gallery/gallery-rwf-team.png';
+import workThumbFood from '../assets/gallery/gallery-home-visits-donation.png';
 
 const About = () => {
   return (
-    <div className="py-12 px-4 sm:px-6">
-      <div className="mx-auto flex w-full max-w-5xl flex-col gap-16">
+    <div className="font-about py-12 px-4 sm:px-6 lg:px-10">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 lg:gap-20">
         <header className="space-y-3 text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-transparent px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-white">
             Our Story
           </span>
-          <h1 className="text-3xl font-semibold text-white sm:text-4xl">
-            Honouring a legacy of compassion across generations
+          <h1 className="font-display text-3xl font-semibold text-white sm:text-4xl">
+            The Reuben Wairicu Foundation (RWF)
           </h1>
-          <p className="mx-auto max-w-3xl text-sm leading-relaxed text-white/90 sm:text-base">
-            The Reuben Wairicu Foundation (RWF) is a registered family initiative rooted in Kitale,
-            Kenya. Founded by the eight children of Mr. Reuben and Mrs. Hellen Wairicu, we continue
-            their lifelong commitment to giving hope, restoring dignity, and empowering neighbours who
-            need it most.
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-200/90">
+            Rooted in Community · Giving Hope, Sharing Love, Touching Hearts
           </p>
+          <div className="mx-auto max-w-3xl space-y-4 text-left text-sm leading-relaxed text-white/90 sm:text-base">
+            <p>
+              The Reuben Wairicu Foundation (RWF) is a community-driven organisation committed to uplifting
+              vulnerable people across Kenyan regions.
+            </p>
+            <p>
+              Rooted in compassion and guided by purpose, we believe that every individual deserves dignity,
+              care, and opportunity. Our work is grounded in restoring hope and strengthening communities as
+              we aim to uplift vulnerable people across Kenyan regions through compassion, practical support,
+              and sustainable initiatives. Officially registered under Section 10 of the Non-Governmental
+              Organizations Co-ordination Act on{' '}
+              <span className="font-semibold text-white">10th September 2021</span>.
+            </p>
+            <p>
+              Together, we honour the legacy of Mr & Mrs. Reuben Wairicu by creating lasting impact in the
+              lives of those we serve.
+            </p>
+          </div>
           <div className="flex justify-center pt-2">
             <ShareButtons
               title="About Reuben Wairicu Foundation"
@@ -31,109 +50,227 @@ const About = () => {
           </div>
         </header>
 
-        <section className="grid gap-6 rounded-3xl border border-white/20 bg-white/10 p-6 text-white shadow-lg backdrop-blur lg:grid-cols-3">
-          <article className="space-y-4 rounded-2xl border border-white/15 bg-white/5 p-6">
-            <div className="flex items-center justify-between gap-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-white/80">
-                Our Mission
-              </p>
-              <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold text-white/90">
-                Practical + relational care
-              </span>
-            </div>
-            <p className="text-base leading-relaxed text-white/90">
-              We mobilise resources and partnerships to restore dignity across Kenya through practical
-              aid, mentorship, and consistent follow-up—so families move from crisis to stability.
-            </p>
-            <div className="rounded-2xl border border-white/15 bg-white/5 p-4">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-white/75">
-                What this means on the ground
-              </p>
-              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-white/90">
-                <li>
-                  <strong className="text-white">Home visits + food support</strong> for elderly
-                  caregivers and guardians.
-                </li>
-                <li>
-                  <strong className="text-white">Prison ministry</strong> with essentials, counselling,
-                  and reintegration support.
-                </li>
-                <li>
-                  <strong className="text-white">Children with a parent in prison</strong> through
-                  counselling, safe spaces, and coordination with caregivers and schools.
-                </li>
-                <li>
-                  <strong className="text-white">Teen mums mentorship</strong> with family follow-ups
-                  and referrals.
-                </li>
-              </ul>
-            </div>
-          </article>
+        <section className="font-about text-slate-800">
+          <div className="mx-auto grid max-w-7xl gap-10 px-1 sm:gap-12 lg:grid-cols-3 lg:gap-14 lg:px-4">
+            <article className="flex flex-col rounded-2xl border border-slate-200/90 bg-white p-8 shadow-xl sm:p-10 lg:p-11">
+              <div className="aspect-[5/4] w-full overflow-hidden rounded-xl ring-1 ring-black/[0.06]">
+                <img
+                  src={whoWeAreThumb}
+                  alt="Reuben Wairicu Foundation team and community"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div
+                className="my-7 h-px w-full bg-gradient-to-r from-transparent via-amber-400/90 to-transparent"
+                aria-hidden="true"
+              />
+              <h2 className="font-display text-2xl font-semibold tracking-tight text-emerald-900 sm:text-[1.65rem]">
+                Who We Are
+              </h2>
+              <div className="mt-5 space-y-4 text-[0.98rem] leading-[1.75] text-[#5c4033]">
+                <p>
+                  The Reuben Wairicu Foundation (RWF) is a community-driven organisation uplifting vulnerable
+                  families across Kenya.
+                </p>
+                <p>We believe dignity is a human right, not a privilege.</p>
+              </div>
+            </article>
 
-          <article className="space-y-4 rounded-2xl border border-white/15 bg-white/5 p-6">
-            <div className="flex items-center justify-between gap-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-white/80">
-                Our Vision
-              </p>
-              <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold text-white/90">
-                Sustainable hope
-              </span>
-            </div>
-            <p className="text-base leading-relaxed text-white/90">
-              To raise mature, selfless individuals who extend hope through sustainable and
-              compassionate action—building communities where dignity is protected and opportunity is
-              accessible.
-            </p>
-            <div className="rounded-2xl border border-white/15 bg-white/5 p-4">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-white/75">
-                The outcomes we pursue
-              </p>
-              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-white/90">
-                <li>
-                  <strong className="text-white">Second chances</strong> for returning citizens through
-                  skills and mentorship.
-                </li>
-                <li>
-                  <strong className="text-white">Inclusive futures</strong> through assistive support,
-                  advocacy, and access to services.
-                </li>
-                <li>
-                  <strong className="text-white">Youth empowerment</strong> through leadership,
-                  scholarship support, and guidance.
-                </li>
-              </ul>
-            </div>
-          </article>
-
-          <article className="space-y-4 rounded-2xl border border-white/15 bg-white/5 p-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-white/80">
-              Who we serve
-            </p>
-            <p className="text-sm leading-relaxed text-white/90">
-              We prioritise households and individuals most at risk of being overlooked—meeting needs
-              with compassion and coordinated support.
-            </p>
-            <div className="grid gap-3">
-              {[
-                { title: 'Elderly caregivers + widowers', copy: 'Home visits, nutrition support, and companionship.' },
-                { title: 'Inmates + returning citizens', copy: 'Mentorship, counselling, and reintegration pathways.' },
-                {
-                  title: 'Children affected by parental incarceration',
-                  copy: 'Counselling, safe peer spaces, and practical help when a parent is in custody.',
-                },
-                { title: 'Teen mums + vulnerable youth', copy: 'Mentorship, family follow-up, and opportunities.' },
-                { title: 'Persons living with disabilities', copy: 'Assistive support, referrals, and advocacy.' },
-              ].map((group) => (
-                <div
-                  key={group.title}
-                  className="rounded-2xl border border-white/15 bg-white/5 p-4"
-                >
-                  <p className="text-sm font-semibold text-white">{group.title}</p>
-                  <p className="mt-1 text-sm text-white/85">{group.copy}</p>
+            <article className="flex flex-col rounded-2xl border border-slate-200/90 bg-white p-8 shadow-xl sm:p-10 lg:p-11">
+              <div className="grid grid-cols-3 gap-2 sm:gap-3">
+                <div className="aspect-square overflow-hidden rounded-lg ring-1 ring-black/[0.06]">
+                  <img
+                    src={workThumbFood}
+                    alt="Food and home visit support"
+                    className="h-full w-full object-cover"
+                  />
                 </div>
-              ))}
+                <div className="aspect-square overflow-hidden rounded-lg ring-1 ring-black/[0.06]">
+                  <img src={image2} alt="Community health outreach" className="h-full w-full object-cover" />
+                </div>
+                <div className="aspect-square overflow-hidden rounded-lg ring-1 ring-black/[0.06]">
+                  <img src={image6} alt="Restorative programmes" className="h-full w-full object-cover" />
+                </div>
+              </div>
+              <div
+                className="my-7 h-px w-full bg-gradient-to-r from-transparent via-amber-400/90 to-transparent"
+                aria-hidden="true"
+              />
+              <h2 className="font-display text-2xl font-semibold tracking-tight text-emerald-900 sm:text-[1.65rem]">
+                Our Work
+              </h2>
+              <ul className="mt-5 space-y-3.5 text-[0.98rem] font-semibold leading-snug">
+                <li className="flex gap-3 text-emerald-900">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-700" aria-hidden="true" />
+                  Food Security Programs
+                </li>
+                <li className="flex gap-3 text-amber-800">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" aria-hidden="true" />
+                  Health Outreach
+                </li>
+                <li className="flex gap-3 text-emerald-900">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-700" aria-hidden="true" />
+                  Restorative Programs
+                </li>
+              </ul>
+            </article>
+
+            <article className="relative flex flex-col overflow-hidden rounded-2xl border border-amber-200/60 bg-[#fdfaf3] p-8 shadow-xl sm:p-10 lg:p-11">
+              <div className="pointer-events-none absolute inset-0 opacity-[0.14]">
+                <img
+                  src={aboutJourneyImage}
+                  alt=""
+                  className="h-full w-full object-cover"
+                  aria-hidden="true"
+                />
+              </div>
+              <div className="relative z-10 flex flex-1 flex-col space-y-8">
+                <div>
+                  <h3 className="font-display text-lg font-semibold tracking-wide text-amber-700 sm:text-xl">
+                    Mission
+                  </h3>
+                  <p className="mt-3 text-[0.98rem] font-semibold leading-relaxed text-emerald-900 sm:text-base">
+                    To uplift vulnerable families through compassion and sustainable support.
+                  </p>
+                </div>
+                <div
+                  className="h-px w-full bg-gradient-to-r from-transparent via-amber-400/90 to-transparent"
+                  aria-hidden="true"
+                />
+                <div>
+                  <h3 className="font-display text-lg font-semibold tracking-wide text-amber-700 sm:text-xl">
+                    Vision
+                  </h3>
+                  <p className="mt-3 text-[0.98rem] font-semibold leading-relaxed text-emerald-900 sm:text-base">
+                    A future where dignity is a human right, not a privilege.
+                  </p>
+                </div>
+                <div
+                  className="h-px w-full bg-gradient-to-r from-transparent via-amber-400/90 to-transparent"
+                  aria-hidden="true"
+                />
+                <div className="pb-1">
+                  <h3 className="font-display text-lg font-semibold tracking-tight text-emerald-900 sm:text-xl">
+                    Looking Ahead
+                  </h3>
+                  <ul className="mt-4 list-none space-y-2.5 pl-0 text-[0.95rem] leading-relaxed text-emerald-900/95">
+                    {[
+                      'Quarterly prison visits',
+                      'Container office & program spaces',
+                      'Develop 5-acre Community Hub',
+                      'Expand partnerships',
+                      'Annual fundraiser',
+                    ].map((item) => (
+                      <li key={item} className="flex gap-2.5">
+                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-amber-500" aria-hidden="true" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section className="rounded-3xl border border-white/20 bg-white p-6 text-slate-800 shadow-lg sm:p-8">
+          <header className="space-y-2 border-b border-slate-100 pb-5">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.32em] text-emerald-600">
+              Contacts & giving
+            </span>
+            <h2 className="text-2xl font-semibold text-emerald-800">Connect with us and give in Kenya</h2>
+            <p className="text-sm leading-relaxed text-slate-600">
+              Reach us on email and social media, speak with our contact person, or use the Equity / M-Pesa
+              details below. For PayPal or Australia transfers, open the Donate page.
+            </p>
+          </header>
+          <div className="mt-6 grid gap-8 lg:grid-cols-2">
+            <div className="space-y-4 text-sm">
+              <h3 className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">Contacts</h3>
+              <dl className="space-y-3">
+                <div>
+                  <dt className="font-semibold text-slate-900">Email</dt>
+                  <dd>
+                    <a
+                      href="mailto:reubenwairicufoundation@gmail.com"
+                      className="text-emerald-700 underline underline-offset-2"
+                    >
+                      reubenwairicufoundation@gmail.com
+                    </a>
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-slate-900">Facebook</dt>
+                  <dd>
+                    <a
+                      href="https://www.facebook.com/reuben.wairicufoundation?_rdc=1&_rdr#"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-emerald-700 underline underline-offset-2"
+                    >
+                      Reuben Wairicu Foundation
+                    </a>
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-slate-900">Instagram</dt>
+                  <dd>
+                    <a
+                      href="https://www.instagram.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-emerald-700 underline underline-offset-2"
+                    >
+                      Reuben Wairicu Foundation
+                    </a>
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-slate-900">Contact person</dt>
+                  <dd className="text-slate-600">Milcah Ochoki</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-slate-900">Phone</dt>
+                  <dd>
+                    <a href="tel:+254723237149" className="text-emerald-700 underline underline-offset-2">
+                      +254 723 237149
+                    </a>
+                  </dd>
+                </div>
+              </dl>
             </div>
-          </article>
+            <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm">
+              <h3 className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-700">
+                Kenya support — donate to
+              </h3>
+              <p className="font-semibold text-slate-900">Reuben Wairicu Foundation — Equity Bank, Kitale</p>
+              <p className="text-slate-600">For financial support. Thanking you in advance.</p>
+              <dl className="space-y-2 border-t border-slate-200 pt-3">
+                <div>
+                  <dt className="text-xs font-semibold uppercase tracking-wider text-slate-500">Account name</dt>
+                  <dd className="font-medium text-slate-900">Reuben Wairicu Foundation</dd>
+                </div>
+                <div>
+                  <dt className="text-xs font-semibold uppercase tracking-wider text-slate-500">Account number</dt>
+                  <dd className="font-mono text-base font-semibold text-slate-900">0330284842169</dd>
+                </div>
+                <div>
+                  <dt className="text-xs font-semibold uppercase tracking-wider text-slate-500">Bank</dt>
+                  <dd className="text-slate-700">Equity Bank, Kitale</dd>
+                </div>
+                <div>
+                  <dt className="text-xs font-semibold uppercase tracking-wider text-slate-500">M-Pesa line</dt>
+                  <dd className="text-slate-700">+254 723 237149 (Milcah Ochoki)</dd>
+                </div>
+              </dl>
+              <a
+                href="/donate"
+                className="inline-flex items-center justify-center rounded-full bg-emerald-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-emerald-700"
+              >
+                Donate (all options)
+              </a>
+            </div>
+          </div>
         </section>
 
         <section className="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
@@ -162,11 +299,16 @@ const About = () => {
             <dl className="grid gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
               <div>
                 <dt className="text-xs uppercase tracking-[0.3em] text-emerald-600">Founded</dt>
-                <dd className="text-base font-semibold text-slate-900">1970s legacy, registered 2024</dd>
+                <dd className="text-base font-semibold text-slate-900">
+                  10th September 2021 — founded as RWF, building on a 1970s family legacy in Kitale
+                </dd>
               </div>
               <div>
-                <dt className="text-xs uppercase tracking-[0.3em] text-emerald-600">Focus</dt>
-                <dd>Holistic support for vulnerable families across Kenya</dd>
+                <dt className="text-xs uppercase tracking-[0.3em] text-emerald-600">Our focus</dt>
+                <dd>
+                  Children with an incarcerated parent, prison ministry and reintegration, elderly care,
+                  disability support, teen moms mentorships, recovery support, and community partnerships.
+                </dd>
               </div>
             </dl>
           </div>
@@ -197,11 +339,15 @@ const About = () => {
               {
                 title: 'Children leaving with an incarcerated parent in prison',
                 copy:
-                  'When a parent is in custody, children need stability fast. We offer counselling, safe peer spaces, caregiver and school coordination, and practical support so young people stay grounded and connected.',
+                  'When a parent is in custody, children need stability fast—including children living alongside a parent in prison. Counselling, safe spaces, caregiver and school coordination, essentials, and practical support keep families grounded.',
               },
               {
-                title: 'Teen mums mentorship',
+                title: 'Teen moms mentorships',
                 copy: 'Mentorship, family follow-ups, and guidance that protects dignity and helps young mothers stay on track.',
+              },
+              {
+                title: 'Recovering addicts',
+                copy: 'Mentorship, referrals, and practical help for recovering individuals—reinforcing healthy choices with compassion and follow-up.',
               },
               {
                 title: 'Disability support + advocacy',
@@ -339,12 +485,14 @@ const About = () => {
 
         <section className="rounded-3xl border border-white/20 bg-white/10 p-6 text-white shadow-lg backdrop-blur sm:p-8">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div className="space-y-2">
-              <h2 className="text-2xl font-semibold text-white">Help us reach more families</h2>
-              <p className="text-sm leading-relaxed text-white/90 sm:text-base">
-                Sharing our mission is one of the fastest ways to grow visibility and unlock new
-                partnerships.
-              </p>
+            <div className="space-y-3">
+              <h2 className="text-2xl font-semibold text-white">Get involved</h2>
+              <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed text-white/90 sm:text-base">
+                <li>Donate to support our mission.</li>
+                <li>Volunteer your time and skills.</li>
+                <li>Partner with us.</li>
+                <li>Advocate for change.</li>
+              </ul>
             </div>
             <div className="flex flex-wrap gap-3">
               <a
@@ -357,7 +505,7 @@ const About = () => {
                 href="/contact"
                 className="inline-flex items-center justify-center rounded-full border border-white/25 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/15"
               >
-                Partner with us
+                Volunteer or partner
               </a>
             </div>
           </div>

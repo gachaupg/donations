@@ -1,7 +1,10 @@
 import { doc, getDoc, setDoc, deleteDoc, serverTimestamp } from 'firebase/firestore';
 
 /** Superseded stable ids from earlier seed titles—removed so the list does not show two similar programmes. */
-const DEPRECATED_PROGRAM_DOC_IDS = ['children-with-an-incarcerated-parent'];
+const DEPRECATED_PROGRAM_DOC_IDS = [
+  'children-with-an-incarcerated-parent',
+  'children-growing-in-prison',
+];
 
 /** Stable Firestore document id for catalogue programmes (avoids duplicate addDoc races). */
 export function slugifyProgramId(title) {
@@ -79,7 +82,8 @@ export async function upsertProgramSeeds(db, programSeedData) {
         id === 'elderly-care' ||
         id === 'support-for-teen-mums' ||
         id === 'widowers' ||
-        id === 'children-leaving-with-an-incarcerated-parent-in-prison'
+        id === 'children-leaving-with-an-incarcerated-parent-in-prison' ||
+        id === 'recovery-support'
       ) {
         updates.image = item.image || '';
       }

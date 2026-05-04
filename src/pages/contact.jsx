@@ -6,12 +6,14 @@ import {
   faPhone,
   faPaperPlane,
   faFileAlt,
+  faLocationDot,
 } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase';
+import flapPanelImage from '../assets/Image_1.jpeg';
 
 function ContactForm({ embedded = false }) {
   const [formValues, setFormValues] = useState({
@@ -88,98 +90,154 @@ function ContactForm({ embedded = false }) {
     );
   }
 
-  const rootSurface = embedded
-    ? 'py-6 text-slate-900 sm:py-8'
-    : 'py-12 px-4 text-white sm:px-6';
+  const rootSurface = embedded ? 'py-6 text-slate-900 sm:py-8' : 'py-12 px-4 sm:px-6';
   const rootPad = embedded ? '' : 'px-4 sm:px-6';
-  const introHeading = embedded ? 'text-slate-900' : 'text-white';
-  const introBody = embedded ? 'text-slate-600' : 'text-white/90';
-  const contactRowClass =
-    'flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-4';
+
+  const brandTitleClass = embedded
+    ? 'text-lg font-bold tracking-[0.2em] text-emerald-950 sm:text-xl'
+    : 'text-xl font-bold tracking-[0.22em] text-white sm:text-2xl';
+  const brandSubtitleClass = embedded
+    ? 'mt-3 text-base font-semibold text-amber-600 sm:text-lg'
+    : 'mt-4 text-base font-semibold text-amber-300 sm:text-lg';
+  const brandTaglineClass = embedded
+    ? 'mt-2 text-base font-medium text-slate-800 sm:text-lg'
+    : 'mt-2 text-lg font-medium text-white sm:text-xl';
+
+  const rowClass =
+    'flex flex-col gap-1 border-b border-amber-900/10 py-3 last:border-b-0 sm:flex-row sm:items-start sm:justify-between sm:gap-4';
+  const labelClass = 'text-sm font-semibold text-[#5c4033]';
+  const valueClass = 'text-sm text-[#6b4e3d] sm:text-right';
 
   return (
     <div className={`${rootSurface} ${rootPad}`.trim()}>
-      <div className="mx-auto grid w-full max-w-6xl items-start gap-10 text-left sm:gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)]">
-        <div className="w-full min-w-0 space-y-6 text-left">
-          <div className="space-y-3 text-left">
-            <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-700">
-              Contact us
-            </span>
-            <h1 className={`text-3xl font-semibold sm:text-4xl ${introHeading}`}>
-              We are here to help you keep hope alive
-            </h1>
-            <p className={`text-sm leading-relaxed sm:text-base ${introBody}`}>
-              Reach out with questions, ideas, or partnership opportunities. We’d love to hear from
-              you and explore how we can serve together.
+      <div className="mx-auto w-full max-w-6xl">
+        <header className={`text-center ${embedded ? 'mb-8' : 'mb-10 sm:mb-12'}`}>
+          <p className={brandTitleClass}>REUBEN WAIRICU FOUNDATION</p>
+          <p className={brandSubtitleClass}>Rooted in Community</p>
+          <p className={brandTaglineClass}>Giving Hope, Sharing Love, Touching Hearts</p>
+          <div
+            className={`mx-auto mt-6 max-w-md border-t ${embedded ? 'border-slate-300' : 'border-white/25'}`}
+            aria-hidden="true"
+          />
+        </header>
+
+        <div className="grid w-full items-stretch gap-8 text-left sm:gap-10 lg:grid-cols-[minmax(0,17.5rem)_minmax(0,1fr)] xl:grid-cols-[minmax(0,20rem)_minmax(0,1fr)]">
+          <aside className="flex min-h-[26rem] flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-lg sm:min-h-[28rem] lg:min-h-[min(100%,32rem)]">
+            <div className="relative min-h-0 flex-1 basis-0 border-b border-slate-200/80">
+              <img
+                src={flapPanelImage}
+                alt="Reuben Wairicu Foundation volunteers and community outreach"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            </div>
+            <div className="flex min-h-0 flex-1 basis-0 flex-col bg-white px-5 pb-5 pt-5 sm:px-6 sm:pb-6 sm:pt-6">
+              <h2 className="text-xl font-semibold tracking-tight text-emerald-800 sm:text-2xl">
+                Get Involved
+              </h2>
+              <ul className="mt-4 list-inside list-disc space-y-2 text-sm font-medium leading-relaxed text-[#5c4033] sm:text-base">
+                <li>Donate</li>
+                <li>Volunteer</li>
+                <li>Partner</li>
+                <li>Advocate</li>
+              </ul>
+              {embedded ? (
+                <Link
+                  to="/contact#contact-form"
+                  className="mt-auto inline-flex w-full items-center justify-center rounded-lg bg-[#134e2a] px-4 py-3.5 text-center text-base font-bold text-white shadow-md transition hover:bg-[#0f3d22]"
+                >
+                  Join Us Today
+                </Link>
+              ) : (
+                <a
+                  href="#contact-form"
+                  className="mt-auto inline-flex w-full items-center justify-center rounded-lg bg-[#134e2a] px-4 py-3.5 text-center text-base font-bold text-white shadow-md transition hover:bg-[#0f3d22]"
+                >
+                  Join Us Today
+                </a>
+              )}
+            </div>
+          </aside>
+
+          <div className="grid min-w-0 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-8 xl:gap-10">
+          <aside className="w-full min-w-0 rounded-2xl border border-slate-200/80 bg-white p-6 shadow-lg sm:p-8">
+            <h2 className="text-2xl font-semibold tracking-tight text-emerald-800 sm:text-[1.65rem]">
+              Contact Us
+            </h2>
+
+            <div className="mt-6 space-y-0 text-left">
+              <div className={rowClass}>
+                <span className={labelClass}>
+                  <FontAwesomeIcon icon={faEnvelope} className="mr-2 text-emerald-700/90" />
+                  Email
+                </span>
+                <a
+                  href="mailto:reubenwairicufoundation@gmail.com"
+                  className={`${valueClass} font-medium text-emerald-800 underline decoration-amber-600/40 underline-offset-2 hover:text-emerald-900`}
+                >
+                  reubenwairicufoundation@gmail.com
+                </a>
+              </div>
+              <div className={rowClass}>
+                <span className={labelClass}>
+                  <FontAwesomeIcon icon={faPhone} className="mr-2 text-emerald-700/90" />
+                  Phone
+                </span>
+                <a
+                  href="tel:+254723237149"
+                  className={`${valueClass} font-medium text-emerald-800 underline decoration-amber-600/40 underline-offset-2 hover:text-emerald-900`}
+                >
+                  +254 723 237149
+                </a>
+              </div>
+              <div className={rowClass}>
+                <span className={labelClass}>
+                  <FontAwesomeIcon icon={faLocationDot} className="mr-2 text-emerald-700/90" />
+                  Location
+                </span>
+                <span className={`${valueClass} font-medium`}>Kenya</span>
+              </div>
+              <div className="border-b border-amber-900/10 py-3">
+                <p className={`${labelClass} mb-3`}>Socials</p>
+                <div className="flex flex-col gap-2 sm:items-end">
+                  <a
+                    href="https://www.facebook.com/reuben.wairicufoundation?_rdc=1&_rdr#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-[#6b4e3d] underline decoration-amber-600/40 underline-offset-2 hover:text-emerald-900"
+                  >
+                    <FontAwesomeIcon icon={faFacebook} className="text-blue-700" />
+                    Facebook — Reuben Wairicu Foundation
+                  </a>
+                  <a
+                    href="https://www.instagram.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-[#6b4e3d] underline decoration-amber-600/40 underline-offset-2 hover:text-emerald-900"
+                  >
+                    <FontAwesomeIcon icon={faInstagram} className="text-pink-600" />
+                    Instagram — Reuben Wairicu Foundation
+                  </a>
+                </div>
+              </div>
+              <div className={`${rowClass} border-b-0`}>
+                <span className={labelClass}>Contact person</span>
+                <span className={`${valueClass} font-medium`}>Milcah Ochoki</span>
+              </div>
+            </div>
+
+            <div className="my-6 h-px w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent" />
+
+            <p className="text-center text-sm font-medium italic text-[#5c4033]/85">
+              Together, we can make a difference.
             </p>
-          </div>
-          <div className="grid gap-4 rounded-3xl border border-slate-200 bg-slate-50 p-6 text-left text-sm text-slate-600">
-            <div className={contactRowClass}>
-              <span className="font-semibold text-slate-900">
-                <FontAwesomeIcon icon={faEnvelope} className="mr-2 text-emerald-600" />
-                Email
-              </span>
-              <a
-                href="mailto:reubenwairicufoundation@gmail.com"
-                className="break-all text-emerald-700 underline underline-offset-2 sm:break-normal sm:text-right"
-              >
-                reubenwairicufoundation@gmail.com
-              </a>
-            </div>
-            <div className={contactRowClass}>
-              <span className="font-semibold text-slate-900">
-                <FontAwesomeIcon icon={faFacebook} className="mr-2 text-blue-600" />
-                Facebook
-              </span>
-              <a
-                href="https://www.facebook.com/reuben.wairicufoundation?_rdc=1&_rdr#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-emerald-700 underline underline-offset-2 sm:text-right"
-              >
-                Reuben Wairicu Foundation
-              </a>
-            </div>
-            <div className={contactRowClass}>
-              <span className="font-semibold text-slate-900">
-                <FontAwesomeIcon icon={faInstagram} className="mr-2 text-pink-500" />
-                Instagram
-              </span>
-              <a
-                href="https://www.instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-emerald-700 underline underline-offset-2 sm:text-right"
-              >
-                Reuben Wairicu Foundation
-              </a>
-            </div>
-            <div className={contactRowClass}>
-              <span className="font-semibold text-slate-900">Contact person</span>
-              <span className="text-slate-600 sm:text-right">Milcah Ochoki</span>
-            </div>
-            <div className={contactRowClass}>
-              <span className="font-semibold text-slate-900">
-                <FontAwesomeIcon icon={faPhone} className="mr-2 text-emerald-600" />
-                Phone
-              </span>
-              <a
-                href="tel:+254723237149"
-                className="text-emerald-700 underline underline-offset-2 sm:text-right"
-              >
-                +254 723 237149
-              </a>
-            </div>
-          </div>
-          <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6 text-left text-sm leading-relaxed text-emerald-700">
-            <p>
-              <strong className="font-semibold text-emerald-800">Office hours:</strong> Monday – Friday,
-              9:00am – 5:00pm EAT. We aim to respond to all inquiries within two working days.
+            <p className="mt-4 text-center text-xs leading-relaxed text-[#6b4e3d]/75">
+              <span className="font-semibold text-[#5c4033]">Office hours:</span> Monday – Friday, 9:00am –
+              5:00pm EAT. We aim to respond within two working days.
             </p>
-          </div>
-        </div>
+          </aside>
 
         <form
+          id="contact-form"
           className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-xl sm:p-8"
           onSubmit={handleSubmit}
         >
@@ -255,6 +313,8 @@ function ContactForm({ embedded = false }) {
             {submitting ? 'Submitting…' : 'Submit message'}
           </button>
         </form>
+          </div>
+        </div>
       </div>
     </div>
   );

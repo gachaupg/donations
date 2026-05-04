@@ -7,12 +7,18 @@ export const data = [
     {
       title: 'Children leaving with an incarcerated parent in prison',
       description:
-        "When a parent is taken into custody, children's lives are turned upside down—housing, school, and emotional safety all feel uncertain. We walk with families through that transition: practical help, counselling, safe peer spaces, and coordination with caregivers and schools so children are supported, not left behind.",
+        "When a parent is taken into custody, children's lives are turned upside down—housing, school, and emotional safety all feel uncertain. We walk with families through that transition: practical help, counselling, safe peer spaces, and coordination with caregivers and schools so children are supported, not left behind. Where infants and young children remain with a mother in custody, we also help with nutrition, essentials, and dignified care alongside facility partners until transition home.",
       image: '',
     },
     {
       title: 'Support for Teen Mums',
       description: 'Providing mentorship and training as they rebuild their lives.',
+      image: '',
+    },
+    {
+      title: 'Recovery support',
+      description:
+        'Compassionate mentorship, referrals, and practical help for recovering individuals—reinforcing healthy choices with dignity and consistent follow-up.',
       image: '',
     },
     {

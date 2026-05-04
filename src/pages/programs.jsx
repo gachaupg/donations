@@ -13,6 +13,7 @@ import elderlyCareImage from '../assets/elderly-care.png';
 import teenMumsImage from '../assets/teen-mums.png';
 import widowersImage from '../assets/widowers.png';
 import childrenIncarceratedParentImage from '../assets/children-incarcerated-parent.png';
+import childrenGrowingInPrisonImage from '../assets/children-growing-in-prison.png';
 
 /** These titles always use the bundled local image, even if Firestore still has an old URL */
 const PROGRAM_LOCAL_IMAGE_OVERRIDES_REMOTE = new Set([
@@ -20,15 +21,19 @@ const PROGRAM_LOCAL_IMAGE_OVERRIDES_REMOTE = new Set([
   'support for teen mums',
   'widowers',
   'children leaving with an incarcerated parent in prison',
+  'children growing in prison',
+  'recovery support',
 ]);
 
 const localProgramImagesByTitle = {
   'prison ministry': image5,
   'children leaving with an incarcerated parent in prison': childrenIncarceratedParentImage,
+  'children growing in prison': childrenGrowingInPrisonImage,
   'support for teen mums': teenMumsImage,
   'elderly care': elderlyCareImage,
   widowers: widowersImage,
   'persons with disabilities': image8,
+  'recovery support': image6,
 };
 
 const LOCAL_IMAGE_ROTATION = [image5, image10, image6, image2, image8];
@@ -38,11 +43,13 @@ function pickLocalProgramImage(title, index) {
   if (localProgramImagesByTitle[normalized]) return localProgramImagesByTitle[normalized];
 
   // Keyword-based match to handle variations like "Prison Outreach" / "Teen Moms" etc.
+  if (/(growing in prison|babies in prison|infants in custody)/.test(normalized)) return childrenGrowingInPrisonImage;
   if (/(prison|reintegration|returning|incarcerat|parent in prison|leaving with)/.test(normalized)) return image5;
   if (/(teen|mum|mother|girls)/.test(normalized)) return teenMumsImage;
   if (/(elder|caregiver|senior)/.test(normalized)) return elderlyCareImage;
   if (/(widow|widower)/.test(normalized)) return widowersImage;
   if (/(disabil|pwd|assistive)/.test(normalized)) return image8;
+  if (/(recover|addiction|sobriety|rehab)/.test(normalized)) return image6;
 
   // Last resort: rotate through local images so the grid never looks empty.
   return LOCAL_IMAGE_ROTATION[index % LOCAL_IMAGE_ROTATION.length];
@@ -50,11 +57,13 @@ function pickLocalProgramImage(title, index) {
 
 function pickProgramIcon(title) {
   const normalized = (title || '').toLowerCase();
+  if (/(growing in prison|babies in prison|infants in custody)/.test(normalized)) return FiHeart;
   if (/(prison|reintegration|returning|incarcerat|parent in prison|leaving with)/.test(normalized)) return FiShield;
   if (/(teen|mum|mother|girls)/.test(normalized)) return FiHeart;
   if (/(elder|caregiver|senior)/.test(normalized)) return FiActivity;
   if (/(widow|widower)/.test(normalized)) return FiUsers;
   if (/(disabil|pwd|assistive)/.test(normalized)) return FiSun;
+  if (/(recover|addiction|sobriety|rehab)/.test(normalized)) return FiActivity;
   return FiHeart;
 }
 

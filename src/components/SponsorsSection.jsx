@@ -26,8 +26,8 @@ export default function SponsorsSection({
   className = '',
 }) {
   return (
-    <section className={`py-6 sm:py-10 ${className}`}>
-      <header className="mb-6 text-center sm:mb-8">
+    <section className={`py-4 sm:py-6 ${className}`}>
+      <header className="mb-4 text-center sm:mb-5">
         <h2 className="mb-3 text-2xl font-semibold text-white">{title}</h2>
         <p className="text-base text-white/80">{subtitle}</p>
       </header>

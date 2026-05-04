@@ -27,8 +27,8 @@ const Footer = () => {
             onError={() => setLogoSrc(defaultLogo)}
           />
           <p className="text-sm leading-relaxed text-white/80">
-            The Reuben Wairicu Foundation supports vulnerable families across Kenya through practical
-            aid, mentorship, and restorative programmes—so dignity and opportunity are within reach.
+            The Reuben Wairicu Foundation (RWF) uplifts vulnerable families across Kenya—giving hope,
+            sharing love, and touching hearts through compassion, action, and sustainable support.
           </p>
           <div className="flex flex-wrap gap-2">
             <a
