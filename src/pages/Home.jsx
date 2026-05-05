@@ -11,7 +11,6 @@ import SponsorsSection from '../components/SponsorsSection.jsx';
 
 const Home = () => {
   const { ref: heroRef, inView: heroInView } = useInView({ triggerOnce: true, threshold: 0.2 });
-  const { ref: missionRef, inView: missionInView } = useInView({ triggerOnce: true, threshold: 0.2 });
   const { ref: impactRef, inView: impactInView } = useInView({ triggerOnce: true, threshold: 0.2 });
   const { ref: ctaRef, inView: ctaInView } = useInView({ triggerOnce: true, threshold: 0.2 });
 
@@ -32,9 +31,6 @@ const Home = () => {
             </p>
           </div>
           <div className="hero__actions">
-            <Link to="/donate" className="btn btn--primary">
-              Donate Now
-            </Link>
             <Link to="/about" className="btn btn--outline">
               Discover Our Story
             </Link>
@@ -52,8 +48,7 @@ const Home = () => {
       </section>
 
       <section
-        ref={missionRef}
-        className={`mission fold ${missionInView ? 'is-visible' : ''}`}
+        className="mission"
       >
         <div className="mission-band">
           <header className="mission-band__header">

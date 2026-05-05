@@ -121,8 +121,8 @@ const Programs = () => {
 
   return (
     <div>
-      <div className="mx-auto flex min-h-[calc(100vh-80px)] max-w-6xl flex-col gap-6 px-3 py-8 sm:px-6">
-      <header className="space-y-3 text-center mb-4">
+      <div className="mx-auto flex min-h-[calc(100vh-80px)] max-w-6xl flex-col gap-6 px-0 py-8 sm:px-6">
+      <header className="space-y-3 px-4 text-center mb-4 sm:px-0">
         <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-700">
           Foundation programmes
         </span>
@@ -159,7 +159,7 @@ const Programs = () => {
               return (
                 <article
                   key={program.id || `${program.title}-${index}`}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-[26px] border border-emerald-200/75 bg-white shadow-lg shadow-emerald-900/5 transition duration-300 sm:shadow-none"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-none border border-emerald-200/75 bg-white shadow-lg shadow-emerald-900/5 transition duration-300 sm:rounded-[26px] sm:shadow-none"
                 >
                   <div className="relative h-56 w-full overflow-hidden sm:h-48">
                     {programImage ? (
