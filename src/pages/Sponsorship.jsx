@@ -249,6 +249,7 @@ const PayPalButtonsOnly = ({ amount, onPaymentSuccess }) => {
 
 const Sponsorship = () => {
   const [formData, setFormData] = useState({
+    sponsorType: 'organization',
     companyName: '',
     websiteUrl: '',
     description: '',
@@ -290,7 +291,11 @@ const Sponsorship = () => {
     try {
       // Validate form
       if (!formData.companyName.trim()) {
-        toast.error('Please enter your company name');
+        toast.error(
+          formData.sponsorType === 'individual'
+            ? 'Please enter your full name'
+            : 'Please enter your organization name'
+        );
         setSubmitting(false);
         return;
       }
@@ -314,6 +319,7 @@ const Sponsorship = () => {
 
       // Save to Firebase
       await addDoc(collection(db, 'sponsors'), {
+        sponsorType: formData.sponsorType,
         companyName: formData.companyName.trim(),
         websiteUrl: formData.websiteUrl.trim() || '',
         description: formData.description.trim(),
@@ -327,6 +333,7 @@ const Sponsorship = () => {
       
       // Reset form
       setFormData({
+        sponsorType: 'organization',
         companyName: '',
         websiteUrl: '',
         description: '',
@@ -373,7 +380,7 @@ const Sponsorship = () => {
                     <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-200 text-[11px] font-semibold">
                       1
                     </span>
-                    <p>Choose a sponsorship channel that aligns with your organization.</p>
+                    <p>Choose a sponsorship channel that aligns with you.</p>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-200 text-[11px] font-semibold">
@@ -396,13 +403,31 @@ const Sponsorship = () => {
           <div className="rounded-[28px] border border-emerald-200/40 bg-white/95 p-8 shadow-xl shadow-emerald-900/10 sm:p-10">
             <div className="mb-6 space-y-2">
               <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-emerald-500">Sponsor Details</p>
-              <h3 className="text-2xl font-semibold text-slate-900">Share how your organization will stand with us</h3>
+              <h3 className="text-2xl font-semibold text-slate-900">Share how you will stand with us</h3>
               <p className="text-sm text-slate-500">Complete the form, choose a payment option, and we will follow up with a tailored impact report.</p>
             </div>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
+                <label htmlFor="sponsorType" className="mb-2 block text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">
+                  Sponsoring as <span className="text-red-400">*</span>
+                </label>
+                <select
+                  id="sponsorType"
+                  name="sponsorType"
+                  value={formData.sponsorType}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
+                >
+                  <option value="individual">Individual</option>
+                  <option value="organization">Organization</option>
+                </select>
+              </div>
+
+              <div>
                 <label htmlFor="companyName" className="mb-2 block text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">
-                  Company Name <span className="text-red-400">*</span>
+                  {formData.sponsorType === 'individual' ? 'Full Name' : 'Company / Organization Name'}{' '}
+                  <span className="text-red-400">*</span>
                 </label>
                 <input
                   type="text"
@@ -412,7 +437,7 @@ const Sponsorship = () => {
                   onChange={handleInputChange}
                   required
                   className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
-                  placeholder="Enter your company name"
+                  placeholder={formData.sponsorType === 'individual' ? 'Enter your full name' : 'Enter your organization name'}
                 />
               </div>
 
@@ -529,63 +554,63 @@ const Sponsorship = () => {
 
             {formData.paymentMethod === 'cash' && (
               <div className="mt-6 space-y-4">
-                <p className="text-xs font-semibold text-white/80">Bank Transfer Details:</p>
+                <p className="text-xs font-semibold text-slate-700">Bank Transfer Details:</p>
                 
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between gap-3 rounded-lg border border-emerald-200/30 bg-white/5 px-4 py-2">
+                  <div className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-slate-50 px-4 py-2">
                     <div>
-                      <p className="text-[10px] text-white/60">Kenya - Account Name</p>
-                      <p className="text-sm font-semibold text-white">Reuben Wairicu Foundation</p>
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">Kenya - Account Name</p>
+                      <p className="text-sm font-semibold text-slate-900">Reuben Wairicu Foundation</p>
                     </div>
                     <button
                       type="button"
                       onClick={() => handleCopy('Reuben Wairicu Foundation', 'ke-name')}
-                      className="inline-flex items-center gap-1 rounded-full border border-emerald-200/40 px-2 py-1 text-[10px] text-emerald-300 transition hover:bg-emerald-500/20"
+                      className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2 py-1 text-[10px] font-semibold text-slate-700 transition hover:bg-slate-50"
                     >
                       <FiCopy className="text-xs" />
                       {copiedKey === 'ke-name' ? 'Copied' : 'Copy'}
                     </button>
                   </div>
 
-                  <div className="flex items-center justify-between gap-3 rounded-lg border border-emerald-200/30 bg-white/5 px-4 py-2">
+                  <div className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-slate-50 px-4 py-2">
                     <div>
-                      <p className="text-[10px] text-white/60">Kenya - Account Number</p>
-                      <p className="text-sm font-semibold text-white">0330284842169</p>
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">Kenya - Account Number</p>
+                      <p className="text-sm font-semibold text-slate-900">0330284842169</p>
                     </div>
                     <button
                       type="button"
                       onClick={() => handleCopy('0330284842169', 'ke-account')}
-                      className="inline-flex items-center gap-1 rounded-full border border-emerald-200/40 px-2 py-1 text-[10px] text-emerald-300 transition hover:bg-emerald-500/20"
+                      className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2 py-1 text-[10px] font-semibold text-slate-700 transition hover:bg-slate-50"
                     >
                       <FiCopy className="text-xs" />
                       {copiedKey === 'ke-account' ? 'Copied' : 'Copy'}
                     </button>
                   </div>
 
-                  <div className="flex items-center justify-between gap-3 rounded-lg border border-emerald-200/30 bg-white/5 px-4 py-2">
+                  <div className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-slate-50 px-4 py-2">
                     <div>
-                      <p className="text-[10px] text-white/60">Kenya - Bank</p>
-                      <p className="text-sm font-semibold text-white">Equity Bank, Kitale</p>
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">Kenya - Bank</p>
+                      <p className="text-sm font-semibold text-slate-900">Equity Bank, Kitale</p>
                     </div>
                     <button
                       type="button"
                       onClick={() => handleCopy('Equity Bank, Kitale', 'ke-bank')}
-                      className="inline-flex items-center gap-1 rounded-full border border-emerald-200/40 px-2 py-1 text-[10px] text-emerald-300 transition hover:bg-emerald-500/20"
+                      className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2 py-1 text-[10px] font-semibold text-slate-700 transition hover:bg-slate-50"
                     >
                       <FiCopy className="text-xs" />
                       {copiedKey === 'ke-bank' ? 'Copied' : 'Copy'}
                     </button>
                   </div>
 
-                  <div className="flex items-center justify-between gap-3 rounded-lg border border-emerald-200/30 bg-white/5 px-4 py-2">
+                  <div className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-slate-50 px-4 py-2">
                     <div>
-                      <p className="text-[10px] text-white/60">Kenya - Mpesa</p>
-                      <p className="text-sm font-semibold text-white">+254 723 237149</p>
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">Kenya - Mpesa</p>
+                      <p className="text-sm font-semibold text-slate-900">+254 723 237149</p>
                     </div>
                     <button
                       type="button"
                       onClick={() => handleCopy('+254 723 237149', 'ke-mpesa')}
-                      className="inline-flex items-center gap-1 rounded-full border border-emerald-200/40 px-2 py-1 text-[10px] text-emerald-300 transition hover:bg-emerald-500/20"
+                      className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2 py-1 text-[10px] font-semibold text-slate-700 transition hover:bg-slate-50"
                     >
                       <FiCopy className="text-xs" />
                       {copiedKey === 'ke-mpesa' ? 'Copied' : 'Copy'}

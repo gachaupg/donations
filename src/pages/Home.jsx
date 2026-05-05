@@ -1,37 +1,37 @@
 import React from 'react';
 import './Home.css';
 import { Link } from 'react-router-dom';
-import ContactForm from './contact';
-import Gallery from './Gallery';
 import Programs from './programs';
 import { useInView } from 'react-intersection-observer';
-import ShareButtons from '../components/ShareButtons';
 import heroImage from '../assets/hero-kitale-prison-visit.png';
 import SponsorsSection from '../components/SponsorsSection.jsx';
 
 const Home = () => {
   const { ref: heroRef, inView: heroInView } = useInView({ triggerOnce: true, threshold: 0.2 });
-  const { ref: impactRef, inView: impactInView } = useInView({ triggerOnce: true, threshold: 0.2 });
-  const { ref: ctaRef, inView: ctaInView } = useInView({ triggerOnce: true, threshold: 0.2 });
 
   return (
     <div className="homepage">
       <section ref={heroRef} className={`hero fold ${heroInView ? 'is-visible' : ''}`}>
         <div className="hero__content">
           <div className="hero__tag">Rooted in Community</div>
-          <h1>Giving Hope, Sharing Love, Touching Hearts</h1>
+          <h1>
+            Giving Hope, Sharing Love, <span className="hero__gold">Touching Hearts</span>
+          </h1>
           <p>
-            We uplift vulnerable families through compassion, action, and sustainable support.
+            We uplift individual in the communities affected by incarceration through compassion, action, and sustainable support.
           </p>
-          <div className="hero__note">
-            <strong>Community First</strong>
-            <p>
-              Every donation fuels on-the-ground initiatives that restore dignity and open doors to
-              opportunity.
+          <div className="hero__who">
+            <span className="hero__who-tag">Who we are</span>
+            <p className="hero__who-title">The Reuben Wairicu Foundation (RWF)</p>
+            <p className="hero__who-copy">
+              Rooted in compassion and guided by purpose, we believe every individual deserves dignity, care,
+              and opportunity. We restore hope and strengthen communities through practical support and
+              sustainable initiatives. Registered under Section 10 of the Non-Governmental Organizations
+              Co-ordination Act on 10th September 2021.
             </p>
           </div>
           <div className="hero__actions">
-            <Link to="/about" className="btn btn--outline">
+            <Link to="/about" className="btn btn--gold">
               Discover Our Story
             </Link>
           </div>
@@ -52,25 +52,7 @@ const Home = () => {
       >
         <div className="mission-band">
           <header className="mission-band__header">
-            <span className="mission-band__eyebrow">Who we are</span>
             <h2 className="mission-band__title">The Reuben Wairicu Foundation (RWF)</h2>
-            <div className="mission-band__lede">
-              <p>
-                The Reuben Wairicu Foundation (RWF) is a community-driven organisation committed to uplifting
-                vulnerable people across Kenyan regions.
-              </p>
-              <p>
-                Rooted in compassion and guided by purpose, we believe that every individual deserves dignity,
-                care, and opportunity. Our work is grounded in restoring hope and strengthening communities as
-                we aim to uplift vulnerable people across Kenyan regions through compassion, practical support,
-                and sustainable initiatives. Officially registered under Section 10 of the Non-Governmental
-                Organizations Co-ordination Act on <strong>10th September 2021</strong>.
-              </p>
-              <p>
-                Together, we honour the legacy of Mr & Mrs. Reuben Wairicu by creating lasting impact in the
-                lives of those we serve.
-              </p>
-            </div>
           </header>
 
           <div className="mission-band__split">
@@ -162,80 +144,45 @@ const Home = () => {
                   </p>
                 </div>
               </li>
+              <li className="mission-ground__item">
+                <span className="mission-ground__n" aria-hidden="true">
+                  4
+                </span>
+                <div>
+                  <p className="mission-ground__title">Future plans</p>
+                  <p className="mission-ground__copy">
+                    Continue quarterly prison visits to share love and give hope. Hold an annual fundraiser to
+                    sustain and grow our impact.
+                  </p>
+                </div>
+              </li>
+              <li className="mission-ground__item">
+                <span className="mission-ground__n" aria-hidden="true">
+                  5
+                </span>
+                <div>
+                  <p className="mission-ground__title">Our promise</p>
+                  <p className="mission-ground__copy">
+                    Stewardship and transparency guide every shilling—invested with care so donors and
+                    neighbours know their trust is honoured.
+                  </p>
+                </div>
+              </li>
             </ul>
             <div className="mission-trust" role="list">
               <span className="mission-trust__pill" role="listitem">
                 Registered NGO
               </span>
               <span className="mission-trust__pill" role="listitem">
-                Kitale roots
+                Kenyan Roots
               </span>
               <span className="mission-trust__pill" role="listitem">
-                Follow-up first
+                Prison Ministry
               </span>
             </div>
-          </div>
-
-          <div className="mission-highlights">
-            <article className="mission-highlight">
-              <span className="mission-highlight__step" aria-hidden="true">
-                01
-              </span>
-              <h3 className="mission-highlight__title">Our focus</h3>
-              <ul className="mission-highlight__list">
-                <li>Children living with their incarcerated parent in prison.</li>
-                <li>Incarcerated individuals rebuilding their lives.</li>
-                <li>Elderly care.</li>
-                <li>People living with disabilities.</li>
-                <li>Teen moms mentorships.</li>
-                <li>Recovering addicts.</li>
-              </ul>
-            </article>
-            <article className="mission-highlight">
-              <span className="mission-highlight__step" aria-hidden="true">
-                02
-              </span>
-              <h3 className="mission-highlight__title">Future plans</h3>
-              <ul className="mission-highlight__list">
-                <li>Continue quarterly prison visits to share love and give hope.</li>
-                <li>
-                  Establish fabricated container spaces for offices and program delivery.
-                </li>
-                <li>Develop the 5-acre donated land into a thriving Community Hub.</li>
-                <li>Expand networks and collaboration with other organisations.</li>
-                <li>Hold an annual fundraiser to sustain and grow our impact.</li>
-              </ul>
-            </article>
-            <article className="mission-highlight">
-              <span className="mission-highlight__step" aria-hidden="true">
-                03
-              </span>
-              <h3 className="mission-highlight__title">Our promise</h3>
-              <p className="mission-highlight__body">
-                Stewardship and transparency guide every shilling—invested with care so donors and
-                neighbours know their trust is honoured.
-              </p>
-            </article>
           </div>
 
           <div className="mission-band__meta">
-            <div className="mission-meta-panel mission-meta-panel--involve">
-              <h3 className="mission-meta-panel__title">Get involved</h3>
-              <ul className="mission-meta-panel__list">
-                <li>Donate to support our mission.</li>
-                <li>Volunteer your time and skills.</li>
-                <li>Partner with us.</li>
-                <li>Advocate for change.</li>
-              </ul>
-              <div className="mission-meta-panel__links">
-                <Link to="/donate" className="mission-meta-panel__link">
-                  Donate
-                </Link>
-                <Link to="/contact" className="mission-meta-panel__link mission-meta-panel__link--ghost">
-                  Contact us
-                </Link>
-              </div>
-            </div>
             <div className="mission-meta-panel mission-meta-panel--contact">
               <h3 className="mission-meta-panel__title">Contacts</h3>
               <dl className="mission-meta-panel__dl">
@@ -276,6 +223,11 @@ const Home = () => {
                   </dd>
                 </div>
               </dl>
+              <div className="mission-meta-panel__links">
+                <Link to="/contact" className="mission-meta-panel__link mission-meta-panel__link--ghost">
+                  Contact us
+                </Link>
+              </div>
             </div>
             <div className="mission-meta-panel mission-meta-panel--kenya">
               <h3 className="mission-meta-panel__title">Kenya support</h3>
@@ -302,68 +254,10 @@ const Home = () => {
                 </div>
               </dl>
               <Link to="/donate" className="mission-meta-panel__link mission-meta-panel__link--block">
-                Full giving options (PayPal & bank transfer)
+                PayPal available
               </Link>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section
-        ref={impactRef}
-        className={`impact fold ${impactInView ? 'is-visible' : ''}`}
-      >
-        <div className="section-header">
-          <span className="section-header__tag">Our focus</span>
-          <h2>Where we invest our energy</h2>
-          <p>
-            These priorities keep our teams aligned—from prison visits to mentorship—so compassion shows
-            up as consistent, practical care.
-          </p>
-        </div>
-        <div className="impact__grid">
-          <article className="impact-card">
-            <h3>Children living with their incarcerated parent in prison</h3>
-            <p>
-              Counselling, safe spaces, caregiver and school coordination, essentials, and practical help
-              so children and caregivers stay grounded through custody and transition.
-            </p>
-          </article>
-          <article className="impact-card">
-            <h3>Incarcerated individuals rebuilding their lives</h3>
-            <p>
-              Quarterly prison visits, essentials, counselling, and reintegration support that reduces
-              stigma and helps returning citizens find stability.
-            </p>
-          </article>
-          <article className="impact-card">
-            <h3>Elderly care</h3>
-            <p>
-              Home visits, nutrition support, medical referrals, and age-appropriate activities that honour
-              dignity in later life.
-            </p>
-          </article>
-          <article className="impact-card">
-            <h3>People living with disabilities</h3>
-            <p>
-              Support for carers, assistive referrals, outings, and advocacy that improves access and
-              inclusion.
-            </p>
-          </article>
-          <article className="impact-card">
-            <h3>Teen moms mentorships</h3>
-            <p>
-              Mentorship, family follow-ups, and guidance that protects dignity and helps young mothers
-              stay on track.
-            </p>
-          </article>
-          <article className="impact-card">
-            <h3>Recovering addicts</h3>
-            <p>
-              Compassionate pathways for recovering individuals—mentorship, referrals, and practical help
-              that reinforces healthy choices.
-            </p>
-          </article>
         </div>
       </section>
 
@@ -375,53 +269,6 @@ const Home = () => {
         title="Our Sponsors"
         subtitle="Thank you to the partners who help us keep hope alive."
       />
-
-      <section ref={ctaRef} className={`call-to-action fold ${ctaInView ? 'is-visible' : ''}`}>
-        <div className="cta__content">
-          <span className="section-header__tag">Get involved</span>
-          <h2>Join the movement for dignity and hope</h2>
-          <p>
-            Donate to support our mission. Volunteer your time and skills. Partner with us. Advocate for
-            change—every pathway widens the circle of hope.
-          </p>
-        </div>
-        <div className="hero__actions">
-          <Link to="/donate" className="btn btn--primary">
-            Donate
-          </Link>
-          <Link to="/contact" className="btn btn--outline">
-            Volunteer or partner
-          </Link>
-          <Link to="/about" className="btn btn--ghost">
-            Learn our story
-          </Link>
-        </div>
-      </section>
-
-      <section className="support-strip">
-        <div className="support-strip__content">
-          <h3>Together we can reach even more families.</h3>
-          <p>Share our story with your community or invite us to speak at your next event.</p>
-        </div>
-        <div className="flex flex-wrap items-center gap-3">
-          <Link to="/gallery" className="btn btn--lime">
-            Explore Impact Stories
-          </Link>
-          <ShareButtons
-            title="Reuben Wairicu Foundation"
-            text="The Reuben Wairicu Foundation: giving hope, sharing love, touching hearts across Kenya."
-            path="/"
-          />
-        </div>
-      </section>
-
-      <div className="contact-section">
-        <ContactForm embedded />
-      </div>
-
-      <section className="home-gallery-preview fold is-visible">
-        <Gallery embedded />
-      </section>
     </div>
   );
 };

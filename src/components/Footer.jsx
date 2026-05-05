@@ -26,14 +26,10 @@ const Footer = () => {
             alt="Reuben Wairicu Foundation logo"
             onError={() => setLogoSrc(defaultLogo)}
           />
-          <p className="text-sm leading-relaxed text-white/80">
-            The Reuben Wairicu Foundation (RWF) uplifts vulnerable families across Kenya—giving hope,
-            sharing love, and touching hearts through compassion, action, and sustainable support.
-          </p>
           <div className="flex flex-wrap gap-2">
             <a
               href="/donate"
-              className="inline-flex items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-white/90"
+              className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#f3d08a] via-[#d4af37] to-[#b8860b] px-4 py-2 text-sm font-semibold text-slate-900 transition hover:brightness-95"
             >
               Donate
             </a>
@@ -58,7 +54,6 @@ const Footer = () => {
               { label: 'Sponsorship', href: '/sponsorship' },
               { label: 'Gallery', href: '/gallery' },
               { label: 'Contact', href: '/contact' },
-              { label: 'Donate', href: '/donate' },
             ].map((link) => (
               <li key={link.href}>
                 <a className="transition hover:text-white hover:underline" href={link.href}>

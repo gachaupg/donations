@@ -6,6 +6,20 @@ const DEPRECATED_PROGRAM_DOC_IDS = [
   'children-growing-in-prison',
 ];
 
+/**
+ * When seed titles change, the slug id changes too. Migrate old ids to new ids so we don't
+ * show duplicates in Firestore-backed lists.
+ */
+const PROGRAM_DOC_ID_MIGRATIONS = [
+  {
+    from: 'children-leaving-with-an-incarcerated-parent-in-prison',
+    to: 'children-living-with-their-incarcerated-parent-in-prison',
+  },
+  { from: 'support-for-teen-mums', to: 'teen-moms-mentorships' },
+  { from: 'recovery-support', to: 'recovering-addicts' },
+  { from: 'persons-with-disabilities', to: 'people-living-with-disabilities' },
+];
+
 /** Stable Firestore document id for catalogue programmes (avoids duplicate addDoc races). */
 export function slugifyProgramId(title) {
   const raw = (title || '')
@@ -80,14 +94,41 @@ export async function upsertProgramSeeds(db, programSeedData) {
       };
       if (
         id === 'elderly-care' ||
-        id === 'support-for-teen-mums' ||
+        id === 'teen-moms-mentorships' ||
         id === 'widowers' ||
-        id === 'children-leaving-with-an-incarcerated-parent-in-prison' ||
-        id === 'recovery-support'
+        id === 'children-living-with-their-incarcerated-parent-in-prison' ||
+        id === 'recovering-addicts'
       ) {
         updates.image = item.image || '';
       }
       await setDoc(ref, updates, { merge: true });
+    }
+  }
+
+  // Migrate old ids created by earlier seed titles.
+  for (const { from, to } of PROGRAM_DOC_ID_MIGRATIONS) {
+    try {
+      const fromRef = doc(db, 'programs', from);
+      const toRef = doc(db, 'programs', to);
+      const [fromSnap, toSnap] = await Promise.all([getDoc(fromRef), getDoc(toRef)]);
+      if (!fromSnap.exists()) continue;
+
+      if (!toSnap.exists()) {
+        // Keep any uploaded image/storagePath from the old doc, but the seed loop above
+        // will already have ensured the new doc title/description are current.
+        const fromData = fromSnap.data() || {};
+        const patch = {};
+        if (typeof fromData.image === 'string' && fromData.image.trim()) patch.image = fromData.image;
+        if (typeof fromData.storagePath === 'string' && fromData.storagePath.trim()) patch.storagePath = fromData.storagePath;
+        if (fromData.createdAt) patch.createdAt = fromData.createdAt;
+        if (Object.keys(patch).length > 0) {
+          await setDoc(toRef, patch, { merge: true });
+        }
+      }
+
+      await deleteDoc(fromRef);
+    } catch (e) {
+      console.warn('Program seed: could not migrate doc id', from, '->', to, e);
     }
   }
 
