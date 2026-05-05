@@ -121,7 +121,7 @@ const Programs = () => {
 
   return (
     <div>
-      <div className="mx-auto flex min-h-[calc(100vh-80px)] max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6">
+      <div className="mx-auto flex min-h-[calc(100vh-80px)] max-w-6xl flex-col gap-6 px-3 py-8 sm:px-6">
       <header className="space-y-3 text-center mb-4">
         <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-700">
           Foundation programmes
@@ -159,9 +159,9 @@ const Programs = () => {
               return (
                 <article
                   key={program.id || `${program.title}-${index}`}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-[26px] border border-emerald-200/60 bg-white transition duration-300"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-[26px] border border-emerald-200/75 bg-white shadow-lg shadow-emerald-900/5 transition duration-300 sm:shadow-none"
                 >
-                  <div className="relative h-48 w-full overflow-hidden">
+                  <div className="relative h-56 w-full overflow-hidden sm:h-48">
                     {programImage ? (
                       <img
                         src={programImage}
@@ -186,9 +186,9 @@ const Programs = () => {
                       </div>
                     )}
                   </div>
-                  <div className="flex flex-1 flex-col gap-3 p-6">
-                    <h3 className="text-xl font-semibold text-emerald-700">{program.title}</h3>
-                    <p className="text-sm leading-relaxed text-slate-600">
+                  <div className="flex flex-1 flex-col gap-3 p-7 sm:p-6">
+                    <h3 className="text-2xl font-semibold text-emerald-700 sm:text-xl">{program.title}</h3>
+                    <p className="text-base leading-relaxed text-slate-600 sm:text-sm">
                       {program.description}
                     </p>
                   </div>

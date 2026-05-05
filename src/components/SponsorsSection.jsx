@@ -34,15 +34,19 @@ export default function SponsorsSection({
 
       {/* Small screens: two logos per row, no horizontal scroll */}
       <div className="md:hidden">
-        <div className="mx-auto grid w-full max-w-2xl grid-cols-2 gap-x-6 gap-y-12 justify-items-center px-1 sm:max-w-3xl sm:gap-x-10 sm:gap-y-14">
+        <div className="mx-auto grid w-full max-w-2xl grid-cols-1 gap-4 px-1 min-[420px]:grid-cols-2 sm:max-w-3xl sm:gap-5">
           {SPONSOR_LOGOS.map((logo) => (
-            <img
+            <div
               key={logo.src}
-              src={logo.src}
-              alt={logo.alt}
-              className="h-[4.5rem] w-full max-w-[16rem] object-contain opacity-95 sm:h-20 sm:max-w-[18.5rem]"
-              loading="lazy"
-            />
+              className="flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-4 py-5 backdrop-blur-sm"
+            >
+              <img
+                src={logo.src}
+                alt={logo.alt}
+                className="h-14 w-full max-w-[14rem] object-contain opacity-95 sm:h-16 sm:max-w-[16rem]"
+                loading="lazy"
+              />
+            </div>
           ))}
         </div>
       </div>

@@ -847,6 +847,34 @@ body {
     padding: 1.8rem 1.4rem;
   }
 
+  .mission {
+    padding: 1.6rem 0.25rem;
+  }
+
+  .mission-band {
+    padding: 1.35rem 1.15rem;
+    background: linear-gradient(
+        165deg,
+        rgba(255, 255, 255, 0.14) 0%,
+        rgba(255, 255, 255, 0.06) 45%,
+        rgba(15, 23, 42, 0.28) 100%
+      ),
+      rgba(15, 23, 42, 0.22);
+  }
+
+  .mission-band__eyebrow {
+    font-size: 0.72rem;
+  }
+
+  .mission-band__title {
+    font-size: 1.7rem;
+  }
+
+  .mission-band__lede {
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
   .mission-values {
     grid-template-columns: 1fr;
   }
