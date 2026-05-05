@@ -79,19 +79,6 @@ const DirectTransferSpotlight = () => {
           { key: 'mpesaKe', label: 'Mpesa line', value: '+254 723 237149 (Milcah Ochoki)' },
         ],
       },
-      {
-        id: 'australia',
-        label: 'Australia Support',
-        headline: 'Direct bank deposit (AUD)',
-        description:
-          'Make a local AUD transfer using the account below so gifts route straight to priority work.',
-        fields: [
-          { key: 'accountName', label: 'Account name', value: 'Jane Nalianya' },
-          { key: 'payId', label: 'PAYID', value: '+61434356852' },
-          { key: 'bsb', label: 'BSB', value: '083495' },
-          { key: 'account', label: 'Account', value: '161373692' },
-        ],
-      },
     ],
     []
   );
@@ -121,7 +108,7 @@ const DirectTransferSpotlight = () => {
         </p>
       </div>
 
-      <div className="mt-6 grid w-full gap-5 md:grid-cols-2">
+      <div className="mt-6 grid w-full gap-5">
         {transferSections.map((section) => (
           <div key={section.id} className="w-full space-y-4">
             <div className="space-y-2">

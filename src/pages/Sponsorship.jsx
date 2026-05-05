@@ -534,51 +534,6 @@ const Sponsorship = () => {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between gap-3 rounded-lg border border-emerald-200/30 bg-white/5 px-4 py-2">
                     <div>
-                      <p className="text-[10px] text-white/60">Australia - Account Name</p>
-                      <p className="text-sm font-semibold text-white">Jane Nalianya</p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => handleCopy('Jane Nalianya', 'aus-name')}
-                      className="inline-flex items-center gap-1 rounded-full border border-emerald-200/40 px-2 py-1 text-[10px] text-emerald-300 transition hover:bg-emerald-500/20"
-                    >
-                      <FiCopy className="text-xs" />
-                      {copiedKey === 'aus-name' ? 'Copied' : 'Copy'}
-                    </button>
-                  </div>
-
-                  <div className="flex items-center justify-between gap-3 rounded-lg border border-emerald-200/30 bg-white/5 px-4 py-2">
-                    <div>
-                      <p className="text-[10px] text-white/60">Australia - BSB</p>
-                      <p className="text-sm font-semibold text-white">083495</p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => handleCopy('083495', 'aus-bsb')}
-                      className="inline-flex items-center gap-1 rounded-full border border-emerald-200/40 px-2 py-1 text-[10px] text-emerald-300 transition hover:bg-emerald-500/20"
-                    >
-                      <FiCopy className="text-xs" />
-                      {copiedKey === 'aus-bsb' ? 'Copied' : 'Copy'}
-                    </button>
-                  </div>
-
-                  <div className="flex items-center justify-between gap-3 rounded-lg border border-emerald-200/30 bg-white/5 px-4 py-2">
-                    <div>
-                      <p className="text-[10px] text-white/60">Australia - Account</p>
-                      <p className="text-sm font-semibold text-white">161373692</p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => handleCopy('161373692', 'aus-account')}
-                      className="inline-flex items-center gap-1 rounded-full border border-emerald-200/40 px-2 py-1 text-[10px] text-emerald-300 transition hover:bg-emerald-500/20"
-                    >
-                      <FiCopy className="text-xs" />
-                      {copiedKey === 'aus-account' ? 'Copied' : 'Copy'}
-                    </button>
-                  </div>
-
-                  <div className="flex items-center justify-between gap-3 rounded-lg border border-emerald-200/30 bg-white/5 px-4 py-2">
-                    <div>
                       <p className="text-[10px] text-white/60">Kenya - Account Name</p>
                       <p className="text-sm font-semibold text-white">Reuben Wairicu Foundation</p>
                     </div>

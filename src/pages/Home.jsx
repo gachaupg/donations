@@ -24,6 +24,13 @@ const Home = () => {
           <p>
             We uplift vulnerable families through compassion, action, and sustainable support.
           </p>
+          <div className="hero__note">
+            <strong>Community First</strong>
+            <p>
+              Every donation fuels on-the-ground initiatives that restore dignity and open doors to
+              opportunity.
+            </p>
+          </div>
           <div className="hero__actions">
             <Link to="/donate" className="btn btn--primary">
               Donate Now
@@ -40,13 +47,6 @@ const Home = () => {
               alt="RWF team and volunteers at Kitale Women Prison with donation bags after a community visit"
             />
             <div className="hero__badge">The Reuben Wairicu Foundation (RWF)</div>
-          </div>
-          <div className="hero__note">
-            <strong>Community First</strong>
-            <p>
-              Every donation fuels on-the-ground initiatives that restore dignity and open doors to
-              opportunity.
-            </p>
           </div>
         </div>
       </section>
@@ -307,7 +307,7 @@ const Home = () => {
                 </div>
               </dl>
               <Link to="/donate" className="mission-meta-panel__link mission-meta-panel__link--block">
-                Full giving options (PayPal & Australia)
+                Full giving options (PayPal & bank transfer)
               </Link>
             </div>
           </div>

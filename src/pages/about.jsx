@@ -181,7 +181,7 @@ const About = () => {
             <h2 className="text-2xl font-semibold text-emerald-800">Connect with us and give in Kenya</h2>
             <p className="text-sm leading-relaxed text-slate-600">
               Reach us on email and social media, speak with our contact person, or use the Equity / M-Pesa
-              details below. For PayPal or Australia transfers, open the Donate page.
+              details below. For PayPal or bank transfer options, open the Donate page.
             </p>
           </header>
           <div className="mt-6 grid gap-8 lg:grid-cols-2">
