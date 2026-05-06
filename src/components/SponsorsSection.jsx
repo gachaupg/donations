@@ -10,6 +10,7 @@ import aufrican from '../assets/sponsors/aufrican.png';
 import carebility from '../assets/sponsors/carebility.png';
 import safiServices from '../assets/sponsors/safi-services.png';
 import blessingTransporters from '../assets/sponsors/blessing-transporters.png';
+import millysWellness from '../assets/sponsors/millys-wellness.png';
 
 const SPONSOR_LOGOS = [
   {
@@ -23,6 +24,7 @@ const SPONSOR_LOGOS = [
     alt: 'Blessing Transporters logo',
     href: 'https://www.blessingstransporters.co.ke/',
   },
+  { src: millysWellness, alt: "Milly's Wellness logo" },
   { src: barkay, alt: 'Sponsor logo' },
   { src: diamond, alt: 'Sponsor logo' },
   { src: almondskills, alt: 'Sponsor logo' },

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import heroImage from '../assets/hero-kitale-prison-visit.png';
 import SponsorsSection from '../components/SponsorsSection.jsx';
+import Programs from './programs';
 
 const Home = () => {
   const { ref: heroRef, inView: heroInView } = useInView({ triggerOnce: true, threshold: 0.2 });
@@ -12,7 +13,7 @@ const Home = () => {
     <div className="homepage">
       <section ref={heroRef} className={`hero fold ${heroInView ? 'is-visible' : ''}`}>
         <div className="hero__content">
-          <div className="hero__tag">Rooted in Community</div>
+          <div className="hero__tag">Prison Ministry</div>
           <h1>
             Giving Hope, Sharing Love, <span className="hero__gold">Touching Hearts</span>
           </h1>
@@ -21,6 +22,7 @@ const Home = () => {
           </p>
           <div className="hero__who">
             <span className="hero__who-tag">Who we are</span>
+            <span className="hero__who-tag hero__who-tag--secondary">Rooted in Community</span>
             <p className="hero__who-title">The Reuben Wairicu Foundation (RWF)</p>
             <p className="hero__who-copy">
               Rooted in compassion and guided by purpose, we believe every individual deserves dignity, care,
@@ -34,6 +36,9 @@ const Home = () => {
           <div className="hero__actions">
             <Link to="/about" className="btn btn--gold">
               Discover Our Story
+            </Link>
+            <Link to="/programs" className="btn btn--gold">
+              Explore Our Programs
             </Link>
           </div>
         </div>
@@ -170,6 +175,9 @@ const Home = () => {
                 </div>
               </li>
             </ul>
+            <div className="mission-programs">
+              <Programs />
+            </div>
             <div className="mission-trust" role="list">
               <span className="mission-trust__pill" role="listitem">
                 Registered NGO

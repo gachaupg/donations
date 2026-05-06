@@ -11,6 +11,7 @@ import teenMumsImage from '../assets/teen-mums.png';
 import childrenIncarceratedParentImage from '../assets/children-incarcerated-parent.png';
 import incarceratedRebuildingImage from '../assets/incarcerated-rebuilding.png';
 import recoveringAddictsImage from '../assets/recovering-addicts.png';
+import disabilityProgrammeImage from '../assets/disability-programme.png';
 
 /** These titles always use the bundled local image, even if Firestore still has an old URL */
 const PROGRAM_LOCAL_IMAGE_OVERRIDES_REMOTE = new Set([
@@ -27,7 +28,7 @@ const localProgramImagesByTitle = {
   'incarcerated individuals rebuilding their lives': incarceratedRebuildingImage,
   'teen moms mentorships': teenMumsImage,
   'elderly care': elderlyCareImage,
-  'people living with disabilities': image8,
+  'people living with disabilities': disabilityProgrammeImage,
   'recovering addicts': recoveringAddictsImage,
 };
 
@@ -41,7 +42,7 @@ function pickLocalProgramImage(title, index) {
   if (/(prison|reintegration|returning|incarcerat|parent in prison|leaving with)/.test(normalized)) return image5;
   if (/(teen|mum|mother|girls)/.test(normalized)) return teenMumsImage;
   if (/(elder|caregiver|senior)/.test(normalized)) return elderlyCareImage;
-  if (/(disabil|pwd|assistive)/.test(normalized)) return image8;
+  if (/(disabil|pwd|assistive)/.test(normalized)) return disabilityProgrammeImage;
   if (/(recover|addiction|sobriety|rehab)/.test(normalized)) return image6;
 
   // Last resort: rotate through local images so the grid never looks empty.
