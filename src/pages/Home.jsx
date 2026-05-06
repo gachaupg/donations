@@ -1,7 +1,6 @@
 import React from 'react';
 import './Home.css';
 import { Link } from 'react-router-dom';
-import Programs from './programs';
 import { useInView } from 'react-intersection-observer';
 import heroImage from '../assets/hero-kitale-prison-visit.png';
 import SponsorsSection from '../components/SponsorsSection.jsx';
@@ -18,16 +17,18 @@ const Home = () => {
             Giving Hope, Sharing Love, <span className="hero__gold">Touching Hearts</span>
           </h1>
           <p>
-            We uplift individual in the communities affected by incarceration through compassion, action, and sustainable support.
+            We uplift individuals in the communities affected by incarceration through compassion, action, and sustainable support.
           </p>
           <div className="hero__who">
             <span className="hero__who-tag">Who we are</span>
             <p className="hero__who-title">The Reuben Wairicu Foundation (RWF)</p>
             <p className="hero__who-copy">
               Rooted in compassion and guided by purpose, we believe every individual deserves dignity, care,
-              and opportunity. We restore hope and strengthen communities through practical support and
-              sustainable initiatives. Registered under Section 10 of the Non-Governmental Organizations
-              Co-ordination Act on 10th September 2021.
+              and opportunity.
+              <br />
+              We restore hope and strengthen communities through practical support and sustainable initiatives.
+              Registered under Section 10 of the Non&#8209;Governmental Organizations Co&#8209;ordination Act
+              on 10th September 2021.
             </p>
           </div>
           <div className="hero__actions">
@@ -259,10 +260,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
-
-      <section className="programs-section fold is-visible">
-        <Programs />
       </section>
 
       <SponsorsSection

@@ -14,11 +14,6 @@ import image8 from '../assets/image_8.jpeg';
 import image9 from '../assets/image_9.jpeg';
 import image10 from '../assets/image_10.jpeg';
 import galleryRwfTeam from '../assets/gallery/gallery-rwf-team.png';
-import galleryPrisonMinistryBanner from '../assets/gallery/gallery-prison-ministry-banner.png';
-import galleryPrisonProgrammeSession from '../assets/gallery/gallery-prison-programme-session.png';
-import galleryHomeVisitsDonation from '../assets/gallery/gallery-home-visits-donation.png';
-import galleryKitaleWomenPrisonVisit from '../assets/gallery/gallery-kitale-women-prison-visit.png';
-import galleryPrisonAssembly from '../assets/gallery/gallery-prison-assembly.png';
 import galleryMattressDonation from '../assets/gallery/gallery-mattress-donation.png';
 import galleryExtra01 from '../assets/gallery/gallery-extra-01.png';
 import galleryExtra02 from '../assets/gallery/gallery-extra-02.png';
@@ -39,11 +34,6 @@ import galleryExtra16 from '../assets/gallery/gallery-extra-16.png';
 
 const LOCAL_GALLERY_IMAGES = [
   galleryRwfTeam,
-  galleryPrisonMinistryBanner,
-  galleryPrisonProgrammeSession,
-  galleryHomeVisitsDonation,
-  galleryKitaleWomenPrisonVisit,
-  galleryPrisonAssembly,
   galleryMattressDonation,
   galleryExtra01,
   galleryExtra02,
@@ -79,31 +69,6 @@ const GALLERY_SPOTLIGHT_ITEMS = [
     id: 'spotlight-rwf-team',
     src: galleryRwfTeam,
     description: 'RWF volunteers in branded shirts — Supporting Communities, standing together',
-  },
-  {
-    id: 'spotlight-prison-banner',
-    src: galleryPrisonMinistryBanner,
-    description: 'Prison ministry display at a community event under the foundation tent',
-  },
-  {
-    id: 'spotlight-prison-session',
-    src: galleryPrisonProgrammeSession,
-    description: 'Outdoor session with residents and facilitators at a correctional facility',
-  },
-  {
-    id: 'spotlight-home-visits',
-    src: galleryHomeVisitsDonation,
-    description: 'Food essentials and supplies shared during a home-visit style outreach',
-  },
-  {
-    id: 'spotlight-kitale-prison',
-    src: galleryKitaleWomenPrisonVisit,
-    description: 'Foundation team visit at Kitale Women Prison gates',
-  },
-  {
-    id: 'spotlight-prison-assembly',
-    src: galleryPrisonAssembly,
-    description: 'Large gathering under the pavilion for teaching, counselling, and encouragement',
   },
   {
     id: 'spotlight-mattresses',
@@ -143,7 +108,7 @@ const GALLERY_SPOTLIGHT_ITEMS = [
   {
     id: 'spotlight-extra-07',
     src: galleryExtra07,
-    description: 'Prison ministry banner at a field presentation',
+    description: 'Foundation banner at a field presentation',
   },
   {
     id: 'spotlight-extra-08',
@@ -153,7 +118,7 @@ const GALLERY_SPOTLIGHT_ITEMS = [
   {
     id: 'spotlight-extra-09',
     src: galleryExtra09,
-    description: 'Word of encouragement beside the foundation’s prison ministry display',
+    description: 'Word of encouragement beside the foundation display',
   },
   {
     id: 'spotlight-extra-10',
@@ -183,7 +148,7 @@ const GALLERY_SPOTLIGHT_ITEMS = [
   {
     id: 'spotlight-extra-15',
     src: galleryExtra15,
-    description: 'Presenting prison ministry and community care programmes outdoors',
+    description: 'Presenting community care programmes outdoors',
   },
   {
     id: 'spotlight-extra-16',
@@ -191,6 +156,14 @@ const GALLERY_SPOTLIGHT_ITEMS = [
     description: 'Partners shaking hands after a foundation community event',
   },
 ];
+
+const PRISON_KEYWORDS = /(prison|inmate|incarcerat|correctional|warden|custody)/i;
+const SENSITIVE_KEYWORDS = /(elderly\s+care|essential\s+care|essentials?\s+.*care)/i;
+
+function isAllowedGalleryItem(item) {
+  const text = `${item?.description || ''} ${item?.title || ''}`.trim();
+  return !PRISON_KEYWORDS.test(text) && !SENSITIVE_KEYWORDS.test(text);
+}
 
 function hashStringToIndex(value, modulo) {
   const str = String(value ?? '');
@@ -237,7 +210,7 @@ const fallbackImages = [
     src: image3,
     description: 'Mentorship sessions with returning citizens',
   },
-  { src: image4, description: 'Prison ministry in partnership with wardens' },
+  { src: image4, description: 'Community ministry in partnership with local leaders' },
   { src: image5, description: 'Youth leadership workshops' },
   { src: image6, description: 'Assistive device distribution' },
   { src: image7, description: 'Second chances and reintegration support' },
@@ -294,15 +267,15 @@ const Gallery = ({ embedded = false }) => {
         .map((item) => ({
           id: item.id,
           src: item.image || item.imageUrl || '',
-          description: item.title || 'Impact moment',
+          description: item.title || item.description || 'Impact moment',
         }))
         .filter((item) => Boolean(item.src && String(item.src).trim().length > 0));
 
       if (normalized.length > 0) {
-        return [...GALLERY_SPOTLIGHT_ITEMS, ...normalized];
+        return [...GALLERY_SPOTLIGHT_ITEMS, ...normalized].filter(isAllowedGalleryItem);
       }
     }
-    return [...GALLERY_SPOTLIGHT_ITEMS, ...fallbackImages];
+    return [...GALLERY_SPOTLIGHT_ITEMS, ...fallbackImages].filter(isAllowedGalleryItem);
   }, [galleryItems]);
 
   const gridItems = useMemo(() => {

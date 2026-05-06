@@ -8,9 +8,21 @@ import bridgeworks from '../assets/sponsors/bridgeworks.png';
 import deliverance from '../assets/sponsors/deliverance.png';
 import aufrican from '../assets/sponsors/aufrican.png';
 import carebility from '../assets/sponsors/carebility.png';
+import safiServices from '../assets/sponsors/safi-services.png';
+import blessingTransporters from '../assets/sponsors/blessing-transporters.png';
 
 const SPONSOR_LOGOS = [
-  { src: carebility, alt: 'Carebility Z Option Inc. logo' },
+  {
+    src: carebility,
+    alt: 'Carebility Z Option Inc. logo',
+    href: 'https://carebilityzoption.org.au/',
+  },
+  { src: safiServices, alt: 'Safi Services logo' },
+  {
+    src: blessingTransporters,
+    alt: 'Blessing Transporters logo',
+    href: 'https://www.blessingstransporters.co.ke/',
+  },
   { src: barkay, alt: 'Sponsor logo' },
   { src: diamond, alt: 'Sponsor logo' },
   { src: almondskills, alt: 'Sponsor logo' },
@@ -40,12 +52,29 @@ export default function SponsorsSection({
               key={logo.src}
               className="flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-4 py-5 backdrop-blur-sm"
             >
-              <img
-                src={logo.src}
-                alt={logo.alt}
-                className="h-14 w-full max-w-[14rem] object-contain opacity-95 sm:h-16 sm:max-w-[16rem]"
-                loading="lazy"
-              />
+              {logo.href ? (
+                <a
+                  href={logo.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={logo.alt}
+                  className="inline-flex items-center justify-center"
+                >
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className="h-14 w-full max-w-[14rem] object-contain opacity-95 sm:h-16 sm:max-w-[16rem]"
+                    loading="lazy"
+                  />
+                </a>
+              ) : (
+                <img
+                  src={logo.src}
+                  alt={logo.alt}
+                  className="h-14 w-full max-w-[14rem] object-contain opacity-95 sm:h-16 sm:max-w-[16rem]"
+                  loading="lazy"
+                />
+              )}
             </div>
           ))}
         </div>
@@ -54,15 +83,32 @@ export default function SponsorsSection({
       <div className="sponsors-marquee hidden md:block">
         <div className="sponsors-marquee__track" aria-label="Sponsors marquee">
           <div className="sponsors-marquee__set">
-            {SPONSOR_LOGOS.map((logo) => (
-              <img
-                key={logo.src}
-                src={logo.src}
-                alt={logo.alt}
-                className="sponsors-marquee__logo"
-                loading="lazy"
-              />
-            ))}
+            {SPONSOR_LOGOS.map((logo) =>
+              logo.href ? (
+                <a
+                  key={logo.src}
+                  href={logo.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={logo.alt}
+                >
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className="sponsors-marquee__logo"
+                    loading="lazy"
+                  />
+                </a>
+              ) : (
+                <img
+                  key={logo.src}
+                  src={logo.src}
+                  alt={logo.alt}
+                  className="sponsors-marquee__logo"
+                  loading="lazy"
+                />
+              )
+            )}
           </div>
           <div className="sponsors-marquee__set" aria-hidden="true">
             {SPONSOR_LOGOS.map((logo) => (
