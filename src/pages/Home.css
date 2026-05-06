@@ -160,6 +160,10 @@ body {
   padding-top: 0.4rem;
 }
 
+.hero__actions .btn--gold {
+  color: #ffffff;
+}
+
 .hero__media {
   position: relative;
   z-index: 1;
@@ -942,6 +946,21 @@ body {
 
   .hero {
     padding: 1.15rem 0;
+    margin-left: 0.5rem;
+  }
+
+  .hero__actions {
+    width: 100%;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+  }
+
+  .hero__actions .btn {
+    flex: 1;
+    min-width: 0;
+    padding: 0.72rem 0.7rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
   }
 
   .hero__who {

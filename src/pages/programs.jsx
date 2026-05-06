@@ -9,8 +9,8 @@ import image10 from '../assets/image_10.jpeg';
 import elderlyCareImage from '../assets/elderly-care.png';
 import teenMumsImage from '../assets/teen-mums.png';
 import childrenIncarceratedParentImage from '../assets/children-incarcerated-parent.png';
-import incarceratedRebuildingImage from '../assets/incarcerated-rebuilding.png';
-import recoveringAddictsImage from '../assets/recovering-addicts.png';
+import incarceratedRebuildingImage from '../assets/incarcerated-rebuilding-new.png';
+import recoveringAddictsImage from '../assets/recovering-addicts-new.png';
 import disabilityProgrammeImage from '../assets/disability-programme.png';
 
 /** These titles always use the bundled local image, even if Firestore still has an old URL */
@@ -43,7 +43,7 @@ function pickLocalProgramImage(title, index) {
   if (/(teen|mum|mother|girls)/.test(normalized)) return teenMumsImage;
   if (/(elder|caregiver|senior)/.test(normalized)) return elderlyCareImage;
   if (/(disabil|pwd|assistive)/.test(normalized)) return disabilityProgrammeImage;
-  if (/(recover|addiction|sobriety|rehab)/.test(normalized)) return image6;
+  if (/(recover|addiction|sobriety|rehab)/.test(normalized)) return recoveringAddictsImage;
 
   // Last resort: rotate through local images so the grid never looks empty.
   return LOCAL_IMAGE_ROTATION[index % LOCAL_IMAGE_ROTATION.length];
@@ -90,7 +90,7 @@ const Programs = () => {
 
   return (
     <div>
-      <div className="mx-auto flex min-h-[calc(100vh-80px)] max-w-6xl flex-col gap-6 px-0 py-8 sm:px-6">
+      <div className="mx-auto flex min-h-[calc(100vh-80px)] max-w-6xl flex-col gap-6 px-2 py-8 sm:px-6">
       <header className="space-y-3 px-4 text-center mb-4 sm:px-0">
         <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-700">
           Foundation programmes

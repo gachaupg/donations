@@ -25,7 +25,11 @@ const SPONSOR_LOGOS = [
     href: 'https://www.blessingstransporters.co.ke/',
   },
   { src: millysWellness, alt: "Milly's Wellness logo" },
-  { src: barkay, alt: 'Sponsor logo' },
+  {
+    src: barkay,
+    alt: 'Barkay International logo',
+    href: 'https://www.barkayinternational.com',
+  },
   { src: diamond, alt: 'Sponsor logo' },
   { src: almondskills, alt: 'Sponsor logo' },
   { src: twoStars, alt: 'Sponsor logo' },
@@ -48,7 +52,7 @@ export default function SponsorsSection({
 
       {/* Small screens: two logos per row, no horizontal scroll */}
       <div className="md:hidden">
-        <div className="mx-auto grid w-full max-w-2xl grid-cols-1 gap-4 px-1 min-[420px]:grid-cols-2 sm:max-w-3xl sm:gap-5">
+        <div className="mx-auto grid w-full max-w-2xl grid-cols-2 gap-4 px-1 sm:max-w-3xl sm:gap-5">
           {SPONSOR_LOGOS.map((logo) => (
             <div
               key={logo.src}
