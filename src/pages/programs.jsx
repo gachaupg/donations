@@ -90,12 +90,12 @@ const Programs = () => {
 
   return (
     <div>
-      <div className="mx-auto flex min-h-[calc(100vh-80px)] max-w-6xl flex-col gap-6 px-2 py-8 sm:px-6">
-      <header className="space-y-3 px-4 text-center mb-4 sm:px-0">
+      <div className="mx-auto flex min-h-[calc(100vh-80px)] w-full max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6">
+      <header className="mb-4 space-y-3 text-center">
         <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-700">
           Foundation programmes
         </span>
-        <h2 className="text-3xl font-semibold text-white sm:text-4xl drop-shadow-lg">Our Programs</h2>
+        <h2 className="text-2xl font-semibold text-white drop-shadow-lg sm:text-4xl">Our Programs</h2>
       </header>
 
         {programList.length === 0 ? (
@@ -121,9 +121,9 @@ const Programs = () => {
               return (
                 <article
                   key={key}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-none border border-emerald-200/75 bg-white shadow-lg shadow-emerald-900/5 transition duration-300 sm:rounded-[26px] sm:shadow-none"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-emerald-200/75 bg-white shadow-md shadow-emerald-900/10 transition duration-300 sm:rounded-[26px] sm:shadow-lg sm:shadow-emerald-900/5"
                 >
-                  <div className="relative h-56 w-full overflow-hidden sm:h-48">
+                  <div className="relative h-52 w-full overflow-hidden sm:h-48">
                     {programImage ? (
                       <img
                         src={programImage}
@@ -148,17 +148,17 @@ const Programs = () => {
                       </div>
                     )}
                   </div>
-                  <div className="flex flex-1 flex-col gap-3 p-7 sm:p-6">
-                    <h3 className="rwf-gold-text text-2xl font-semibold sm:text-xl">{program.title}</h3>
+                  <div className="flex flex-1 flex-col gap-3 p-5 sm:p-6">
+                    <h3 className="rwf-gold-text text-xl font-semibold leading-snug sm:text-xl">{program.title}</h3>
                     <p
-                      className="text-base leading-relaxed text-slate-600 sm:text-sm"
+                      className="text-sm leading-relaxed text-slate-600 sm:text-sm"
                       style={
                         isExpanded
                           ? undefined
                           : {
                               display: '-webkit-box',
                               WebkitBoxOrient: 'vertical',
-                              WebkitLineClamp: 1,
+                              WebkitLineClamp: 3,
                               overflow: 'hidden',
                             }
                       }

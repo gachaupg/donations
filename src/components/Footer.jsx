@@ -17,7 +17,7 @@ const Footer = () => {
   }, [resolvedBrandLogo]);
 
   return (
-    <footer className="mt-14 border-t border-white/10 bg-slate-950/30 text-white">
+    <footer className="rwf-shell mt-14 border-t text-white">
       <div className="container mx-auto grid grid-cols-1 gap-8 px-4 py-10 md:grid-cols-4">
         <div className="space-y-4">
           <img

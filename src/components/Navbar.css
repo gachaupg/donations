@@ -12,8 +12,9 @@ header.navbar {
 }
 
 .navbar--dark {
-  background: rgba(15, 23, 42, 0.9);
+  background: var(--rwf-shell-bg);
   color: #f1f5f9;
+  border-bottom: 1px solid var(--rwf-shell-border);
 }
 
 .navbar--light.navbar--scrolled,
@@ -259,7 +260,8 @@ header.navbar {
   }
 
   .navbar--dark .navbar__mobile-links {
-    background: rgba(15, 23, 42, 0.94);
+    background: rgba(2, 6, 23, 0.9);
+    border: 1px solid var(--rwf-shell-border);
   }
 
   .navbar__mobile-link {
