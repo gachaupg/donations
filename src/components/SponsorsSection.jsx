@@ -6,7 +6,6 @@ import almondskills from '../assets/sponsors/almondskills.png';
 import twoStars from '../assets/sponsors/2stars.png';
 import bridgeworks from '../assets/sponsors/bridgeworks.png';
 import deliverance from '../assets/sponsors/deliverance.png';
-import aufrican from '../assets/sponsors/aufrican.png';
 import carebility from '../assets/sponsors/carebility.png';
 import safiServices from '../assets/sponsors/safi-services.png';
 import blessingTransporters from '../assets/sponsors/blessing-transporters.png';
@@ -15,6 +14,8 @@ import runLikeKenyanLogo from '../assets/sponsors/run-like-a-kenyan-logo.png';
 import runLikeKenyanPosterOne from '../assets/sponsors/run-like-a-kenyan-poster-1.png';
 import runLikeKenyanPosterTwo from '../assets/sponsors/run-like-a-kenyan-poster-2.png';
 import almondskillsPrograms from '../assets/sponsors/almondskills-programs.png';
+import aufricanCateringPoster from '../assets/sponsors/aufrican-catering-poster.png';
+import aufricanCateringPosterTwo from '../assets/sponsors/aufrican-catering-poster-2.png';
 
 const SPONSOR_LOGOS = [
   {
@@ -50,7 +51,12 @@ const SPONSOR_LOGOS = [
   { src: twoStars, alt: 'Sponsor logo' },
   { src: bridgeworks, alt: 'Sponsor logo' },
   { src: deliverance, alt: 'Sponsor logo' },
-  { src: aufrican, alt: 'Sponsor logo' },
+  {
+    src: aufricanCateringPoster,
+    alt: 'AUFRICAN Vybz and Byts logo',
+    previewTitle: 'AUFRICAN Vybz and Byts',
+    gallery: [aufricanCateringPoster, aufricanCateringPosterTwo],
+  },
 ];
 
 export default function SponsorsSection({
