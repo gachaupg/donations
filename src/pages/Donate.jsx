@@ -70,13 +70,14 @@ const DirectTransferSpotlight = () => {
       {
         id: 'kenya',
         label: 'Kenya Support',
-        headline: 'Reuben Wairicu Foundation — Equity Bank, Kitale',
+        headline: 'Reuben Wairicu Foundation — Equity Bank',
         description: 'For Financial Support. Thanking you in advance.',
         fields: [
           { key: 'accountNameKe', label: 'Account name', value: 'Reuben Wairicu Foundation' },
-          { key: 'accountKe', label: 'Account number', value: '0330284842169' },
-          { key: 'bankKe', label: 'Bank', value: 'Equity Bank, Kitale' },
-          { key: 'mpesaKe', label: 'Mpesa line', value: '+254 723 237149 (Milcah Ochoki)' },
+          { key: 'paybillKe', label: 'Paybill number', value: '247247' },
+          { key: 'accountKe', label: 'Account number', value: '842169' },
+          { key: 'bankKe', label: 'Bank', value: 'Equity Bank' },
+          { key: 'mpesaKe', label: 'Transaction notifications', value: '0723 237 149 (Milly)' },
         ],
       },
     ],

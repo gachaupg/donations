@@ -574,12 +574,27 @@ const Sponsorship = () => {
 
                   <div className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-slate-50 px-4 py-2">
                     <div>
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">Kenya - Account Number</p>
-                      <p className="text-sm font-semibold text-slate-900">0330284842169</p>
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">Kenya - Paybill</p>
+                      <p className="text-sm font-semibold text-slate-900">247247</p>
                     </div>
                     <button
                       type="button"
-                      onClick={() => handleCopy('0330284842169', 'ke-account')}
+                      onClick={() => handleCopy('247247', 'ke-paybill')}
+                      className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2 py-1 text-[10px] font-semibold text-slate-700 transition hover:bg-slate-50"
+                    >
+                      <FiCopy className="text-xs" />
+                      {copiedKey === 'ke-paybill' ? 'Copied' : 'Copy'}
+                    </button>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-slate-50 px-4 py-2">
+                    <div>
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">Kenya - Account Number</p>
+                      <p className="text-sm font-semibold text-slate-900">842169</p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleCopy('842169', 'ke-account')}
                       className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2 py-1 text-[10px] font-semibold text-slate-700 transition hover:bg-slate-50"
                     >
                       <FiCopy className="text-xs" />
@@ -590,11 +605,11 @@ const Sponsorship = () => {
                   <div className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-slate-50 px-4 py-2">
                     <div>
                       <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">Kenya - Bank</p>
-                      <p className="text-sm font-semibold text-slate-900">Equity Bank, Kitale</p>
+                      <p className="text-sm font-semibold text-slate-900">Equity Bank</p>
                     </div>
                     <button
                       type="button"
-                      onClick={() => handleCopy('Equity Bank, Kitale', 'ke-bank')}
+                      onClick={() => handleCopy('Equity Bank', 'ke-bank')}
                       className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2 py-1 text-[10px] font-semibold text-slate-700 transition hover:bg-slate-50"
                     >
                       <FiCopy className="text-xs" />
@@ -604,12 +619,12 @@ const Sponsorship = () => {
 
                   <div className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-slate-50 px-4 py-2">
                     <div>
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">Kenya - Mpesa</p>
-                      <p className="text-sm font-semibold text-slate-900">+254 723 237149</p>
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">Transaction notifications</p>
+                      <p className="text-sm font-semibold text-slate-900">0723 237 149 (Milly)</p>
                     </div>
                     <button
                       type="button"
-                      onClick={() => handleCopy('+254 723 237149', 'ke-mpesa')}
+                      onClick={() => handleCopy('0723 237 149 (Milly)', 'ke-mpesa')}
                       className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2 py-1 text-[10px] font-semibold text-slate-700 transition hover:bg-slate-50"
                     >
                       <FiCopy className="text-xs" />

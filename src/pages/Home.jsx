@@ -2,7 +2,7 @@ import React from 'react';
 import './Home.css';
 import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
-import heroImage from '../assets/hero-kitale-prison-visit.png';
+import heroImage from '../assets/home-hero-collage-2.png';
 import SponsorsSection from '../components/SponsorsSection.jsx';
 import Programs from './programs';
 
@@ -242,7 +242,7 @@ const Home = () => {
               <h3 className="mission-meta-panel__title">Kenya support</h3>
               <p className="mission-meta-panel__intro">
                 <strong className="text-white/95">Donate to:</strong> Reuben Wairicu Foundation — Equity
-                Bank, Kitale. For financial support. Thanking you in advance.
+                Bank. For financial support. Thanking you in advance.
               </p>
               <dl className="mission-meta-panel__dl mission-meta-panel__dl--compact">
                 <div>
@@ -250,16 +250,20 @@ const Home = () => {
                   <dd>Reuben Wairicu Foundation</dd>
                 </div>
                 <div>
+                  <dt>Paybill number</dt>
+                  <dd className="mission-meta-panel__mono">247247</dd>
+                </div>
+                <div>
                   <dt>Account number</dt>
-                  <dd className="mission-meta-panel__mono">0330284842169</dd>
+                  <dd className="mission-meta-panel__mono">842169</dd>
                 </div>
                 <div>
                   <dt>Bank</dt>
-                  <dd>Equity Bank, Kitale</dd>
+                  <dd>Equity Bank</dd>
                 </div>
                 <div>
-                  <dt>M-Pesa line</dt>
-                  <dd>+254 723 237149 (Milcah Ochoki)</dd>
+                  <dt>Transaction notifications</dt>
+                  <dd>0723 237 149 (Milly)</dd>
                 </div>
               </dl>
               <Link to="/donate" className="mission-meta-panel__link mission-meta-panel__link--block">
