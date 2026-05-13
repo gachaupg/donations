@@ -48,7 +48,6 @@ const Home = () => {
               src={heroImage}
               alt="RWF team and volunteers at Kitale Women Prison with donation bags after a community visit"
             />
-            <div className="hero__badge">The Reuben Wairicu Foundation (RWF)</div>
           </div>
         </div>
       </section>
