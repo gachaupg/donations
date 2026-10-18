@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 import barkay from '../assets/sponsors/barkay.png';
 import diamond from '../assets/sponsors/diamond.png';
 import almondskills from '../assets/sponsors/almondskills.png';
 import twoStars from '../assets/sponsors/2stars.png';
-import bridgeworks from '../assets/sponsors/bridgeworks.png';
+import bridgeworks from '../assets/sponsors/bridgeworks-logo.jpg';
 import deliverance from '../assets/sponsors/deliverance.png';
-import carebility from '../assets/sponsors/carebility.png';
+import carevault from '../assets/sponsors/carevault.png';
 import safiServices from '../assets/sponsors/safi-services.png';
 import blessingTransporters from '../assets/sponsors/blessing-transporters.png';
 import millysWellness from '../assets/sponsors/millys-wellness.png';
@@ -16,54 +17,94 @@ import runLikeKenyanPosterTwo from '../assets/sponsors/run-like-a-kenyan-poster-
 import almondskillsPrograms from '../assets/sponsors/almondskills-programs.png';
 import aufricanCateringPoster from '../assets/sponsors/aufrican-catering-poster.png';
 import aufricanCateringPosterTwo from '../assets/sponsors/aufrican-catering-poster-2.png';
-import bridgeworksProfile from '../assets/sponsors/bridgeworks-profile.pdf?url';
+import safariLounge from '../assets/sponsors/safari-lounge.png';
+import pgWebDeveloper from '../assets/sponsors/pg-web-developer.svg';
+import mkkAccounting from '../assets/sponsors/mkk-accounting.jpg';
+import curamServices from '../assets/sponsors/curam-services.png';
 
 const SPONSOR_LOGOS = [
   {
-    src: carebility,
-    alt: '',
-    href: 'https://carebilityzoption.org.au/',
+    src: bridgeworks,
+    alt: 'Bridgeworks Network Ltd',
+    href: 'https://bridgeworksnetwork.org.au/',
+  },
+  {
+    src: safariLounge,
+    alt: 'Safari Lounge Grill & Bar',
+    href: 'https://safarilounge.com.au/',
+  },
+  {
+    src: carevault,
+    alt: 'CareVault',
+    href: 'https://carevault.com.au/',
+  },
+  {
+    src: mkkAccounting,
+    alt: 'MKK Accounting Solutions',
+    href: 'https://www.mkkaccountingsolutions.com.au/',
+  },
+  {
+    src: curamServices,
+    alt: 'Curam Services',
+    href: 'https://curamservices.com.au/',
+  },
+  {
+    src: pgWebDeveloper,
+    alt: 'PG Web Developer',
+    href: 'https://petergachau.petracoresol.co.ke/',
   },
   {
     src: runLikeKenyanLogo,
-    alt: '',
-    previewTitle: '',
+    alt: 'Run Like a Kenyan',
     gallery: [runLikeKenyanPosterOne, runLikeKenyanPosterTwo],
   },
-  { src: safiServices, alt: '' },
+  { src: safiServices, alt: 'Safi Services' },
   {
     src: blessingTransporters,
-    alt: '',
+    alt: 'Blessings Transporters',
     href: 'https://www.blessingstransporters.co.ke/',
   },
-  { src: millysWellness, alt: "" },
+  { src: millysWellness, alt: "Milly's Wellness" },
   {
     src: barkay,
-    alt: '',
+    alt: 'Barkay International',
     href: 'https://www.barkayinternational.com',
   },
-  { src: diamond, alt: '' },
+  { src: diamond, alt: 'Diamond' },
   {
     src: almondskills,
-    alt: '',
-    previewTitle: '',
+    alt: 'Almond Skills',
     gallery: [almondskillsPrograms],
   },
-  { src: twoStars, alt: '' },
-  {
-    src: bridgeworks,
-    alt: '',
-    previewTitle: 'Bridgeworks Network Limited',
-    pdf: bridgeworksProfile,
-  },
-  { src: deliverance, alt: '' },
+  { src: twoStars, alt: '2 Stars' },
+  { src: deliverance, alt: 'Deliverance' },
   {
     src: aufricanCateringPoster,
-    alt: '',
-    previewTitle: '',
+    alt: 'Aufrican Catering',
     gallery: [aufricanCateringPoster, aufricanCateringPosterTwo],
   },
 ];
+
+const ExternalLinkIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="h-4 w-4"
+    aria-hidden="true"
+  >
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" y1="14" x2="21" y2="3" />
+  </svg>
+);
+
+const primaryButtonClass =
+  'inline-flex items-center gap-2 rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 shadow-lg shadow-emerald-500/20 transition hover:-translate-y-0.5 hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-300';
 
 export default function SponsorsSection({
   title = 'Our Sponsors',
@@ -72,14 +113,23 @@ export default function SponsorsSection({
 }) {
   const [activeSponsor, setActiveSponsor] = useState(null);
   const closePreview = () => setActiveSponsor(null);
-  const getSponsorGallery = (logo) => (logo.gallery?.length ? logo.gallery : [logo.src]);
   const openSponsorPreview = (logo) => {
     setActiveSponsor({
       ...logo,
       previewTitle: logo.previewTitle || logo.alt || 'Sponsor',
-      gallery: logo.pdf ? [] : getSponsorGallery(logo),
+      gallery: logo.pdf ? [] : logo.gallery ?? [],
     });
   };
+
+  const hasGallery = activeSponsor?.gallery.length > 0;
+  const isLogoOnly = activeSponsor && !activeSponsor.pdf && !hasGallery;
+  let modalWidthClass = 'max-w-3xl';
+  if (activeSponsor?.pdf) modalWidthClass = 'max-w-5xl';
+  else if (isLogoOnly) modalWidthClass = 'max-w-lg';
+  else if (activeSponsor?.gallery.length === 1) modalWidthClass = 'max-w-2xl';
+  let modalKindLabel = 'Sponsor';
+  if (activeSponsor?.pdf) modalKindLabel = 'Company profile';
+  else if (hasGallery) modalKindLabel = 'Gallery';
 
   useEffect(() => {
     if (!activeSponsor) return undefined;
@@ -99,7 +149,7 @@ export default function SponsorsSection({
     <img src={logo.src} alt={logo.alt} className={className} loading="lazy" />
   );
 
-  const renderSponsorContent = (logo, className) => {
+  const renderSponsorContent = (logo, className, extraProps = {}) => {
     if (logo.gallery?.length || logo.pdf || !logo.href) {
       return (
         <button
@@ -107,27 +157,25 @@ export default function SponsorsSection({
           onClick={() => openSponsorPreview(logo)}
           className="inline-flex items-center justify-center"
           aria-label={`View ${logo.previewTitle || logo.alt || 'sponsor'}`}
+          {...extraProps}
         >
           {renderSponsorImage(logo, className)}
         </button>
       );
     }
 
-    if (logo.href) {
-      return (
-        <a
-          href={logo.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={logo.alt}
-          className="inline-flex items-center justify-center"
-        >
-          {renderSponsorImage(logo, className)}
-        </a>
-      );
-    }
-
-    return renderSponsorImage(logo, className);
+    return (
+      <a
+        href={logo.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${logo.alt} website`}
+        className="inline-flex items-center justify-center"
+        {...extraProps}
+      >
+        {renderSponsorImage(logo, className)}
+      </a>
+    );
   };
 
   return (
@@ -165,30 +213,24 @@ export default function SponsorsSection({
           </div>
           <div className="sponsors-marquee__set" aria-hidden="true">
             {SPONSOR_LOGOS.map((logo) => (
-              <img
-                key={`dup-${logo.src}`}
-                src={logo.src}
-                alt=""
-                className="sponsors-marquee__logo"
-                loading="lazy"
-              />
+              <React.Fragment key={`dup-${logo.src}`}>
+                {renderSponsorContent(logo, 'sponsors-marquee__logo', { tabIndex: -1 })}
+              </React.Fragment>
             ))}
           </div>
         </div>
       </div>
 
-      {activeSponsor ? (
+      {activeSponsor ? createPortal(
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/80 p-3 backdrop-blur-md animate-modal-fade sm:p-6"
+          className="fixed inset-0 z-[1300] flex items-center justify-center bg-slate-950/80 p-3 backdrop-blur-md animate-modal-fade sm:p-6"
           role="dialog"
           aria-modal="true"
           aria-label={activeSponsor.previewTitle || activeSponsor.alt}
           onClick={closePreview}
         >
           <div
-            className={`relative flex max-h-[92vh] w-full flex-col overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 shadow-2xl shadow-black/60 ring-1 ring-white/5 animate-modal-pop ${
-              activeSponsor.pdf ? 'max-w-5xl' : 'max-w-3xl'
-            }`}
+            className={`relative flex max-h-[92vh] w-full flex-col overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 shadow-2xl shadow-black/60 ring-1 ring-white/5 animate-modal-pop ${modalWidthClass}`}
             onClick={(event) => event.stopPropagation()}
           >
             <header className="flex items-center justify-between gap-4 border-b border-white/10 bg-white/[0.03] px-4 py-3 sm:px-6 sm:py-4">
@@ -205,7 +247,7 @@ export default function SponsorsSection({
                     {activeSponsor.previewTitle}
                   </p>
                   <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-emerald-300/80 sm:text-xs">
-                    {activeSponsor.pdf ? 'Company profile' : 'Gallery'}
+                    {modalKindLabel}
                   </p>
                 </div>
               </div>
@@ -250,29 +292,25 @@ export default function SponsorsSection({
                       href={activeSponsor.pdf}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 shadow-lg shadow-emerald-500/20 transition hover:-translate-y-0.5 hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-300"
+                      className={primaryButtonClass}
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="h-4 w-4"
-                        aria-hidden="true"
-                      >
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                        <polyline points="15 3 21 3 21 9" />
-                        <line x1="10" y1="14" x2="21" y2="3" />
-                      </svg>
+                      <ExternalLinkIcon />
                       Open PDF in new tab
                     </a>
                   </div>
                 </div>
+              ) : isLogoOnly ? (
+                <div className="flex items-center justify-center rounded-2xl bg-white p-8 sm:p-12">
+                  <img
+                    src={activeSponsor.src}
+                    alt={`${activeSponsor.previewTitle} logo`}
+                    className="max-h-[40vh] w-auto max-w-full object-contain"
+                  />
+                </div>
               ) : (
-                <div className="grid gap-4 sm:grid-cols-2">
+                <div
+                  className={`grid gap-4 ${activeSponsor.gallery.length > 1 ? 'sm:grid-cols-2' : ''}`}
+                >
                   {activeSponsor.gallery.map((image) => (
                     <div
                       key={image}
@@ -288,8 +326,23 @@ export default function SponsorsSection({
                 </div>
               )}
             </div>
+
+            {activeSponsor.href ? (
+              <footer className="flex justify-end border-t border-white/10 bg-white/[0.03] px-4 py-3 sm:px-6 sm:py-4">
+                <a
+                  href={activeSponsor.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={primaryButtonClass}
+                >
+                  <ExternalLinkIcon />
+                  Visit website
+                </a>
+              </footer>
+            ) : null}
           </div>
-        </div>
+        </div>,
+        document.body
       ) : null}
     </section>
   );

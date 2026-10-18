@@ -1,11 +1,12 @@
 import React from 'react';
 import ShareButtons from '../components/ShareButtons';
+import PartnersSection from '../components/PartnersSection.jsx';
 import image5 from '../assets/image_5.jpeg';
 import aboutJourneyImage from '../assets/about-journey.png';
 
 const About = () => {
   return (
-    <div className="py-12 px-4 sm:px-6 lg:px-10">
+    <div className="py-12 px-3 sm:px-5 lg:px-6">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 lg:gap-20">
         <header className="space-y-3 text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-transparent px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-white">
@@ -17,7 +18,7 @@ const About = () => {
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-200/90">
             Rooted in Community · Giving Hope, Sharing Love, Touching Hearts
           </p>
-          <div className="mx-auto max-w-3xl space-y-4 text-left text-[clamp(1.02rem,1.9vw,1.18rem)] leading-[1.75] text-white/90">
+          <div className="mx-auto max-w-5xl space-y-4 text-left text-[clamp(1.02rem,1.9vw,1.18rem)] leading-[1.75] text-white/90">
             <p>
               The Reuben Wairicu Foundation (RWF) is a community-driven organisation committed to uplifting
               vulnerable people across Kenyan regions.
@@ -125,6 +126,8 @@ const About = () => {
             ))}
           </div>
         </section>
+
+        <PartnersSection />
 
       </div>
     </div>

@@ -90,23 +90,23 @@ const Programs = () => {
 
   return (
     <div>
-      <div className="mx-auto flex min-h-[calc(100vh-80px)] w-full max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6">
-      <header className="mb-4 space-y-3 text-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-700">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-5 sm:px-6">
+      <header className="space-y-2 text-center">
+        <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-0.5 text-[11px] font-semibold uppercase tracking-[0.28em] text-emerald-700">
           Foundation programmes
         </span>
-        <h2 className="text-2xl font-semibold text-white drop-shadow-lg sm:text-4xl">Our Programs</h2>
+        <h2 className="text-2xl font-semibold text-white drop-shadow-lg sm:text-3xl">Our Programs</h2>
       </header>
 
         {programList.length === 0 ? (
-          <div className="flex flex-col items-center justify-center gap-3 rounded-[26px] border border-dashed border-emerald-200/40 bg-emerald-50 py-14 text-center">
+          <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-emerald-200/40 bg-emerald-50 py-14 text-center">
             <p className="text-base font-semibold text-emerald-800">No programs available yet.</p>
             <p className="max-w-md text-sm text-emerald-600/80">
               Add programmes in the admin dashboard to showcase them here.
             </p>
           </div>
         ) : (
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {programList.map((program, index) => {
               const key = programKeys[index]?.key ?? `${program.title}-${index}`;
               const normalizedTitle = (program.title || '').toLowerCase().trim();
@@ -121,9 +121,9 @@ const Programs = () => {
               return (
                 <article
                   key={key}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-emerald-200/75 bg-white shadow-md shadow-emerald-900/10 transition duration-300 sm:rounded-[26px] sm:shadow-lg sm:shadow-emerald-900/5"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-slate-200/80 bg-white shadow-sm shadow-emerald-950/10 transition duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-950/20"
                 >
-                  <div className="relative h-52 w-full overflow-hidden sm:h-48">
+                  <div className="relative h-44 w-full overflow-hidden sm:h-40">
                     {programImage ? (
                       <img
                         src={programImage}
@@ -138,7 +138,7 @@ const Programs = () => {
                     ) : (
                       <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-emerald-50 to-emerald-100 text-emerald-700">
                         <div className="flex flex-col items-center gap-2">
-                          <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-sm">
+                          <span className="inline-flex h-14 w-14 items-center justify-center rounded-lg bg-white shadow-sm">
                             <Icon className="text-2xl" />
                           </span>
                           <span className="text-xs font-semibold uppercase tracking-[0.25em] text-emerald-600">
@@ -148,10 +148,15 @@ const Programs = () => {
                       </div>
                     )}
                   </div>
-                  <div className="flex flex-1 flex-col gap-3 p-5 sm:p-6">
-                    <h3 className="rwf-gold-text text-xl font-semibold leading-snug sm:text-xl">{program.title}</h3>
+                  <div className="flex flex-1 flex-col gap-2 p-4">
+                    <div className="flex items-start gap-2.5">
+                      <span className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100">
+                        <Icon className="text-sm" aria-hidden="true" />
+                      </span>
+                      <h3 className="rwf-gold-text text-base font-semibold leading-snug sm:text-[1.05rem]">{program.title}</h3>
+                    </div>
                     <p
-                      className="text-sm leading-relaxed text-slate-600 sm:text-sm"
+                      className="text-sm leading-relaxed text-slate-600"
                       style={
                         isExpanded
                           ? undefined
@@ -169,9 +174,13 @@ const Programs = () => {
                       <button
                         type="button"
                         onClick={() => toggleExpanded(key)}
-                        className="mt-1 inline-flex w-fit items-center rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-800 transition hover:bg-amber-100"
+                        aria-expanded={isExpanded}
+                        className="mt-auto inline-flex w-fit items-center gap-1 pt-1 text-xs font-semibold text-emerald-700 transition hover:text-emerald-900"
                       >
                         {isExpanded ? 'Show less' : 'Read more'}
+                        <span aria-hidden="true" className={`transition ${isExpanded ? 'rotate-180' : ''}`}>
+                          ↓
+                        </span>
                       </button>
                     )}
                   </div>

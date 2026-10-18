@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import heroImage from '../assets/home-hero-collage-2.png';
 import SponsorsSection from '../components/SponsorsSection.jsx';
+import PartnersSection from '../components/PartnersSection.jsx';
 import Programs from './programs';
 
 const Home = () => {
@@ -37,7 +38,7 @@ const Home = () => {
             <Link to="/about" className="btn btn--gold">
               Discover Our Story
             </Link>
-            <Link to="/programs" className="btn btn--gold">
+            <Link to="/programs" className="btn btn--gold-outline">
               Explore Our Programs
             </Link>
           </div>
@@ -273,9 +274,11 @@ const Home = () => {
         </div>
       </section>
 
+      <PartnersSection className="mb-2" />
+
       <SponsorsSection
         title="Our Sponsors"
-        subtitle="Thank you to the partners who help us keep hope alive."
+        subtitle="Thank you to the sponsors who help us keep hope alive."
       />
     </div>
   );
