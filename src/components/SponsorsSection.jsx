@@ -7,20 +7,13 @@ import almondskills from '../assets/sponsors/almondskills.png';
 import twoStars from '../assets/sponsors/2stars.png';
 import bridgeworks from '../assets/sponsors/bridgeworks-logo.jpg';
 import deliverance from '../assets/sponsors/deliverance.png';
-import carevault from '../assets/sponsors/carevault.png';
 import safiServices from '../assets/sponsors/safi-services.png';
 import blessingTransporters from '../assets/sponsors/blessing-transporters.png';
 import millysWellness from '../assets/sponsors/millys-wellness.png';
-import runLikeKenyanLogo from '../assets/sponsors/run-like-a-kenyan-logo.png';
-import runLikeKenyanPosterOne from '../assets/sponsors/run-like-a-kenyan-poster-1.png';
-import runLikeKenyanPosterTwo from '../assets/sponsors/run-like-a-kenyan-poster-2.png';
 import almondskillsPrograms from '../assets/sponsors/almondskills-programs.png';
 import aufricanCateringPoster from '../assets/sponsors/aufrican-catering-poster.png';
 import aufricanCateringPosterTwo from '../assets/sponsors/aufrican-catering-poster-2.png';
-import safariLounge from '../assets/sponsors/safari-lounge.png';
 import pgWebDeveloper from '../assets/sponsors/pg-web-developer.svg';
-import mkkAccounting from '../assets/sponsors/mkk-accounting.jpg';
-import curamServices from '../assets/sponsors/curam-services.png';
 
 const SPONSOR_LOGOS = [
   {
@@ -29,34 +22,9 @@ const SPONSOR_LOGOS = [
     href: 'https://bridgeworksnetwork.org.au/',
   },
   {
-    src: safariLounge,
-    alt: 'Safari Lounge Grill & Bar',
-    href: 'https://safarilounge.com.au/',
-  },
-  {
-    src: carevault,
-    alt: 'CareVault',
-    href: 'https://carevault.com.au/',
-  },
-  {
-    src: mkkAccounting,
-    alt: 'MKK Accounting Solutions',
-    href: 'https://www.mkkaccountingsolutions.com.au/',
-  },
-  {
-    src: curamServices,
-    alt: 'Curam Services',
-    href: 'https://curamservices.com.au/',
-  },
-  {
     src: pgWebDeveloper,
     alt: 'PG Web Developer',
     href: 'https://petergachau.petracoresol.co.ke/',
-  },
-  {
-    src: runLikeKenyanLogo,
-    alt: 'Run Like a Kenyan',
-    gallery: [runLikeKenyanPosterOne, runLikeKenyanPosterTwo],
   },
   { src: safiServices, alt: 'Safi Services' },
   {

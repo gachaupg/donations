@@ -90,7 +90,7 @@ const Programs = () => {
 
   return (
     <div>
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-5 sm:px-6">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-2 py-5 sm:px-3">
       <header className="space-y-2 text-center">
         <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-0.5 text-[11px] font-semibold uppercase tracking-[0.28em] text-emerald-700">
           Foundation programmes
@@ -106,7 +106,7 @@ const Programs = () => {
             </p>
           </div>
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
             {programList.map((program, index) => {
               const key = programKeys[index]?.key ?? `${program.title}-${index}`;
               const normalizedTitle = (program.title || '').toLowerCase().trim();
@@ -121,9 +121,9 @@ const Programs = () => {
               return (
                 <article
                   key={key}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-slate-200/80 bg-white shadow-sm shadow-emerald-950/10 transition duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-950/20"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-slate-200/80 bg-white shadow-sm shadow-emerald-950/10 transition duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-950/20"
                 >
-                  <div className="relative h-44 w-full overflow-hidden sm:h-40">
+                  <div className="relative h-24 w-full overflow-hidden sm:h-32">
                     {programImage ? (
                       <img
                         src={programImage}
@@ -148,15 +148,15 @@ const Programs = () => {
                       </div>
                     )}
                   </div>
-                  <div className="flex flex-1 flex-col gap-2 p-4">
-                    <div className="flex items-start gap-2.5">
-                      <span className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100">
-                        <Icon className="text-sm" aria-hidden="true" />
+                  <div className="flex flex-1 flex-col gap-1.5 p-2.5 sm:p-3">
+                    <div className="flex items-start gap-2">
+                      <span className="mt-0.5 hidden h-6 w-6 shrink-0 items-center justify-center rounded-md bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100 sm:inline-flex">
+                        <Icon className="text-xs" aria-hidden="true" />
                       </span>
-                      <h3 className="rwf-gold-text text-base font-semibold leading-snug sm:text-[1.05rem]">{program.title}</h3>
+                      <h3 className="rwf-gold-text text-[0.82rem] font-semibold leading-snug sm:text-sm">{program.title}</h3>
                     </div>
                     <p
-                      className="text-sm leading-relaxed text-slate-600"
+                      className="text-xs leading-relaxed text-slate-600"
                       style={
                         isExpanded
                           ? undefined
