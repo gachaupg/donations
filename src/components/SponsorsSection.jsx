@@ -117,15 +117,14 @@ export default function SponsorsSection({
     <img src={logo.src} alt={logo.alt} className={className} loading="lazy" />
   );
 
-  const renderSponsorContent = (logo, className, extraProps = {}) => {
+  const renderSponsorContent = (logo, className) => {
     if (logo.gallery?.length || logo.pdf || !logo.href) {
       return (
         <button
           type="button"
           onClick={() => openSponsorPreview(logo)}
-          className="inline-flex items-center justify-center"
+          className="inline-flex w-full items-center justify-center"
           aria-label={`View ${logo.previewTitle || logo.alt || 'sponsor'}`}
-          {...extraProps}
         >
           {renderSponsorImage(logo, className)}
         </button>
@@ -138,8 +137,7 @@ export default function SponsorsSection({
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`${logo.alt} website`}
-        className="inline-flex items-center justify-center"
-        {...extraProps}
+        className="inline-flex w-full items-center justify-center"
       >
         {renderSponsorImage(logo, className)}
       </a>
@@ -148,46 +146,24 @@ export default function SponsorsSection({
 
   return (
     <section className={`py-4 sm:py-6 ${className}`}>
-      <header className="mb-4 text-center sm:mb-5">
-        <h2 className="mb-3 text-2xl font-semibold text-white">{title}</h2>
+      <header className="mb-3 text-center">
+        <h2 className="mb-1 text-2xl font-semibold text-white">{title}</h2>
         <p className="text-base text-white/80">{subtitle}</p>
       </header>
 
-      {/* Small screens: two logos per row, no horizontal scroll */}
-      <div className="md:hidden">
-        <div className="mx-auto grid w-full max-w-2xl grid-cols-2 gap-4 px-1 sm:max-w-3xl sm:gap-5">
-          {SPONSOR_LOGOS.map((logo) => (
-            <div
-              key={logo.src}
-              className="flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-4 py-5 backdrop-blur-sm"
-            >
-              {renderSponsorContent(
-                logo,
-                'h-14 w-full max-w-[14rem] object-contain opacity-95 sm:h-16 sm:max-w-[16rem]'
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="sponsors-marquee hidden md:block">
-        <div className="sponsors-marquee__track" aria-label="Sponsors marquee">
-          <div className="sponsors-marquee__set">
-            {SPONSOR_LOGOS.map((logo) => (
-              <React.Fragment key={logo.src}>
-                {renderSponsorContent(logo, 'sponsors-marquee__logo')}
-              </React.Fragment>
-            ))}
-          </div>
-          <div className="sponsors-marquee__set" aria-hidden="true">
-            {SPONSOR_LOGOS.map((logo) => (
-              <React.Fragment key={`dup-${logo.src}`}>
-                {renderSponsorContent(logo, 'sponsors-marquee__logo', { tabIndex: -1 })}
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
-      </div>
+      <ul className="flex w-full flex-wrap items-center justify-center gap-x-4 gap-y-5 sm:gap-y-6">
+        {SPONSOR_LOGOS.map((logo) => (
+          <li
+            key={logo.src}
+            className="flex basis-[calc(50%-0.5rem)] items-center justify-center sm:basis-[calc(33.333%-0.667rem)] md:basis-[calc(25%-0.75rem)] lg:basis-[calc(16.666%-0.834rem)]"
+          >
+            {renderSponsorContent(
+              logo,
+              'h-20 w-full object-contain transition duration-300 hover:scale-105 sm:h-24 md:h-28'
+            )}
+          </li>
+        ))}
+      </ul>
 
       {activeSponsor ? createPortal(
         <div
