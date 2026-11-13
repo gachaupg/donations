@@ -17,6 +17,7 @@ import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
 import { useAuth } from "./context/AuthContext.jsx";
 import News from "./pages/News.jsx";
+import ScrollReveal from "./components/ScrollReveal.jsx";
 
 function App() {
   const { initializing } = useAuth();
@@ -26,7 +27,8 @@ function App() {
       <div className="min-h-screen relative overflow-hidden">
         <Navbar />
         <ToastContainer />
-        <div className="mt-20">
+        <ScrollReveal />
+        <main className="mt-20">
           {initializing ? (
             <div className="w-full py-16 flex items-center justify-center text-white">
               <div className="flex flex-col items-center gap-3">
@@ -52,7 +54,7 @@ function App() {
               <Route path="/admin" element={<Admin />} />
             </Routes>
           )}
-        </div>
+        </main>
         <Footer />
         <Toaster
           position="top-center"

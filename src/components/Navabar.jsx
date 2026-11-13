@@ -1,9 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { BsList } from "react-icons/bs";
+import { BsList, BsHeartFill } from "react-icons/bs";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
-import { useAuth } from "../context/AuthContext.jsx";
 import { useBranding } from "../context/BrandingContext.jsx";
 import defaultLogo from "../assets/rwf-logo.png";
 
@@ -21,7 +20,6 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  const { user } = useAuth();
   const { branding } = useBranding();
 
   const resolvedBrandLogo = useMemo(() => {
@@ -78,14 +76,8 @@ const Navbar = () => {
 
         <div className="navbar__actions">
           <Link to="/donate" className="btn donate-btn">
-            Donate
-          </Link>
-          <Link
-            to={user ? "/dashboard" : "/login"}
-            className={`btn ${user ? "dashboard-btn" : "login-btn"}`}
-            style={{ minWidth: '80px', textAlign: 'center' }}
-          >
-            {user ? "Dashboard" : "Login"}
+            <BsHeartFill className="donate-btn__icon" aria-hidden="true" />
+            <span>Donate</span>
           </Link>
           <button
             type="button"
@@ -137,14 +129,8 @@ const Navbar = () => {
             </div>
             <div className="navbar__mobile-cta">
               <Link to="/donate" className="btn donate-btn" onClick={closeMenu}>
-                Donate
-              </Link>
-              <Link
-                to={user ? "/dashboard" : "/login"}
-                className={`btn ${user ? "dashboard-btn" : "login-btn"}`}
-                onClick={closeMenu}
-              >
-                {user ? "Dashboard" : "Login"}
+                <BsHeartFill className="donate-btn__icon" aria-hidden="true" />
+                <span>Donate</span>
               </Link>
             </div>
           </motion.nav>

@@ -1,9 +1,27 @@
 header.navbar {
   position: fixed;
   inset: 0 0 auto 0;
-  padding: 0.85rem clamp(1rem, 4vw, 3rem);
+  padding: 0.6rem clamp(1rem, 4vw, 3rem);
   z-index: 1200;
-  transition: backdrop-filter 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+}
+
+header.navbar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(212, 175, 55, 0) 0%,
+    rgba(212, 175, 55, 0.7) 30%,
+    rgba(243, 208, 138, 0.9) 50%,
+    rgba(212, 175, 55, 0.7) 70%,
+    rgba(212, 175, 55, 0) 100%
+  );
+  pointer-events: none;
 }
 
 .navbar--light {
@@ -12,23 +30,31 @@ header.navbar {
 }
 
 .navbar--dark {
-  background: var(--rwf-shell-bg);
-  color: #f1f5f9;
-  border-bottom: 1px solid var(--rwf-shell-border);
+  background: linear-gradient(180deg, rgba(28, 48, 33, 0.88) 0%, rgba(36, 60, 41, 0.78) 100%);
+  color: #f8fafc;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .navbar--light.navbar--scrolled,
 .navbar--dark.navbar--scrolled {
-  backdrop-filter: blur(14px);
-  box-shadow: 0 18px 38px -30px rgba(15, 23, 42, 0.65);
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.6);
+}
+
+.navbar--dark.navbar--scrolled {
+  background: linear-gradient(180deg, rgba(22, 40, 27, 0.95) 0%, rgba(30, 52, 36, 0.92) 100%);
 }
 
 .navbar__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
-  max-width: 1200px;
+  gap: 1.5rem;
+  max-width: 1240px;
   margin: 0 auto;
 }
 
@@ -38,66 +64,57 @@ header.navbar {
   gap: 0.75rem;
   color: inherit;
   text-decoration: none;
+  flex-shrink: 0;
 }
 
 .navbar__brand img {
   height: 64px;
   width: auto;
   object-fit: contain;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.25));
+  transition: height 0.3s ease, transform 0.3s ease;
 }
 
-.navbar__brand-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
+.navbar--scrolled .navbar__brand img {
+  height: 54px;
 }
 
-.navbar__brand-eyebrow {
-  font-size: 0.65rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-weight: 700;
-  opacity: 0.7;
-}
-
-.navbar__brand-title {
-  font-size: 1.05rem;
-  font-weight: 700;
+.navbar__brand:hover img {
+  transform: scale(1.03);
 }
 
 .navbar__links {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 0.25rem;
+  padding: 0.3rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .navbar__link {
   position: relative;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 600;
-  color: inherit;
+  letter-spacing: 0.01em;
+  color: rgba(248, 250, 252, 0.85);
   text-decoration: none;
-  padding: 0.35rem 0;
-  transition: color 0.2s ease;
-}
-
-.navbar__link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 2px;
+  padding: 0.5rem 0.95rem;
   border-radius: 999px;
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.3s ease;
-  background: linear-gradient(120deg, #22c55e, #16a34a);
+  white-space: nowrap;
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-.navbar__link:hover::after,
-.navbar__link.is-active::after {
-  transform: scaleX(1);
+.navbar__link:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.navbar__link.is-active {
+  color: #f3d08a;
+  background: rgba(212, 175, 55, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.35);
 }
 
 .navbar__actions {
@@ -108,76 +125,61 @@ header.navbar {
 }
 
 .btn.donate-btn {
-  background: linear-gradient(135deg, #f3d08a 0%, #d4af37 55%, #b8860b 100%);
-  color: #3f3f46;
-  border-radius: 999px;
-  padding: 0.5rem 1.35rem;
-  font-weight: 700;
-  font-size: 0.95rem;
-  box-shadow: 0 14px 28px -18px rgba(212, 175, 55, 0.55);
-  text-decoration: none;
-  border: none;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0 1.4rem;
+  border: none;
+  border-radius: 999px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f3d08a 0%, #d4af37 55%, #b8860b 100%);
+  color: #1f2937;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 14px 28px -16px rgba(212, 175, 55, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+.btn.donate-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(100deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.55) 50%, rgba(255, 255, 255, 0) 100%);
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+  pointer-events: none;
 }
 
 .btn.donate-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 18px 36px -24px rgba(184, 134, 11, 0.55);
+  filter: brightness(1.05);
+  box-shadow: 0 18px 36px -18px rgba(212, 175, 55, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
-.btn.login-btn {
-  background: linear-gradient(135deg, #16a34a, #22c55e);
-  color: #ffffff;
-  border-radius: 999px;
-  padding: 0.5rem 1.35rem;
-  font-weight: 700;
-  font-size: 0.95rem;
-  text-decoration: none;
-  border: none;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 14px 28px -18px rgba(22, 163, 74, 0.4);
+.btn.donate-btn:hover::before {
+  left: 120%;
 }
 
-.navbar--dark .btn.login-btn {
-  background: linear-gradient(135deg, #16a34a, #22c55e);
-  color: #ffffff;
+.donate-btn__icon {
+  flex-shrink: 0;
+  font-size: 0.85em;
+  color: #9f1239;
+  transition: transform 0.3s ease;
 }
 
-.btn.login-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 18px 36px -24px rgba(22, 163, 74, 0.5);
-  background: linear-gradient(135deg, #15803d, #16a34a);
-}
-
-.navbar--dark .btn.login-btn:hover {
-  box-shadow: 0 18px 36px -24px rgba(22, 163, 74, 0.6);
-  background: linear-gradient(135deg, #15803d, #16a34a);
-}
-
-.btn.dashboard-btn {
-  background: linear-gradient(135deg, rgba(22, 163, 74, 0.12), rgba(22, 163, 74, 0.2));
-  color: #166534;
-  border-radius: 999px;
-  padding: 0.5rem 1.25rem;
-  font-weight: 600;
-  font-size: 0.95rem;
-  text-decoration: none;
-  border: 1px solid rgba(22, 163, 74, 0.22);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn.dashboard-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 30px -22px rgba(22, 163, 74, 0.2);
+.btn.donate-btn:hover .donate-btn__icon {
+  transform: scale(1.2);
 }
 
 .icon-button {
@@ -214,13 +216,19 @@ header.navbar {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.5rem 0 0;
+  padding: 0.75rem 0 0.25rem;
 }
 
 .navbar__mobile-brand img {
-  height: clamp(90px, 24vw, 130px);
+  height: clamp(80px, 22vw, 110px);
   width: auto;
-  max-height: 140px;
+}
+
+@media (max-width: 1100px) {
+  .navbar__link {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.88rem;
+  }
 }
 
 @media (max-width: 980px) {
@@ -230,88 +238,85 @@ header.navbar {
 
   .navbar__menu-toggle {
     display: inline-flex;
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.06);
   }
 
   .navbar__actions {
     gap: 0.6rem;
   }
 
-  .btn.donate-btn,
-  .btn.login-btn,
-  .btn.dashboard-btn {
-    padding: 0.55rem 1.25rem;
+  .btn.donate-btn {
+    min-height: 2.6rem;
+    padding: 0 1.15rem;
     font-size: 0.9rem;
   }
 
   .navbar__mobile {
     display: block;
-    margin: 0 auto;
-    max-width: 90%;
+    margin: 0.75rem auto 0.5rem;
+    max-width: 520px;
+    border-radius: 22px;
+    overflow: hidden;
+  }
+
+  .navbar--dark .navbar__mobile {
+    background: linear-gradient(180deg, rgba(22, 40, 27, 0.97) 0%, rgba(30, 52, 36, 0.97) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.7);
   }
 
   .navbar__mobile-links {
     display: grid;
-    gap: 0.35rem;
-    margin-top: 0.9rem;
-    padding: 1rem 1.2rem;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 18px 40px -28px rgba(15, 23, 42, 0.32);
-  }
-
-  .navbar--dark .navbar__mobile-links {
-    background: rgba(2, 6, 23, 0.9);
-    border: 1px solid var(--rwf-shell-border);
+    gap: 0.25rem;
+    padding: 0.75rem 1rem;
   }
 
   .navbar__mobile-link {
     font-size: 1rem;
     font-weight: 600;
-    color: inherit;
+    color: rgba(248, 250, 252, 0.88);
     text-decoration: none;
-    padding: 0.65rem 0.75rem;
+    padding: 0.75rem 1rem;
     border-radius: 14px;
     transition: background-color 0.2s ease, color 0.2s ease;
   }
 
-  .navbar__mobile-link:hover,
-  .navbar__mobile-link.is-active {
-    background: rgba(34, 197, 94, 0.14);
-    color: #16a34a;
+  .navbar__mobile-link:hover {
+    background: rgba(255, 255, 255, 0.07);
+    color: #ffffff;
   }
 
-  .navbar--dark .navbar__mobile-link:hover,
-  .navbar--dark .navbar__mobile-link.is-active {
-    background: rgba(248, 250, 252, 0.08);
-    color: #facc15;
+  .navbar__mobile-link.is-active {
+    background: rgba(212, 175, 55, 0.14);
+    color: #f3d08a;
+    box-shadow: inset 3px 0 0 #d4af37;
   }
 
   .navbar__mobile-cta {
-    padding: 1rem 1.2rem 1.5rem;
+    padding: 0.25rem 1rem 1.25rem;
     display: flex;
-    justify-content: flex-start;
+  }
+
+  .navbar__mobile-cta .btn.donate-btn {
+    width: 100%;
+    min-height: 3rem;
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 640px) {
   header.navbar {
-    padding: 0.75rem 1.15rem;
-  }
-
-  .navbar__brand-title {
-    font-size: 0.95rem;
-  }
-
-  .navbar__brand-eyebrow {
-    font-size: 0.58rem;
+    padding: 0.55rem 1rem;
   }
 
   .navbar__brand img {
-    height: 68px;
+    height: 56px;
   }
 
-  .navbar__mobile-brand img {
-    height: clamp(110px, 28vw, 160px);
+  .navbar--scrolled .navbar__brand img {
+    height: 50px;
   }
 }
-

@@ -1,134 +1,265 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { FiCheckCircle, FiEye, FiHeart, FiRefreshCw, FiShield, FiTarget, FiUsers } from 'react-icons/fi';
 import ShareButtons from '../components/ShareButtons';
 import PartnersSection from '../components/PartnersSection.jsx';
 import image5 from '../assets/image_5.jpeg';
 import aboutJourneyImage from '../assets/about-journey.png';
+import teamImage from '../assets/gallery/gallery-rwf-team.png';
+
+const STATS = [
+  { value: '1970s', label: 'Roots in Kitale' },
+  { value: '2021', label: 'Registered NGO' },
+  { value: '6', label: 'Core programmes' },
+  { value: 'Quarterly', label: 'Prison visits' },
+];
+
+const JOURNEY = [
+  {
+    period: 'Early 1970s',
+    title: 'Neighbours to "Farm Prison"',
+    copy: 'The Wairicu family relocated to Kitale, to a farm bordering what locals called "Farm Prison."',
+  },
+  {
+    period: 'Over the years',
+    title: 'Friendships built on everyday kindness',
+    copy: 'Sharing milk, learning together, and creative projects built trust with prison staff and inmates.',
+  },
+  {
+    period: 'Growing outreach',
+    title: 'From family visits to programmes',
+    copy: 'Regular visits grew into organised outreach: mentorship, education, counselling, and practical aid.',
+  },
+  {
+    period: '10th September 2021',
+    title: 'Officially registered',
+    copy: 'Registered under Section 10 of the Non-Governmental Organizations Co-ordination Act.',
+  },
+];
+
+const HIGHLIGHTS = [
+  'Trusted friendships with inmates and wardens built on mutual respect.',
+  'Invitations to contribute to structured rehabilitation programmes.',
+  'Advocacy helping returning citizens find dignified employment.',
+  'Family reintegration support that reduces stigma and isolation.',
+];
+
+const VALUES = [
+  { title: 'Sustainability', copy: 'Programmes that endure beyond short-term aid.', Icon: FiRefreshCw },
+  { title: 'Integrity', copy: 'Transparent stewardship of every shilling invested.', Icon: FiShield },
+  { title: 'Collaboration', copy: 'Partnering with communities and institutions.', Icon: FiUsers },
+  { title: 'Compassion', copy: 'Every initiative begins with dignity and empathy.', Icon: FiHeart },
+];
+
+const SectionLabel = ({ children }) => (
+  <span className="inline-flex items-center gap-2 rounded-full border border-amber-300/40 bg-black/10 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-amber-100">
+    <span className="h-1.5 w-1.5 rounded-full bg-amber-300" aria-hidden="true" />
+    {children}
+  </span>
+);
+
+const sectionTitle = 'text-[clamp(1.35rem,2.4vw,1.8rem)] font-semibold leading-tight text-white';
+const bodyText = 'text-sm leading-relaxed text-white/75 sm:text-[0.95rem]';
+const glassCard = 'rounded-2xl border border-white/10 bg-white/[0.06] backdrop-blur';
 
 const About = () => {
   return (
-    <div className="py-12 px-3 sm:px-5 lg:px-6">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 lg:gap-20">
-        <header className="space-y-3 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-transparent px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-white">
-            Our Story
-          </span>
-          <h1 className="text-[clamp(2.7rem,4vw,3.8rem)] font-semibold leading-[1.03] text-white">
-            The Reuben Wairicu Foundation (RWF)
-          </h1>
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-200/90">
-            Rooted in Community · Giving Hope, Sharing Love, Touching Hearts
-          </p>
-          <div className="mx-auto max-w-5xl space-y-4 text-left text-[clamp(1.02rem,1.9vw,1.18rem)] leading-[1.75] text-white/90">
-            <p>
+    <div className="px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 lg:gap-14">
+        <header className="grid items-center gap-8 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="space-y-4">
+            <SectionLabel>Our story</SectionLabel>
+            <h1 className="text-[clamp(1.8rem,3.4vw,2.6rem)] font-semibold leading-[1.1] text-white">
+              Rooted in community, <span className="rwf-gold-text">driven by compassion</span>
+            </h1>
+            <p className="text-[0.95rem] leading-relaxed text-white/90 sm:text-base">
               The Reuben Wairicu Foundation (RWF) is a community-driven organisation committed to uplifting
               vulnerable people across Kenyan regions.
             </p>
-            <p>
-              Rooted in compassion and guided by purpose, we believe that every individual deserves dignity,
-              care, and opportunity. Our work is grounded in restoring hope and strengthening communities as
-              we aim to uplift vulnerable people across Kenyan regions through compassion, practical support,
-              and sustainable initiatives. Officially registered under Section 10 of the Non-Governmental
-              Organizations Co-ordination Act on{' '}
-              <span className="font-semibold text-white">10th September 2021</span>.
+            <p className={bodyText}>
+              Guided by purpose, we believe every individual deserves dignity, care, and opportunity. Through
+              compassion, practical support, and sustainable initiatives, we honour the legacy of Mr &amp; Mrs.
+              Reuben Wairicu by creating lasting impact in the lives of those we serve.
             </p>
-            <p>
-              Together, we honour the legacy of Mr & Mrs. Reuben Wairicu by creating lasting impact in the
-              lives of those we serve.
-            </p>
+            <div className="flex flex-wrap items-center gap-3 pt-1">
+              <Link to="/programs" className="btn btn--gold !px-5 !py-2.5 !text-sm">
+                Explore Our Programs
+              </Link>
+              <ShareButtons
+                title="About Reuben Wairicu Foundation"
+                text="Learn our vision, mission, and the communities we serve in Kenya."
+                path="/about"
+              />
+            </div>
           </div>
-          <div className="flex justify-center pt-2">
-            <ShareButtons
-              title="About Reuben Wairicu Foundation"
-              text="Learn our vision, mission, and the communities we serve in Kenya."
-              path="/about"
+
+          <div className="relative mx-auto w-full max-w-md">
+            <div
+              className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-amber-300/25 via-transparent to-emerald-400/20 blur-2xl"
+              aria-hidden="true"
             />
+            <div className="relative overflow-hidden rounded-3xl border border-white/15 shadow-xl shadow-black/30">
+              <img
+                src={teamImage}
+                alt="RWF volunteers standing together in Supporting Communities shirts"
+                className="aspect-[4/3] w-full object-cover"
+              />
+            </div>
+            <div className="absolute -bottom-4 left-4 rounded-xl border border-amber-300/40 bg-[#1c3021]/90 px-4 py-2 shadow-lg backdrop-blur">
+              <p className="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-amber-200/80">Registered NGO</p>
+              <p className="text-sm font-semibold text-white">10th September 2021</p>
+            </div>
           </div>
         </header>
 
-        <section className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
-          <div className="space-y-4 rounded-3xl border border-white/20 bg-white p-6 shadow-lg">
-            <h2 className="text-[clamp(1.65rem,3vw,2.35rem)] font-semibold leading-[1.12] text-emerald-700">Our journey in community</h2>
-            <p className="text-[clamp(1.02rem,1.8vw,1.12rem)] leading-[1.7] text-slate-600">
-              When the Wairicu family relocated to Kitale in the early 70s, their farm bordered what
-              locals called "Farm Prison." The family quickly forged relationships with prison staff
-              and inmates through everyday interactions—sharing milk, learning together, and
-              collaborating on creative projects.
+        <section className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+          {STATS.map((stat) => (
+            <article key={stat.label} className={`${glassCard} px-3 py-4 text-center`}>
+              <p className="rwf-gold-text text-xl font-bold leading-none sm:text-2xl">{stat.value}</p>
+              <p className="mt-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-white/70">{stat.label}</p>
+            </article>
+          ))}
+        </section>
+
+        <section className="grid gap-4 md:grid-cols-2">
+          <article className={`${glassCard} p-5 sm:p-6`}>
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-amber-200 to-amber-500 text-emerald-950">
+                <FiTarget aria-hidden="true" />
+              </span>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-200">Our mission</p>
+            </div>
+            <h2 className="mt-3 text-lg font-semibold text-white">Giving hope, sharing love, touching hearts</h2>
+            <p className={`mt-2 ${bodyText}`}>
+              We believe every person deserves dignity, care, and opportunity. Our work restores hope and
+              strengthens communities through compassion, practical help, and sustainable initiatives.
             </p>
-            <p className="text-[clamp(1.02rem,1.8vw,1.12rem)] leading-[1.7] text-slate-600">
-              These friendships sparked a lifelong commitment to stand with neighbours who society too
-              often forgets. What began as regular family visits evolved into organised outreach that
-              now spans mentorship, education, counselling, and practical aid.
+          </article>
+          <article className={`${glassCard} p-5 sm:p-6`}>
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-200 to-emerald-500 text-emerald-950">
+                <FiEye aria-hidden="true" />
+              </span>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-200">Our vision</p>
+            </div>
+            <h2 className="mt-3 text-lg font-semibold text-white">Hope extended through every community</h2>
+            <p className={`mt-2 ${bodyText}`}>
+              To raise mature, selfless individuals who extend hope to communities through sustainable and
+              compassionate action.
             </p>
-            <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5 shadow-sm">
-              <p className="text-xs uppercase tracking-[0.35em] text-emerald-600">Vision</p>
-              <p className="mt-2 text-[clamp(1rem,1.7vw,1.08rem)] leading-[1.7] text-slate-600">
-                To raise mature, selfless individuals who extend hope to communities through
-                sustainable and compassionate action.
+          </article>
+        </section>
+
+        <section className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <div className="space-y-3 lg:sticky lg:top-28">
+            <SectionLabel>Our journey</SectionLabel>
+            <h2 className={sectionTitle}>From neighbours to a registered foundation</h2>
+            <p className={bodyText}>
+              These friendships sparked a lifelong commitment to stand with neighbours who society too often
+              forgets.
+            </p>
+            <div className="overflow-hidden rounded-2xl border border-white/10 shadow-lg shadow-black/20">
+              <img
+                src={aboutJourneyImage}
+                alt="A person before winding paths over green hills, symbolising the community journey"
+                className="aspect-[16/10] w-full object-cover"
+              />
+            </div>
+          </div>
+
+          <ol className="relative space-y-3 border-l border-amber-300/30 pl-6">
+            {JOURNEY.map((step) => (
+              <li key={step.title} className="relative" data-reveal>
+                <span
+                  className="absolute -left-[1.95rem] top-5 h-3 w-3 rounded-full bg-gradient-to-br from-amber-200 to-amber-500 ring-4 ring-[#2f4f36]"
+                  aria-hidden="true"
+                />
+                <div className={`${glassCard} p-4 transition hover:border-amber-300/30 hover:bg-white/[0.09]`}>
+                  <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-amber-200">{step.period}</p>
+                  <h3 className="mt-1 text-base font-semibold text-white">{step.title}</h3>
+                  <p className={`mt-1 ${bodyText}`}>{step.copy}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.05] backdrop-blur">
+          <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="relative min-h-[13rem] sm:min-h-[16rem]">
+              <img
+                src={image5}
+                alt="RWF team with a prison officer outside the main prison gate"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            </div>
+            <div className="space-y-3 p-5 sm:p-7">
+              <SectionLabel>Prison ministry</SectionLabel>
+              <h2 className={sectionTitle}>Standing with those society forgets</h2>
+              <p className={bodyText}>
+                Quarterly prison visits provide essential supplies, mentorship, and encouragement. Even during the
+                COVID-19 pandemic, we sustained support through deliveries of soap, toiletries, and baby supplies.
               </p>
-            </div>
-          </div>
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
-            <img
-              src={aboutJourneyImage}
-              alt="Illustration of a person before many winding paths over green hills, symbolising community journey and choices"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-          </div>
-        </section>
-
-        <section className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
-          <div className="rounded-3xl border border-slate-200 bg-white shadow-sm">
-            <img
-              src={image5}
-              alt="Prison ministry outreach"
-              className="h-full w-full rounded-3xl object-cover"
-            />
-          </div>
-          <div className="space-y-4 rounded-3xl border border-white/20 bg-white p-6 shadow-lg">
-            <h2 className="text-[clamp(1.65rem,3vw,2.35rem)] font-semibold leading-[1.12] text-emerald-700">Our prison ministry</h2>
-            <p className="text-[clamp(1.02rem,1.8vw,1.12rem)] leading-[1.7] text-slate-600">
-              Quarterly prison visits provide essential supplies, mentorship, and encouragement. Even
-              during the COVID-19 pandemic, we sustained support through coordinated deliveries of soap,
-              toiletries, and baby supplies.
-            </p>
-            <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5 text-[clamp(1rem,1.7vw,1.08rem)] leading-[1.65] text-slate-600">
-              <p className="text-xs uppercase tracking-[0.3em] text-emerald-600">Impact highlights</p>
-              <ul className="mt-3 space-y-2 list-disc pl-5">
-                <li>Trusted friendships with inmates and wardens built on mutual respect.</li>
-                <li>Invitations to contribute to structured rehabilitation programmes.</li>
-                <li>Advocacy helping returning citizens find dignified employment.</li>
-                <li>Family reintegration support that reduces stigma and isolation.</li>
+              <ul className="space-y-2">
+                {HIGHLIGHTS.map((item) => (
+                  <li key={item} className="flex gap-2.5 text-sm text-white/85 sm:text-[0.95rem]">
+                    <FiCheckCircle className="mt-0.5 flex-shrink-0 text-amber-300" aria-hidden="true" />
+                    <span className="leading-snug">{item}</span>
+                  </li>
+                ))}
               </ul>
+              <div className="pt-1">
+                <Link to="/donate" className="btn btn--gold !px-5 !py-2.5 !text-sm">
+                  Support this work
+                </Link>
+              </div>
             </div>
-            <p className="text-[clamp(1.02rem,1.8vw,1.12rem)] leading-[1.7] text-slate-600">
-              With your partnership, we can extend these services to more facilities and expand
-              aftercare support as individuals transition back into society.
-            </p>
           </div>
         </section>
 
-        <section className="rounded-3xl border border-white/20 bg-white p-6 shadow-lg sm:p-8">
-          <h2 className="text-[clamp(1.65rem,3vw,2.35rem)] font-semibold leading-[1.12] text-emerald-700">Our core values</h2>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { title: 'Sustainability', copy: 'We design programmes that endure beyond short-term aid.' },
-              { title: 'Integrity', copy: 'Transparent stewardship guides every shilling invested.' },
-              { title: 'Collaboration', copy: 'We partner with communities and institutions for deeper impact.' },
-              { title: 'Compassion', copy: 'Every initiative begins with dignity, respect, and empathy.' },
-            ].map((value) => (
+        <section className="space-y-5">
+          <div className="space-y-2 text-center">
+            <SectionLabel>What guides us</SectionLabel>
+            <h2 className={sectionTitle}>Our core values</h2>
+          </div>
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+            {VALUES.map(({ title, copy, Icon }) => (
               <article
-                key={value.title}
-                className="rounded-2xl border border-slate-200 bg-white p-4 text-[clamp(1rem,1.6vw,1.05rem)] leading-[1.65] text-slate-600 shadow-sm"
+                key={title}
+                className={`group ${glassCard} p-4 transition duration-300 hover:-translate-y-1 hover:border-amber-300/40 hover:bg-white/[0.09]`}
               >
-                <h3 className="text-[clamp(1.05rem,1.8vw,1.2rem)] font-semibold text-slate-900">{value.title}</h3>
-                <p className="mt-2 leading-relaxed">{value.copy}</p>
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-amber-300/40 bg-amber-300/10 text-amber-200 transition group-hover:bg-amber-300/20">
+                  <Icon aria-hidden="true" />
+                </span>
+                <h3 className="mt-3 text-sm font-semibold text-white sm:text-base">{title}</h3>
+                <p className="mt-1 text-xs leading-relaxed text-white/70 sm:text-sm">{copy}</p>
               </article>
             ))}
           </div>
         </section>
 
-        <PartnersSection />
+        <section className="relative overflow-hidden rounded-3xl border border-amber-300/30 bg-gradient-to-br from-[#2d4f35] via-[#244129] to-[#1a2f1f] px-5 py-8 text-center sm:px-10">
+          <div
+            className="absolute -top-20 left-1/2 h-40 w-[30rem] -translate-x-1/2 rounded-full bg-amber-300/20 blur-3xl"
+            aria-hidden="true"
+          />
+          <div className="relative mx-auto max-w-xl space-y-3">
+            <h2 className={sectionTitle}>Walk with us</h2>
+            <p className={bodyText}>
+              Your support helps us restore hope, strengthen families, and stand with vulnerable people across Kenya.
+            </p>
+            <div className="flex flex-wrap justify-center gap-3 pt-1">
+              <Link to="/donate" className="btn btn--gold !px-5 !py-2.5 !text-sm">
+                Donate
+              </Link>
+              <Link to="/sponsorship" className="btn btn--outline !px-5 !py-2.5 !text-sm">
+                Become a sponsor
+              </Link>
+            </div>
+          </div>
+        </section>
 
+        <PartnersSection />
       </div>
     </div>
   );
