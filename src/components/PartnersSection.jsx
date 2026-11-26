@@ -17,22 +17,22 @@ export default function PartnersSection({
   className = '',
 }) {
   return (
-    <section className={`py-4 sm:py-6 ${className}`}>
-      <header className="mb-4 text-center sm:mb-5">
-        <h2 className="mb-3 text-2xl font-semibold text-white">{title}</h2>
+    <section className={`py-2 sm:py-3 ${className}`}>
+      <header className="mb-3 text-center sm:mb-3.5">
+        <h2 className="mb-1.5 text-2xl font-semibold text-white">{title}</h2>
         <p className="text-base text-white/80">{subtitle}</p>
       </header>
 
-      <div className="mx-auto grid w-full max-w-3xl gap-4 px-1 sm:gap-5">
+      <div className="mx-auto grid w-full max-w-3xl gap-3 px-1 sm:gap-4">
         {PARTNERS.map((partner) => (
           <a
             key={partner.href}
             href={partner.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex flex-col items-center gap-4 rounded-2xl border border-white/10 bg-white/5 px-5 py-6 text-center backdrop-blur-sm transition hover:border-white/20 hover:bg-white/10 sm:flex-row sm:text-left"
+            className="group flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-center backdrop-blur-sm transition hover:border-white/20 hover:bg-white/10 sm:flex-row sm:text-left"
           >
-            <div className="flex h-24 w-full max-w-[11rem] shrink-0 items-center justify-center rounded-xl bg-white p-3 sm:h-28 sm:w-40">
+            <div className="flex h-20 w-full max-w-[10rem] shrink-0 items-center justify-center rounded-xl bg-white p-2.5 sm:h-24 sm:w-36">
               <img
                 src={partner.logo}
                 alt={`${partner.name} logo`}

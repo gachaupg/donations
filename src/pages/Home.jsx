@@ -6,9 +6,11 @@ import heroImage from '../assets/home-hero-collage-2.png';
 import SponsorsSection from '../components/SponsorsSection.jsx';
 import PartnersSection from '../components/PartnersSection.jsx';
 import Programs from './programs';
+import { getActivePrisonMinistryEvents } from '../utils/events';
 
 const Home = () => {
   const { ref: heroRef, inView: heroInView } = useInView({ triggerOnce: true, threshold: 0.2 });
+  const activeEvents = getActivePrisonMinistryEvents();
 
   return (
     <div className="homepage">
@@ -52,6 +54,37 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {activeEvents.length > 0 && (
+        <section className="home-events">
+          <div className="home-events__header">
+            <p className="home-events__eyebrow">Coming soon</p>
+            <h2 className="home-events__title">Upcoming Prison Ministry Events</h2>
+            <p className="home-events__copy">
+              Join us for our next visits. Every contribution of time, prayer, or support makes a difference.
+            </p>
+          </div>
+          <div className="home-events__grid">
+            {activeEvents.map((event) => (
+              <article key={event.id} className="home-event-card">
+                <span className="home-event-card__badge">Upcoming</span>
+                <h3 className="home-event-card__title">{event.title}</h3>
+                <p className="home-event-card__date">{event.dateLabel}</p>
+                <p className="home-event-card__location">{event.location}</p>
+                <p className="home-event-card__copy">{event.description}</p>
+              </article>
+            ))}
+          </div>
+          <div className="home-events__actions">
+            <Link to="/news" className="btn btn--gold">
+              View all events
+            </Link>
+            <Link to="/contact" className="btn btn--outline">
+              Join a visit
+            </Link>
+          </div>
+        </section>
+      )}
 
       <section
         className="mission"
@@ -274,7 +307,7 @@ const Home = () => {
         </div>
       </section>
 
-      <PartnersSection className="mb-2" />
+      <PartnersSection />
 
       <SponsorsSection
         title="Our Sponsors"

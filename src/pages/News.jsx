@@ -1,15 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FiCalendar, FiHeart, FiShield, FiUsers } from 'react-icons/fi';
+import { FiCalendar, FiHeart, FiMapPin, FiShield, FiUsers } from 'react-icons/fi';
+import { getActivePrisonMinistryEvents } from '../utils/events';
 
-const items = [
-  {
-    title: 'Community outreach visit',
-    date: 'Upcoming',
-    Icon: FiUsers,
-    description:
-      'Join us as we visit families and deliver support supplies. Check back for the confirmed date and location details.',
-  },
+const ongoingItems = [
   {
     title: 'Prison ministry & reintegration support',
     date: 'Ongoing',
@@ -24,6 +18,13 @@ const items = [
     description:
       'Mentorship, guidance, and family follow-up that protects dignity and builds long-term stability.',
   },
+  {
+    title: 'Community outreach visits',
+    date: 'Ongoing',
+    Icon: FiUsers,
+    description:
+      'Family visits and support-supply deliveries across the communities we serve.',
+  },
 ];
 
 const statusStyles = {
@@ -32,6 +33,8 @@ const statusStyles = {
 };
 
 const News = () => {
+  const activeEvents = getActivePrisonMinistryEvents();
+
   return (
     <div className="px-4 py-8 text-white sm:px-6 sm:py-10 lg:px-8">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-8">
@@ -48,28 +51,73 @@ const News = () => {
           </p>
         </header>
 
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {items.map(({ title, date, Icon, description }) => (
-            <article
-              key={title}
-              className="group flex flex-col rounded-2xl border border-white/10 bg-white/[0.06] p-5 backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-amber-300/40 hover:bg-white/[0.09]"
-            >
-              <div className="flex items-center justify-between gap-3">
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-amber-300/40 bg-amber-300/10 text-amber-200 transition group-hover:bg-amber-300/20">
-                  <Icon aria-hidden="true" />
-                </span>
-                <span
-                  className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.14em] ${statusStyles[date] || statusStyles.Ongoing}`}
-                >
-                  <FiCalendar aria-hidden="true" />
-                  {date}
-                </span>
+        {activeEvents.length > 0 && (
+          <section className="space-y-4">
+            <div className="flex flex-wrap items-end justify-between gap-2">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-200">Coming soon</p>
+                <h2 className="mt-1 text-xl font-semibold text-white">Upcoming Prison Ministry Events</h2>
               </div>
-              <h2 className="mt-4 text-base font-semibold leading-snug text-white sm:text-lg">{title}</h2>
-              <p className="mt-2 text-sm leading-relaxed text-white/75">{description}</p>
-            </article>
-          ))}
-        </div>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              {activeEvents.map((event) => (
+                <article
+                  key={event.id}
+                  className="group flex flex-col rounded-2xl border border-amber-300/35 bg-white/[0.07] p-5 backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-amber-300/55 hover:bg-white/[0.1]"
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-amber-300/40 bg-amber-300/10 text-amber-200">
+                      <FiShield aria-hidden="true" />
+                    </span>
+                    <span
+                      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.14em] ${statusStyles.Upcoming}`}
+                    >
+                      <FiCalendar aria-hidden="true" />
+                      {event.status}
+                    </span>
+                  </div>
+                  <h3 className="mt-4 text-base font-semibold leading-snug text-white sm:text-lg">{event.title}</h3>
+                  <p className="mt-2 flex items-center gap-2 text-sm font-semibold text-amber-100">
+                    <FiCalendar className="flex-shrink-0" aria-hidden="true" />
+                    {event.dateLabel}
+                  </p>
+                  <p className="mt-1 flex items-center gap-2 text-sm text-white/80">
+                    <FiMapPin className="flex-shrink-0 text-amber-200" aria-hidden="true" />
+                    {event.location}
+                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-white/75">{event.description}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section className="space-y-4">
+          <h2 className="text-lg font-semibold text-white">Ongoing programmes</h2>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {ongoingItems.map(({ title, date, Icon, description }) => (
+              <article
+                key={title}
+                className="group flex flex-col rounded-2xl border border-white/10 bg-white/[0.06] p-5 backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-amber-300/40 hover:bg-white/[0.09]"
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-amber-300/40 bg-amber-300/10 text-amber-200 transition group-hover:bg-amber-300/20">
+                    <Icon aria-hidden="true" />
+                  </span>
+                  <span
+                    className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.14em] ${statusStyles[date] || statusStyles.Ongoing}`}
+                  >
+                    <FiCalendar aria-hidden="true" />
+                    {date}
+                  </span>
+                </div>
+                <h3 className="mt-4 text-base font-semibold leading-snug text-white sm:text-lg">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-white/75">{description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
 
         <section className="flex flex-col items-center justify-between gap-4 rounded-2xl border border-amber-300/30 bg-gradient-to-br from-[#2d4f35] via-[#244129] to-[#1a2f1f] px-5 py-6 text-center sm:flex-row sm:text-left">
           <div>

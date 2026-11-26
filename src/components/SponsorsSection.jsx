@@ -145,13 +145,13 @@ export default function SponsorsSection({
   };
 
   return (
-    <section className={`py-4 sm:py-6 ${className}`}>
-      <header className="mb-3 text-center">
+    <section className={`py-2 sm:py-3 ${className}`}>
+      <header className="mb-2 text-center">
         <h2 className="mb-1 text-2xl font-semibold text-white">{title}</h2>
         <p className="text-base text-white/80">{subtitle}</p>
       </header>
 
-      <ul className="flex w-full flex-wrap items-center justify-center gap-x-4 gap-y-5 sm:gap-y-6">
+      <ul className="flex w-full flex-wrap items-center justify-center gap-x-3 gap-y-3 sm:gap-y-4">
         {SPONSOR_LOGOS.map((logo) => (
           <li
             key={logo.src}
