@@ -70,6 +70,9 @@ const Home = () => {
                 <span className="home-event-card__badge">Upcoming</span>
                 <h3 className="home-event-card__title">{event.title}</h3>
                 <p className="home-event-card__date">{event.dateLabel}</p>
+                {event.timeLabel && (
+                  <p className="home-event-card__time">Time: {event.timeLabel}</p>
+                )}
                 <p className="home-event-card__location">{event.location}</p>
                 <p className="home-event-card__copy">{event.description}</p>
               </article>

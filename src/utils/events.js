@@ -4,6 +4,7 @@ export const UPCOMING_PRISON_MINISTRY_EVENTS = [
     title: 'Prison Ministry — Kitale Women Prison',
     dateLabel: '16th Dec 2026',
     dateISO: '2026-12-16',
+    timeLabel: '12:30pm – 3:00pm',
     location: 'Kitale Women Prison',
     status: 'Upcoming',
     description:
@@ -14,6 +15,7 @@ export const UPCOMING_PRISON_MINISTRY_EVENTS = [
     title: 'Prison Ministry — Kitale Men Prison',
     dateLabel: '2nd Jan 2027',
     dateISO: '2027-01-02',
+    timeLabel: '10:00am – 3:30pm',
     location: 'Kitale Men Prison',
     status: 'Upcoming',
     description:

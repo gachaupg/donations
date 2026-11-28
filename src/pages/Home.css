@@ -610,6 +610,13 @@
   color: #f3d08a;
 }
 
+.home-event-card__time {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 650;
+  color: rgba(243, 208, 138, 0.92);
+}
+
 .home-event-card__location {
   margin: 0;
   font-size: 0.88rem;
